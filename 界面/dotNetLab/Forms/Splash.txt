@@ -1,0 +1,370 @@
+﻿/*
+  protected Color clr_Press;
+        private Color clr_Normal;
+          protected bool bNeedResetRegion = false;
+          protected Color clr_RegionColor; 
+private int nRadius = -1;
+Bitmap bmp_Normal = null;
+Bitmap bmp_Press = null;
+bool isNormal = true;
+private Size imageSize;
+
+protected Pen pen_Border;
+private Alignments enm_HeaderAlignment = Alignments.Up;
+private bool isNeedRefreshHeader = false;
+Color clrHeadColor = Color.DodgerBlue;
+int nHeadHeight = 50;
+private SolidBrush sbr_Header;
+private GraphicsPath gp_Header = null;
+private GraphicsPath gp_Border = null;
+Color borderColor = Color.Gray;
+//  private bool bVertical = true;
+private int nControlCount = 0;
+
+
+
+protected override void OnResize(EventArgs e)
+{
+
+
+    base.OnResize(e);
+    if (bmp_Normal != null)
+        bmp_Normal.Dispose();
+    bmp_Normal = null;
+    if (bmp_Press != null)
+        bmp_Press.Dispose();
+    bmp_Press = null;
+    isNeedRefreshHeader = true;
+
+
+    Invalidate();
+}
+
+public GraphicsPath UpRoundRect(int x, int y, int width, int height, int radius)
+{
+    //四边圆角
+    GraphicsPath gp = new GraphicsPath();
+    gp.AddArc(x, y, radius, radius, 180, 90);
+    gp.AddArc(width - radius, y, radius, radius, 270, 90);
+    Point[] pnts = new Point[4];
+    pnts[0] = new Point(width, radius);
+    pnts[1] = new Point(width, height);
+    pnts[2] = new Point(0, height);
+    pnts[3] = new Point(0, radius);
+
+    gp.AddLines(pnts);
+
+    //gp.AddArc(width - radius, height - radius, radius, radius, 0, 90);
+    //gp.AddArc(x, height - radius, radius, radius, 90, 90);
+    //  gp.CloseAllFigures();
+    return gp;
+}
+
+public GraphicsPath LeftRoundRect(int x, int y, int width, int height, int radius)
+{
+    //四边圆角
+    GraphicsPath gp = new GraphicsPath();
+    gp.AddArc(x, y, radius, radius, 180, 90);
+
+    Point[] pnts = new Point[4];
+    pnts[0] = new Point(radius, 0);
+    pnts[1] = new Point(width, 0);
+    pnts[2] = new Point(width, height);
+    pnts[3] = new Point(radius, height);
+
+    gp.AddLines(pnts);
+    gp.AddArc(x, height - radius, radius, radius, 90, 90);
+    return gp;
+}
+
+public GraphicsPath DownRoundRect(int nHeaderHeight, int x, int y, int width, int height, int radius)
+{
+    GraphicsPath gp = new GraphicsPath();
+    gp.AddArc(width - radius, height - radius, radius, radius, 0, 90);
+    gp.AddArc(x, height - radius, radius, radius, 90, 90);
+
+    Point[] pnts = new Point[4];
+    pnts[0] = new Point(x, height - radius);
+    pnts[1] = new Point(x, height - nHeaderHeight - radius);
+    pnts[2] = new Point(width, height - nHeaderHeight - radius);
+    pnts[3] = new Point(width, height - radius);
+
+    gp.AddLines(pnts);
+    // gp.AddArc(x, height - radius, radius, radius, 90, 90);
+    return gp;
+}
+public GraphicsPath RightRoundRect(int nHeaderHeight, int x, int y, int width, int height, int radius)
+{
+    GraphicsPath gp = new GraphicsPath();
+    gp.AddArc(width - radius, y, radius, radius, 270, 90);
+    gp.AddArc(width - radius, height - radius, radius, radius, 0, 90);
+    Point[] pnts = new Point[4];
+    pnts[0] = new Point(this.Width - radius, height);
+    pnts[1] = new Point(this.Width - nHeaderHeight - radius, height);
+    pnts[2] = new Point(this.Width - nHeaderHeight - radius, y);
+    pnts[3] = new Point(this.Width - this.Radius, y);
+
+    gp.AddLines(pnts);
+
+    return gp;
+
+
+}
+
+public static GraphicsPath DrawRoundRect(int x, int y, int width, int height, int radius)
+{
+    //四边圆角
+    GraphicsPath gp = new GraphicsPath();
+    gp.AddArc(x, y, radius, radius, 180, 90);
+    gp.AddArc(width - radius, y, radius, radius, 270, 90);
+    gp.AddArc(width - radius, height - radius, radius, radius, 0, 90);
+    gp.AddArc(x, height - radius, radius, radius, 90, 90);
+    gp.CloseAllFigures();
+    return gp;
+}
+
+
+
+
+protected override void OnPaint(PaintEventArgs e)
+{
+    base.OnPaint(e);
+    //if (nRadius > -1)
+    //{
+    //    Graphics g = e.Graphics;
+
+    //    g.SmoothingMode = SmoothingMode.HighQuality;
+    //    if (bmp_Normal == null)
+    //    {
+    //        bmp_Normal = new Bitmap(this.Width, this.Height);
+    //        Graphics gx = Graphics.FromImage(bmp_Normal);
+
+    //        gx.FillPath(new SolidBrush(clr_Normal), DrawRoundRect(0, 0, Width - 1, Height - 1, Radius));
+
+
+    //        gx.Dispose();
+
+    //    }
+
+
+    //        g.DrawImage(bmp_Normal, 0, 0);
+    //        //if(!AntiAlias)
+    //        //{
+
+    //        //pen_Border.Color = clr_Normal;
+    //        //g.DrawPath(pen_Border, gp_CutRegion);
+    //        //}
+
+
+
+
+    //}
+    //if (gp_Border == null || isNeedRefreshHeader)
+    //{
+    //    gp_Border = RoundRectangle.DrawRoundRect(0, 0, this.Width - 1, this.Height - 1, Radius);
+    //    pen_Border.Color = borderColor;
+
+    //}
+    //e.Graphics.DrawPath(pen_Border, gp_Border);
+    //if (gp_Header == null || this.isNeedRefreshHeader)
+    //{
+    //    if (gp_Header != null)
+    //        gp_Header.Dispose();
+    //    switch (HeaderAlignment)
+    //    {
+    //        case Alignments.Up: gp_Header = UpRoundRect(0, 0, this.Width - 1, HeadHeight, this.Radius); break;
+    //        case Alignments.Left: gp_Header = LeftRoundRect(0, 0, HeadHeight, this.Height - 1, this.Radius); break;
+    //        case Alignments.Down: gp_Header = DownRoundRect(HeadHeight, 0, 0, Width - 1, Height - 1, Radius); break;
+    //        case Alignments.Right: gp_Header = RightRoundRect(HeadHeight, 0, 0, Width - 1, Height - 1, Radius); break;
+    //    }
+
+    //    if (isNeedRefreshHeader)
+    //        isNeedRefreshHeader = false;
+    //}
+
+    //e.Graphics.FillPath(sbr_Header, gp_Header);
+
+
+}
+
+
+
+protected override void prepareAppearance()
+{
+    base.prepareAppearance();
+    // this.NormalColor = PressColor = Color.Snow;
+    // sbr_Header = new SolidBrush(clrHeadColor);
+    // this.Radius = 10;
+    // if(pen_Border ==null)
+    // {
+    //     pen_Border = new Pen(borderColor);
+    // }
+    //// this.pen_Border.Color = borderColor;
+
+    // NormalColor = Color.DodgerBlue;
+    // PressColor = Color.RoyalBlue;
+    // this.ForeColor = Color.White;
+    // pen_Border = new Pen(clr_Normal, 1);
+    // TransparencyKey = Color.White;
+    // BackColor = Color.White;
+    // SetStyle(ControlStyles.SupportsTransparentBackColor, true);
+    // SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
+    //  BackColor = Color.Transparent;
+    // Size = new Size(600, 300);
+
+
+
+}
+protected override CreateParams CreateParams
+{
+    get
+    {
+        CreateParams cp = base.CreateParams;
+        cp.ExStyle |= 0x00080000;  //  WS_EX_LAYERED 扩展样式
+        return cp;
+    }
+}
+[Category("外观")]
+public Color HeadColor { get { return clrHeadColor; } set { clrHeadColor = value; sbr_Header.Color = value; this.Invalidate(); } }
+[Category("外观")]
+public int HeadHeight { get { return nHeadHeight; } set { nHeadHeight = value; this.isNeedRefreshHeader = true; this.Invalidate(); } }
+[Category("外观")]
+public Color BorderColor
+{
+    get { return borderColor; }
+    set
+    {
+        borderColor = value;
+        pen_Border.Color = value;
+        if (gp_Border != null)
+            gp_Border.Dispose();
+        gp_Border = null;
+        Invalidate();
+    }
+}
+[Category("外观")]
+public Alignments HeaderAlignment
+{
+    get
+    {
+        return enm_HeaderAlignment;
+
+
+    }
+    set
+    {
+        enm_HeaderAlignment = value;
+        isNeedRefreshHeader = true; Invalidate();
+    }
+}
+/* [Category("外观")]
+ public bool AntiAlias
+ {
+     get
+     {
+         return this.Anti_Alias;
+     }
+     set
+     {
+         Anti_Alias = value;
+         this.OnResize(null);
+         Invalidate();
+     }
+ }*/
+[Category("外观")]
+public Color PressColor
+{
+    get
+    {
+
+        return clr_Press;
+    }
+
+    set
+    {
+        clr_Press = value;
+        if (Radius > -1)
+        {
+            if (bmp_Press != null)
+                bmp_Press.Dispose();
+            bmp_Press = null;
+
+        }
+
+        Refresh();
+
+    }
+}
+
+[BrowsableAttribute(false)]
+public override Color BackColor
+{
+    get
+    {
+        return base.BackColor;
+    }
+
+    set
+    {
+
+        base.BackColor = value;
+
+        Refresh();
+    }
+}
+[Category("外观")]
+public Color NormalColor
+{
+    get
+    {
+        return clr_Normal;
+    }
+
+    set
+    {
+        clr_Normal = value;
+        if (Radius > -1)
+        {
+            if (bmp_Normal != null)
+                bmp_Normal.Dispose();
+            bmp_Normal = null;
+        }
+
+        Refresh();
+    }
+}
+[Category("外观")]
+public virtual int Radius
+{
+    get { return nRadius; }
+    set
+    {
+        nRadius = value;
+        //  base.BackColor = Color.Transparent;
+        if (bmp_Normal != null)
+        {
+            bmp_Normal.Dispose();
+            bmp_Normal = null;
+        }
+        if (bmp_Press != null)
+        {
+            bmp_Press.Dispose();
+            bmp_Press = null;
+        }
+        isNeedRefreshHeader = true;
+        Refresh();
+    }
+}
+
+
+[Category("外观")]
+public Size ImageSize
+{
+    get { return imageSize; }
+    set
+    {
+        imageSize = value;
+        Refresh();
+    }
+}
+     */

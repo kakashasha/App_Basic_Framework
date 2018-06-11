@@ -1,0 +1,406 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{BC982388-B669-48CF-8F9A-A9DAC94BFFFD}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>dotNetLab</RootNamespace>
+    <AssemblyName>shikii.dotNetLab</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <PlatformTarget>x86</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Design" />
+    <Reference Include="System.DirectoryServices" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Drawing.Design" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.XML" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Animation\AnimationBase.cs" />
+    <Compile Include="Animation\WidthAnimation.cs" />
+    <Compile Include="Appearance.cs" />
+    <Compile Include="Abort\CScrollBar.cs" />
+    <Compile Include="PropertyEditors\Dialogs\DataCenter\DataGridRealTime.cs" />
+    <Compile Include="PropertyEditors\Dialogs\DataCenter\DBEngineConnectPage.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PropertyEditors\Dialogs\DataCenter\DBEngineEditorPage.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PropertyEditors\Dialogs\DataCenter\DBEngineEditorPage_Parts\DB2DB\ConveyDataToOtherDBPart.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PropertyEditors\Dialogs\DataCenter\DBEngineEditorPage_Parts\ListBoxItem_ColumnName.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PropertyEditors\Dialogs\DataCenter\DBEngineEditorPage_Parts\ListBoxItem_TableName.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PropertyEditors\Dialogs\DataCenter\DBEngineEditorPage_Parts\SQL_Query\SQL_Query_Part.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PropertyEditors\Dialogs\DataCenter\DBEngineEditorPage_Parts\TableProvidePart.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PropertyEditors\Dialogs\DataCenter\DBEngineEditorPage_Parts\TableProvidePart_UI.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PropertyEditors\Dialogs\DataCenter\DBEngineInvoker.cs" />
+    <Compile Include="PropertyEditors\Dialogs\DataCenter\DBEngineManagePage.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\MetroListPage.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ModernPage.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ModernWnd.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\RibbonPage.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Session.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Splash.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Wnd.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="PropertyEditors\DataBindingVisualPropertyEditor.cs" />
+    <Compile Include="PropertyEditors\Dialogs\DataBindingPropertyEditorDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PropertyEditors\VisualPropertyEditor.cs" />
+    <Compile Include="Tipper.cs" />
+    <Compile Include="UI.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>UI.resx</DependentUpon>
+    </Compile>
+    <Compile Include="UserInteractor.cs" />
+    <Compile Include="Widgets.cs" />
+    <Compile Include="Widgets\Block.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Widgets\Card.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Widgets\Choice.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Widgets\ColorDecorator.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Widgets\Container\BlockContainer.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Widgets\Container\CanvasPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Widgets\Container\Container.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Widgets\Container\ListContainer.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Widgets\Design\UIBehavior.cs" />
+    <Compile Include="Widgets\Design\UIGlyph.cs" />
+    <Compile Include="Widgets\Design\VisualActionList.cs" />
+    <Compile Include="Widgets\Design\VisualDesigner.cs" />
+    <Compile Include="Widgets\Design\VisualPannelDesigner.cs" />
+    <Compile Include="Widgets\Detail.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Widgets\Direction.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Widgets\FramePanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Widgets\Framework\AeroView.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Widgets\Framework\RoundElement.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Widgets\Framework\UIElement.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Widgets\Hide\Flip.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Widgets\Hide\ModernCheckBox.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Widgets\Hide\Notification.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Widgets\Hide\Perl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Widgets\Hide\Triangle.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Widgets\Hide\LogView.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Widgets\MobileButton.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Widgets\MobileListBox.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Widgets\MobilePictureBox.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Widgets\MobileTextBox.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Widgets\Line.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Widgets\MobileProgressBar.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Widgets\Circle.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Widgets\MobileComboBox.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Widgets\TabHeader.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Widgets\TextBlock.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Widgets\Third_Party\Animation\Animation.cs" />
+    <Compile Include="Widgets\Third_Party\Animation\AnimationDirection.cs" />
+    <Compile Include="Widgets\Third_Party\Animation\AnimationManager.cs" />
+    <Compile Include="Widgets\Third_Party\Animation\DefaultAnimation.cs" />
+    <Compile Include="Widgets\Third_Party\PictureBoxEx.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Widgets\Third_Party\ScrollBar.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Widgets\Third_Party\Utils\GraphicsPathHelper.cs" />
+    <Compile Include="Widgets\Third_Party\Utils\ImageDrawRect.cs" />
+    <Compile Include="Widgets\Third_Party\Utils\RoundStyle.cs" />
+    <Compile Include="Widgets\Third_Party\Utils\Win32.cs" />
+    <Compile Include="Widgets\Third_Party\WinAPi.cs" />
+    <Compile Include="Widgets\Toggle.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Widgets\Traditional\RibButton.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Widgets\UIBinding\BlockUIBinder.cs" />
+    <Compile Include="Widgets\UIBinding\DataBinding\TrueType_C\Double_Ptr.cs" />
+    <Compile Include="Widgets\UIBinding\DataBinding\TrueType_C\Pointer.cs" />
+    <Compile Include="Widgets\UIBinding\DataBinding\UIElementDataBinding.cs" />
+    <Compile Include="Widgets\UIBinding\ListUIBinder.cs" />
+    <Compile Include="Widgets\UIBinding\TabUIBinder.cs" />
+    <Compile Include="Widgets\UIBinding\UIBinders.cs" />
+    <Compile Include="Widgets\WinFormCtrlTriggerColors.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="PropertyEditors\Dialogs\DataCenter\DBEngineConnectPage.resx">
+      <DependentUpon>DBEngineConnectPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PropertyEditors\Dialogs\DataCenter\DBEngineEditorPage.resx">
+      <DependentUpon>DBEngineEditorPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PropertyEditors\Dialogs\DataCenter\DBEngineEditorPage_Parts\DB2DB\ConveyDataToOtherDBPart.resx">
+      <DependentUpon>ConveyDataToOtherDBPart.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PropertyEditors\Dialogs\DataCenter\DBEngineEditorPage_Parts\ListBoxItem_ColumnName.resx">
+      <DependentUpon>ListBoxItem_ColumnName.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PropertyEditors\Dialogs\DataCenter\DBEngineEditorPage_Parts\ListBoxItem_TableName.resx">
+      <DependentUpon>ListBoxItem_TableName.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PropertyEditors\Dialogs\DataCenter\DBEngineEditorPage_Parts\SQL_Query\SQL_Query_Part.resx">
+      <DependentUpon>SQL_Query_Part.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PropertyEditors\Dialogs\DataCenter\DBEngineEditorPage_Parts\TableProvidePart_UI.resx">
+      <DependentUpon>TableProvidePart_UI.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PropertyEditors\Dialogs\DataCenter\DBEngineManagePage.resx">
+      <DependentUpon>DBEngineManagePage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\MetroListPage.resx">
+      <DependentUpon>MetroListPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Session.resx">
+      <DependentUpon>Session.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PropertyEditors\Dialogs\DataBindingPropertyEditorDialog.resx">
+      <DependentUpon>DataBindingPropertyEditorDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>UI.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Widgets\ColorDecorator.resx">
+      <DependentUpon>ColorDecorator.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\done.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\DS-DIGI.TTF" />
+    <None Include="Resources\Error.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Underworking.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Close_Small.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Mind.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Info.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\check_brick.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\RibbonCalligraphy1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\RibbonCalligraphy2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\RibbonCircleAndStripes.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\RibbonCircuit.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\RibbonClouds.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\RibbonDoodleCircles.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\RibbonDoodleDiamonds.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\RibbonGeometry.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\RibbonLunchBox.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\RibbonSchoolStuff.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\RibbonSpring.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\RibbonStars.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\RibbonStraws.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\RibbonTreeRings.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\RibbonUnderwater.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\left.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\CyanLeftArrowThin.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\LeftArrow_White_Thin.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\LeftArrow_Cyan_Thin.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\RightArrow_White_Thin.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\RightArrow_Cyan_Thin.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\LeftArrow_DodgerBlue_Thin.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\RightArrow_DodgerBlue_Thin.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\DownArrow_DodgerBlue_Thin.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\DownArrow_White_Thin.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\UpArrow_White_Thin.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\UpArrow_DodgerBlue_Thin.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Widgets\ICons\Toggle.png" />
+    <EmbeddedResource Include="Widgets\ICons\TabHeaderItem.bmp" />
+    <EmbeddedResource Include="Widgets\ICons\ColorDecorator.bmp" />
+    <EmbeddedResource Include="Resources\dotNetLab.Widgets.MobileButton.dotNet2Button.bmp" />
+    <Content Include="Forms\Splash.txt" />
+    <Content Include="Widgets\Design\如何使自定义控件可点击.txt" />
+    <Content Include="Widgets\Design\设计时自定义控件动态添加控件及添加之后处于可编辑状态.txt" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

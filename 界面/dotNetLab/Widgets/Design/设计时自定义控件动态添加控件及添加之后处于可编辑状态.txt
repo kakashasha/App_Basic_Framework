@@ -1,0 +1,80 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.ComponentModel.Design;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Windows.Forms;
+using System.Windows.Forms.Design;
+using System.Windows.Forms.Design.Behavior;
+using dotNetLab.Widgets;
+using dotNetLab.Widgets.Design;
+
+namespace TestUI
+{
+    [Designer(typeof(MyDocumentDesigner) )]
+   public class MyUI :UserControl
+    {
+      // Button pnl = new Button();
+        public MyUI()
+        {
+          
+        }
+
+       
+    }
+    internal class MyDocumentDesigner : VisualPannelDesigner
+    {
+
+
+
+        
+        protected override void ProvideType()
+        {
+            type_ActionList = typeof(MyDocumentDesignerActionList);
+        }
+    }
+
+    internal class MyDocumentDesignerActionList : VisualActionList
+    {
+        private MyUI _myUi;
+        VisualPannelDesigner designerx;
+       
+        public MyDocumentDesignerActionList(IComponent component, ControlDesigner controlDesigner) : base(component, controlDesigner)
+        {
+            this._myUi = TargetControl as MyUI;
+            designerx = this.designer as VisualPannelDesigner;
+            
+        }
+
+        public override void PrepareDesignerActionItemCollection(DesignerActionItemCollection DIC)
+        {
+             AddDesignerActionHeaderItem(APPEARANCE);
+             AddDesignerActionMethodItem("CSX","XDFS") ;
+        }
+        public void CSX()
+        {
+        	 
+            IDesignerHost designerHost = (IDesignerHost)this.GetService(typeof(IDesignerHost));
+            MemberDescriptor member = TypeDescriptor.GetProperties(_myUi)["Controls"];
+            MobileButton ctrl = (MobileButton)designerHost.CreateComponent(typeof(dotNetLab.Widgets.MobileButton));
+             PropertyDescriptor  pd = member as PropertyDescriptor;
+            designerx.Control.Controls.Add(ctrl);
+
+             
+        }
+       
+       /* public Control.ControlCollection Controls
+        {
+            get { return _myUi.Controls; }
+            set
+            {
+                AssignPropertyValue("Controls",value);
+                
+            }
+        }*/
+    }
+
+    
+}

@@ -1,0 +1,185 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{203DBCC1-7FE8-489F-9204-0D01F6CA0A18}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>dotNetLab.Data</RootNamespace>
+    <AssemblyName>shikii.dotNetLab.DataCenter</AssemblyName>
+    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <PlatformTarget>x86</PlatformTarget>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="DBEngines\FireBirdDB\FireBirdDBRes.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FireBirdDBRes.resx</DependentUpon>
+    </Compile>
+    <Compile Include="DBEngines\MySQL\MySQLDBRes.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MySQLDBRes.resx</DependentUpon>
+    </Compile>
+    <Compile Include="DBEngines\PostgreSQL\PostgreSQLRes.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PostgreSQLRes.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Embedded_Remote\RemoteDB_Client.cs" />
+    <Compile Include="DBEngines\SQLCE\SqlCERes.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SqlCERes.resx</DependentUpon>
+    </Compile>
+    <Compile Include="DBEngines\SQLite\SqliteDBManager.cs" />
+    <Compile Include="DBEngines\SQLite\SqliteDBResource.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SqliteDBResource.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Embedded_Remote\TCPServerDB.cs" />
+    <Compile Include="Exception\UIConsole.cs" />
+    <Compile Include="Network\Home\TServer.cs" />
+    <Compile Include="Network\SerialPort\SerialPort.cs" />
+    <Compile Include="Network\TCP_IP\Signals.cs" />
+    <Compile Include="Network\TCP_IP\TCPBase.cs" />
+    <Compile Include="Network\TCP_IP\TCPClient.cs" />
+    <Compile Include="Network\TCP_IP\TCPServer.cs" />
+    <Compile Include="Root\DBRoot.cs" />
+    <Compile Include="Layers\ErrorWnd.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Layers\ErrorWnd.Designer.cs">
+      <DependentUpon>ErrorWnd.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Simplify\UIDBEngine.cs" />
+    <Compile Include="Simplify\UnitDB_Connect.cs" />
+    <Compile Include="Simplify\UnitDB_Embedded.cs" />
+    <Compile Include="Simplify\UnitDB_Extended.cs" />
+    <Compile Include="Simplify\UnitDB_KeyValue.cs" />
+    <Compile Include="Tipper.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="DBEngines\FireBirdDB\FireBirdDBRes.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>FireBirdDBRes.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DBEngines\MySQL\MySQLDBRes.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>MySQLDBRes.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DBEngines\PostgreSQL\PostgreSQLRes.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>PostgreSQLRes.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DBEngines\SQLCE\SqlCERes.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>SqlCERes.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Layers\ErrorWnd.resx">
+      <DependentUpon>ErrorWnd.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DBEngines\SQLite\SqliteDBResource.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>SqliteDBResource.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="DBEngines\FireBirdDB\Resources\shikii" />
+    <None Include="DBEngines\SQLCE\Resources\shikii" />
+    <None Include="DBEngines\PostgreSQL\Resources\npgsql.2.2.7.nupkg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="DBEngines\SQLite\Resources\shikii" />
+    <None Include="DBEngines\SQLite\Resources\System.Data.SQLite.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="DBEngines\SQLCE\Resources\sqlceme40.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="DBEngines\SQLCE\Resources\sqlceqp40.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="DBEngines\SQLCE\Resources\sqlcese40.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="DBEngines\SQLCE\Resources\System.Data.SqlServerCe.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="DBEngines\SQLCE\Resources\sqlceca40.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="DBEngines\SQLCE\Resources\sqlcecompact40.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="DBEngines\SQLCE\Resources\sqlceer40EN.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="DBEngines\FireBirdDB\Resources\ib_util.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="DBEngines\FireBirdDB\Resources\fbembed.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="DBEngines\FireBirdDB\Resources\FirebirdSql.Data.FirebirdClient.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="DBEngines\FireBirdDB\Resources\icudt30.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="DBEngines\FireBirdDB\Resources\icuin30.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="DBEngines\FireBirdDB\Resources\icuuc30.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="log.txt" />
+    <None Include="DBEngines\MySQL\Resources\MySql.Data.dll" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,91 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="3.5" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{203DBCC1-7FE8-489F-9204-0D01F6CA0A18}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>DBBase</RootNamespace>
+    <AssemblyName>shikii.dotNetLab.DBManger</AssemblyName>
+    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <PlatformTarget>x86</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data.OracleClient" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="DBEngines\OracleDB\OracleDB.cs" />
+    <Compile Include="DBEngines\SQLite\SqliteDBManager.cs" />
+    <Compile Include="DBEngines\SQLite\SqliteDBResource.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SqliteDBResource.resx</DependentUpon>
+    </Compile>
+    <Compile Include="DBEngines\SQLServer\SQLServerDB .cs" />
+    <Compile Include="Simplify\Compactor.cs" />
+    <Compile Include="Root\DBRoot.cs" />
+    <Compile Include="Layers\ErrorWnd.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Layers\ErrorWnd.Designer.cs">
+      <DependentUpon>ErrorWnd.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Pipe\FlashDebug.cs" />
+    <Compile Include="Embedded\KeyValueDB.cs" />
+    <Compile Include="Simplify\LevelDB.cs" />
+    <Compile Include="Embedded\NativeDBBase.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="DBEngines\SQLite\SqliteDB.cs" />
+    <Compile Include="Tipper.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Layers\ErrorWnd.resx">
+      <DependentUpon>ErrorWnd.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DBEngines\SQLite\SqliteDBResource.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>SqliteDBResource.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="DBEngines\SQLite\Resources\shikii" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="DBEngines\SQLite\Resources\System.Data.SQLite.dll" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
