@@ -45,12 +45,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>AppComRes.resx</DependentUpon>
     </Compile>
-    <Compile Include="Form1.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
-    </Compile>
     <Compile Include="Tool\CodeEngine.cs" />
     <Compile Include="Tool\DynamicLib.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -109,9 +103,6 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>AppComRes.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Sign In\Frm_Adiministrator.resx">
       <DependentUpon>Frm_Adiministrator.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -134,9 +125,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Resources\NetCofig.exe" />
-  </ItemGroup>
-  <ItemGroup>
-    <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\数据中心\DBManager.csproj">
