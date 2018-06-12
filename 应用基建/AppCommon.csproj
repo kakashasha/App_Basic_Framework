@@ -37,12 +37,19 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Security" />
     <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AppComRes.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>AppComRes.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Form1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form1.Designer.cs">
+      <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
     <Compile Include="Tool\CodeEngine.cs" />
     <Compile Include="Tool\DynamicLib.cs" />
@@ -101,6 +108,9 @@
     <EmbeddedResource Include="AppComRes.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>AppComRes.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form1.resx">
+      <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Sign In\Frm_Adiministrator.resx">
       <DependentUpon>Frm_Adiministrator.cs</DependentUpon>

@@ -15,7 +15,7 @@ namespace dotNetLab.Widgets
     {
         public enum ProgressBarStyles
         {
-            Ring,Line,Steps
+            Ring,Line,Steps,Ball
         }
         ProgressBarStyles progressBarStyle = ProgressBarStyles.Line;
         private SolidBrush sbr_Bottom = null;
@@ -33,11 +33,18 @@ namespace dotNetLab.Widgets
         protected int nInnerSize = 30;
         protected Pen pen_Split = null;
         private GraphicsPath gp = null;
+        GraphicsPath gp_BallInner = new GraphicsPath();
         private Region rgn = null;
+        Region rgn_BallInner = null;
         readonly float PI = 3.141592654F;
         float nCurrentStep = 5;
-      
-
+        Color clrBallBorder = Color.DarkGray;
+        Pen pen_BallBorder ;
+        Color clrBallInnerColor = Color.DodgerBlue;
+        float fBallBorderThickness = 2f;
+        SolidBrush sbr_BallProgressColor;
+        public String strTextFormat = "{0}%";
+        
         protected override void prepareAppearance()
         {
             base.prepareAppearance();
@@ -67,6 +74,7 @@ namespace dotNetLab.Widgets
             {
                 gp.Dispose();
                 rgn.Dispose();
+               
                 rgn = null;
                 gp = null;
             }
@@ -87,7 +95,7 @@ namespace dotNetLab.Widgets
             else
                 sbrh_Text.Color = ForeColor;
 
-                Text = String.Format("{0}%", nValue);
+                Text = String.Format(TextFormat, nValue);
           if (Alignment == Alignments.Left)
           {
                 
@@ -155,14 +163,52 @@ sb.AppendFormat("{0}\r\n % ", Value);
                 sbrh_Text = new SolidBrush(ForeColor);
             if (ProgressBarStyle == ProgressBarStyles.Steps)
             {
-                Text = String.Format("{0}", Step);
+                Text = String.Format(TextFormat, Step);
             }
             else
-                Text = String.Format("{0}%", nValue);
+                Text = String.Format(TextFormat, nValue);
             if (sbrh_Text == null)
                 sbrh_Text = new SolidBrush(Color.CornflowerBlue);
             this.sbrh_Text.Color = ForeColor;
             CenterText(g, sbrh_Text);
+        }
+         void BallProgressBar(Graphics g)
+        {
+            if (gp == null)
+            {
+                gp = new GraphicsPath();
+                gp.AddEllipse(0, 0, Width - 2, Height - 2);
+                rgn = new Region(gp);
+            }
+          
+            float fdelta = this.Height - (1 - this.Value / 100.0f) * this.Height;
+            Rectangle rct = new Rectangle(0, (int)((1 - this.Value / 100.0f) * this.Height), this.Width, (int)fdelta);
+
+            rgn_BallInner = new Region(gp);
+
+            rgn_BallInner.Intersect(rct);
+            if (sbr_BallProgressColor == null)
+                sbr_BallProgressColor = new SolidBrush(clrBallInnerColor);
+            sbr_BallProgressColor.Color = clrBallInnerColor;
+            g.FillRegion(sbr_BallProgressColor, rgn_BallInner);
+            if (pen_BallBorder == null)
+                pen_BallBorder = new Pen(clrBallBorder, fBallBorderThickness);
+            pen_BallBorder.Color = clrBallBorder;pen_BallBorder.Width = fBallBorderThickness;
+            g.DrawEllipse(pen_BallBorder, 0, 0, Width - 2, Height - 2);
+
+            if (sbrh_Text == null)
+                sbrh_Text = new SolidBrush(ForeColor);
+            if (Value >= 43)
+
+                sbrh_Text.Color = Color.White;
+            else
+                sbrh_Text.Color = ForeColor;
+
+               Text = String.Format(TextFormat, nValue);
+                CenterText(g, sbrh_Text);
+
+            
+
         }
       protected override void OnPaint(PaintEventArgs e)
       {
@@ -170,6 +216,8 @@ sb.AppendFormat("{0}\r\n % ", Value);
             Graphics g = e.Graphics;
             if (progressBarStyle == ProgressBarStyles.Line)
                 LineProgressBar(g);
+            else if (progressBarStyle == ProgressBarStyles.Ball)
+                BallProgressBar(g);
             else
                 RingProgressBar(g);
 
@@ -326,6 +374,52 @@ sb.AppendFormat("{0}\r\n % ", Value);
                 }
             }
         }
+        [Category("外观")]
+        public Color BallBorderColor
+        {
+            get
+            {
+                return clrBallBorder;
+            }
+            set
+            {
+                clrBallBorder = value;
+                Invalidate(rgn);
+            }
+        }
+        [Category("外观")]
+        public Color BallProgressColor
+        {
+            get
+            {
+                return clrBallInnerColor;
+            }
+            set
+            {
+                clrBallInnerColor = value;
+                Invalidate(rgn);
+            }
+        }
+        [Category("外观")]
+        public float BallBorderThickness
+        {
+            get { return fBallBorderThickness; }
+            set { fBallBorderThickness = value; Invalidate(rgn); }
+        }
+        [Category("外观")]
+        public String TextFormat
+        {
+            get
+            {
+                return strTextFormat;
+            }
+            set
+            {
+                strTextFormat = value;
+                Invalidate(rgn);
+            }
+        }
+
         public override string MainBindableProperty
         {
             get
@@ -375,7 +469,7 @@ sb.AppendFormat("{0}\r\n % ", Value);
             DIC.Add(new DesignerActionPropertyItem("ForeColor", "字体颜色","公共外观"));
             DIC.Add(new DesignerActionPropertyItem("Value", "进度", "公共外观"));
             DIC.Add(new DesignerActionPropertyItem("BottomColor", "未完成进度颜色", "公共外观"));
-
+            DIC.Add(new DesignerActionPropertyItem("TextFormat", "显示文本格式", "公共外观"));
             AddDesignerActionPropertyItem("Font", "字体");
             DIC.Add(new DesignerActionHeaderItem("线性进度条外观"));
             DIC.Add(new DesignerActionPropertyItem("ProgressColor", "进度条颜色", "线性进度条外观"));
@@ -389,7 +483,11 @@ sb.AppendFormat("{0}\r\n % ", Value);
             AddDesignerActionPropertyItem("SplitLineColor", "均分线颜色", "步骤进度条外观");
             AddDesignerActionPropertyItem("SplitLineThickness", "均分线粗细", "步骤进度条外观");
             AddDesignerActionPropertyItem("Step", "当前步骤", "步骤进度条外观");
-
+            AddDesignerActionHeaderItem("球进度条外观");
+            AddDesignerActionPropertyItem("BallBorderColor", "边框颜色", "球进度条外观");
+            AddDesignerActionPropertyItem("BallBorderThickness", "边框粗细", "球进度条外观");
+            AddDesignerActionPropertyItem("BallProgressColor", "进度条颜色", "球进度条外观");
+            
         }
         public MobileProgressBar.ProgressBarStyles ProgressBarStyle
         {
@@ -476,6 +574,48 @@ sb.AppendFormat("{0}\r\n % ", Value);
         {
             get { return lps.RingThickness; }
             set { AssignPropertyValue("RingThickness", value); }
+        }
+
+        public Color BallBorderColor
+        {
+            get
+            {
+                return lps.BallBorderColor;
+            }
+            set
+            {
+                AssignPropertyValue("BallBorderColor", value);
+            }
+        }
+     
+        public Color BallProgressColor
+        {
+            get
+            {
+                return lps.BallProgressColor;
+            }
+            set
+            {
+                AssignPropertyValue("BallProgressColor", value);
+            }
+        }
+        
+        public float BallBorderThickness
+        {
+            get { return lps.BallBorderThickness; }
+            set { AssignPropertyValue("BallBorderThickness", value); }
+        }
+
+        public String TextFormat
+        {
+            get
+            {
+                return lps.TextFormat;
+            }
+            set
+            {
+                AssignPropertyValue("TextFormat", value);
+            }
         }
     }
 }
