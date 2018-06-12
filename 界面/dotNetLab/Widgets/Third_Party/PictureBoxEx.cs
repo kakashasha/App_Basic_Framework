@@ -67,7 +67,7 @@ namespace dotNetLab.Widgets.Third_Party
         private bool _showSupLine;
         public bool ShowSupLine
         {
-            get => _showSupLine;
+            get { return _showSupLine;}
             set
             {
                 _showSupLine = value;
@@ -75,7 +75,7 @@ namespace dotNetLab.Widgets.Third_Party
             }
         }
 
-        public Color SupLineColor { get; set; } = Color.Red;
+        public Color SupLineColor { get; set; } 
         // drawRect
         private Rectangle _imageRect;
         private PointF _luPonit = new PointF(0, 0);           // left , up
@@ -96,11 +96,17 @@ namespace dotNetLab.Widgets.Third_Party
 
         #region 属性 
 
-        public bool IsFineTuring   // 是否是微调状态
-            => _nodeSelected != PosSizableRect.None;
-
-        public bool IsDrawPolygon   // 是否是微调状态
-        => _treatmentType == TreatmentType.DrawPolygon;
+            // 是否是微调状态
+        public bool IsFineTuring 
+        {
+            get{return  _nodeSelected != PosSizableRect.None;}
+             
+        }
+        // 是否是微调状态
+        public bool IsDrawPolygon   
+        {
+            get { return _treatmentType == TreatmentType.DrawPolygon; }
+        }
 
         public List<int[]> DrawPointList
         {
@@ -136,7 +142,7 @@ namespace dotNetLab.Widgets.Third_Party
                 int width = (int)Math.Round((_rbPonit.X - _luPonit.X) / Wrate);
                 int height = (int)Math.Round((_rbPonit.Y - _luPonit.Y) / Wrate);
                 Rectangle rect = new Rectangle(x, y, width, height);
-                Rectangle imageRect = new Rectangle(0, 0, _image?.Width ?? 0, _image?.Height ?? 0);
+                Rectangle imageRect = new Rectangle(0, 0, _image.Width , _image.Height);
                 _imageRect = Rectangle.Intersect(rect, imageRect);
                 if (_imageRect != rect)
                 {
@@ -361,7 +367,7 @@ namespace dotNetLab.Widgets.Third_Party
         protected override void OnMouseUp(MouseEventArgs e)
         {
             if (_treatmentType == TreatmentType.FineTuring || _treatmentType == TreatmentType.DrawRect)
-                AfterDrawEvent?.Invoke(_isMouseMove, e.Button == MouseButtons.Right);
+                AfterDrawEvent.Invoke(_isMouseMove, e.Button == MouseButtons.Right);
             if (_treatmentType == TreatmentType.DrawPolygon)
             {
                 if (_selectedCircleIndex != -1)
@@ -382,7 +388,7 @@ namespace dotNetLab.Widgets.Third_Party
                     else
                         _polygons.Insert(_onLineIndex1 + 1, new PointF(e.X, e.Y));
                 }
-                AfterDrawEvent?.Invoke(_isMouseMove, e.Button == MouseButtons.Right);
+                AfterDrawEvent.Invoke(_isMouseMove, e.Button == MouseButtons.Right);
                 Invalidate();
             }
             _mIsClick = false;
@@ -549,7 +555,7 @@ namespace dotNetLab.Widgets.Third_Party
 
         private void DrawMouseWheel(MouseEventArgs e)
         {
-            MouseWheelDrawEvent?.Invoke(this, e);
+            MouseWheelDrawEvent.Invoke(this, e);
         }
 
         private void ZoomMouseMove(MouseEventArgs e)
