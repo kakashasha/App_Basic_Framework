@@ -90,7 +90,7 @@ namespace dotNetLab.Widgets
             this.sbrh_Text = new
                 System.Drawing.SolidBrush
                 (System.Drawing.Color.Black);
-
+            this.Height = 35;
         }
 
 

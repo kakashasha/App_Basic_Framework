@@ -1,12 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
-
-MinimumVisualStudioVersion = 10.0.40219.1
+# Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppCommon", "应用基建\AppCommon.csproj", "{1FBA2CBC-8701-471A-A78F-AEC1119A5962}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "dotNetLab", "界面\dotNetLab\dotNetLab.csproj", "{BC982388-B669-48CF-8F9A-A9DAC94BFFFD}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DBManager", "数据中心\DBManager.csproj", "{203DBCC1-7FE8-489F-9204-0D01F6CA0A18}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UI_DB_Test", "UI_DB_Test\UI_DB_Test.csproj", "{1AB77EAD-2D71-4907-91F1-9C17AACB5006}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -54,6 +55,16 @@ Global
 		{203DBCC1-7FE8-489F-9204-0D01F6CA0A18}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{203DBCC1-7FE8-489F-9204-0D01F6CA0A18}.Release|x86.ActiveCfg = Release|Any CPU
 		{203DBCC1-7FE8-489F-9204-0D01F6CA0A18}.Release|x86.Build.0 = Release|Any CPU
+		{1AB77EAD-2D71-4907-91F1-9C17AACB5006}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{1AB77EAD-2D71-4907-91F1-9C17AACB5006}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{1AB77EAD-2D71-4907-91F1-9C17AACB5006}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{1AB77EAD-2D71-4907-91F1-9C17AACB5006}.Debug|x86.ActiveCfg = Debug|x86
+		{1AB77EAD-2D71-4907-91F1-9C17AACB5006}.Debug|x86.Build.0 = Debug|x86
+		{1AB77EAD-2D71-4907-91F1-9C17AACB5006}.Release|Any CPU.ActiveCfg = Release|x86
+		{1AB77EAD-2D71-4907-91F1-9C17AACB5006}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{1AB77EAD-2D71-4907-91F1-9C17AACB5006}.Release|Mixed Platforms.Build.0 = Release|x86
+		{1AB77EAD-2D71-4907-91F1-9C17AACB5006}.Release|x86.ActiveCfg = Release|x86
+		{1AB77EAD-2D71-4907-91F1-9C17AACB5006}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

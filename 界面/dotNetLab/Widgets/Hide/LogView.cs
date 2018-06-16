@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Text;
+using System.ComponentModel;
 
 namespace dotNetLab.Widgets
 {
+    [ToolboxItem(false)]
     public class LogView : System.Windows.Forms.ListView
     {
         Font fnt_Text;

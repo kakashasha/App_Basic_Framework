@@ -227,7 +227,7 @@
     <Compile Include="Widgets\Toggle.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Widgets\Traditional\RibButton.cs">
+    <Compile Include="Widgets\Abort\RibButton.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Widgets\UIBinding\BlockUIBinder.cs" />
