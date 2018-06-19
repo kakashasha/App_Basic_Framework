@@ -21,6 +21,11 @@ namespace dotNetLab.Common
            mlistbox.AddItem(lg);
 
        }
+       public static void DisplayLogMessage( this Form frm,MobileListBox mlistbox,String strText,bool bisError)
+       {
+
+           mlistbox.AppendLog(strText, bisError);
+       }
     }
     public class LogItem : UIElement
     {
