@@ -22,7 +22,7 @@ namespace dotNetLab.Data
         public event UIOutput_ErrCallback UIOutput_Err;
         public event UIOutput_InfoCallback UIOutput_Info;
         public UnitDB LogDB;
-        public readonly String NORMAL_DATE_FORMAT = "yyyy-MM-dd hh:mm:ss";
+        public readonly String NORMAL_DATE_FORMAT = "yyyy-MM-dd HH:mm:ss";
         public readonly string LOGTABLE = "LogTable";
         public UIConsole()
         {
@@ -76,10 +76,8 @@ namespace dotNetLab.Data
         {
             if (UIOutput_Err != null)
             {
-
                 UIOutput_Err(
                     e.Message);
-
             }
             else
             {
