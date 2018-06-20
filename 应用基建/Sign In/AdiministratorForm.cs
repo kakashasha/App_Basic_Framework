@@ -9,8 +9,8 @@ namespace dotNetLab
 {
     namespace Common
     {
-        
-    public partial class Frm_Adiministrator : RibbonPage
+
+        public partial class AdiministratorForm : RibbonPage
     {
         public bool bAdmin = false;
         protected override void prepareCtrls()
@@ -32,7 +32,7 @@ namespace dotNetLab
             {
                 MessageBox.Show("是否未设置管理员密码？");
 
-                Frm_SetPassword fs = new Frm_SetPassword();
+                SetPasswordForm fs = new SetPasswordForm();
                 this.Hide();
                 fs.ShowDialog();
                 this.Show();

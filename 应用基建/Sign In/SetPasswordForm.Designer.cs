@@ -2,7 +2,7 @@
 {
     namespace Common
     {
-        partial class Frm_SetPassword
+        partial class  SetPasswordForm
         {
             /// <summary>
             /// Required designer variable.
@@ -30,7 +30,7 @@
             /// </summary>
             private void InitializeComponent()
             {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Frm_SetPassword));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SetPasswordForm));
             this.btn_OK = new dotNetLab.Widgets.MobileButton();
             this.txb_newPassword = new dotNetLab.Widgets.MobileTextBox();
             this.txb_confirmPassword = new dotNetLab.Widgets.MobileTextBox();
@@ -134,7 +134,7 @@
             this.pictureBox2.TabIndex = 9;
             this.pictureBox2.TabStop = false;
             // 
-            // Frm_SetPassword
+            // SetPasswordForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -148,7 +148,7 @@
             this.Controls.Add(this.btn_OK);
             this.EnableDialog = true;
             this.IconImage = ((System.Drawing.Image)(resources.GetObject("$this.IconImage")));
-            this.Name = "Frm_SetPassword";
+            this.Name = "SetPasswordForm";
             this.Text = "设置管理员密码";
             this.Controls.SetChildIndex(this.txv_Status, 0);
             this.Controls.SetChildIndex(this.btn_OK, 0);

@@ -2,7 +2,7 @@
 {
     namespace Common
     {
-partial class Frm_Register
+partial class  RegisterForm
     {
         /// <summary>
         /// Required designer variable.
@@ -30,7 +30,7 @@ partial class Frm_Register
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Frm_Register));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(RegisterForm));
             this.textView2 = new dotNetLab.Widgets.TextBlock();
             this.edt_Password = new dotNetLab.Widgets.MobileTextBox();
             this.textView1 = new dotNetLab.Widgets.TextBlock();
@@ -134,7 +134,7 @@ partial class Frm_Register
             this.pictureBox2.TabIndex = 10;
             this.pictureBox2.TabStop = false;
             // 
-            // Frm_Register
+            // RegisterForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -148,7 +148,7 @@ partial class Frm_Register
             this.Controls.Add(this.edt_UserName);
             this.EnableDialog = true;
             this.IconImage = ((System.Drawing.Image)(resources.GetObject("$this.IconImage")));
-            this.Name = "Frm_Register";
+            this.Name = "RegisterForm";
             this.Text = "新用户";
             this.Controls.SetChildIndex(this.txv_Status, 0);
             this.Controls.SetChildIndex(this.edt_UserName, 0);

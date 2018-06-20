@@ -2,7 +2,7 @@
 {
     namespace Common
     {
-        partial class Frm_Adiministrator
+        partial class AdiministratorForm
         {
             /// <summary>
             /// Required designer variable.
@@ -30,7 +30,7 @@
             /// </summary>
             private void InitializeComponent()
             {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Frm_Adiministrator));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AdiministratorForm));
             this.edt_Password = new dotNetLab.Widgets.MobileTextBox();
             this.textView1 = new dotNetLab.Widgets.TextBlock();
             this.btn_OK = new dotNetLab.Widgets.MobileButton();
@@ -93,7 +93,7 @@
             this.pictureBox1.TabIndex = 5;
             this.pictureBox1.TabStop = false;
             // 
-            // Frm_Adiministrator
+            // AdiministratorForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -104,7 +104,7 @@
             this.Controls.Add(this.edt_Password);
             this.EnableDialog = true;
             this.IconImage = ((System.Drawing.Image)(resources.GetObject("$this.IconImage")));
-            this.Name = "Frm_Adiministrator";
+            this.Name = "AdiministratorForm";
             this.Text = "管理员口令";
             this.Controls.SetChildIndex(this.txv_Status, 0);
             this.Controls.SetChildIndex(this.edt_Password, 0);

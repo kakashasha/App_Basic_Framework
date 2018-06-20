@@ -112,16 +112,16 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="pictureBox1.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAgAAAAIACAYAAAD0eNT6AAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6
-        JQAAgIMAAPn/AACA6QAAdTAAAOpgAAA6mAAAF2+SX8VGAAAACXBIWXMAAAsRAAALEQF/ZF+RAAAAB3RJ
+        JQAAgIMAAPn/AACA6QAAdTAAAOpgAAA6mAAAF2+SX8VGAAAACXBIWXMAAAsQAAALEAGtI711AAAAB3RJ
         TUUH3ggKDhQB6Bq2kwAARHJJREFUeF7tnQ11IzvShi8EQzAEI9hjCIZgCIFgBoEQCIEwEAJhIAyEWVWu
         em5PYrt/9JZ+nz0nZ/f7plstPSqVXpVK8j+/f//+hz8YYAPYADaADWADY9kAkz8CCBvABrABbAAbGNAG
         6PQBOx2VP5bKp7/pb2wAG7hnAwgABAA2gA1gA9gANjCgDdDpA3Y6qwFWA9gANoANYAMIAAQANoANYAPY
@@ -420,7 +420,7 @@
   <data name="pictureBox2.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAIAAAACACAYAAADDPmHLAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6
-        JQAAgIMAAPn/AACA6QAAdTAAAOpgAAA6mAAAF2+SX8VGAAAACXBIWXMAAAsRAAALEQF/ZF+RAABDkElE
+        JQAAgIMAAPn/AACA6QAAdTAAAOpgAAA6mAAAF2+SX8VGAAAACXBIWXMAAAsQAAALEAGtI711AABDkElE
         QVR4Xu2dd3xV1dKGt1wUaelA6EUUkCJWqkpRQHoHaUqRDoIFBKnSmwqCiHRC6KH33nsLvfcSSEJXFL13
         vmfW3jscMFQxBD/+mN85OTk5aN5n3pk1a+0dS0Ssp/H/93fwUOL3rf+29Q9FAJ9blGhHjCcWEaFEGHGZ
         uOSEPr9A7CFWEyFEf6IRUYhI1ueTfFbvenmtnnXyWD1q57K6f/yW1bXWG1aXmq9b39R41epULee/Lh4m

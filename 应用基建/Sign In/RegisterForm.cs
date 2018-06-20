@@ -14,7 +14,7 @@ namespace dotNetLab
     namespace Common
     {
 
-    public partial class Frm_Register : RibbonPage
+        public partial class RegisterForm : RibbonPage
         {
 
         protected override void prepareCtrls()
@@ -41,7 +41,7 @@ namespace dotNetLab
             {
                 Tipper.Tip_Info_Ask("是否未设置管理员密码？");
 
-                Frm_SetPassword fs = new Frm_SetPassword();
+                SetPasswordForm fs = new SetPasswordForm();
                 this.Hide();
                 fs.ShowDialog();
                 
@@ -57,7 +57,7 @@ namespace dotNetLab
                 return;
             }
             checkAdminPwdExist();
-            Frm_Adiministrator frm = new Frm_Adiministrator();
+            AdiministratorForm frm = new AdiministratorForm();
             frm.ShowDialog();
             if (frm.bAdmin)
             {

@@ -33,7 +33,6 @@ namespace dotNetLab.Common
                R.Pipe.UIOutput_Err += (str) =>
                {
                    Action<MobileListBox,String,bool> action_DisplayLogMessage = PG.DisplayLogMessage ;
-
                    PG.Invoke(action_DisplayLogMessage, ltb, str, true);
                };
 

@@ -26,7 +26,7 @@ namespace dotNetLab.Widgets
         private MobileButton btn_LookupTable;
         private System.ComponentModel.IContainer components;
         private TextBlock textBlock5;
-         
+        public bool isClosed = false;
        protected override void prepareCtrls()
        {
            base.prepareCtrls();
@@ -61,6 +61,12 @@ namespace dotNetLab.Widgets
            this.btn_BindData.Click += new EventHandler(btn_BindData_Click);
           
            this.FormClosing += new FormClosingEventHandler(DataBindingPropertyEditorDialog_FormClosing);
+           this.FormClosed += new FormClosedEventHandler(DataBindingPropertyEditorDialog_FormClosed);
+       }
+
+       void DataBindingPropertyEditorDialog_FormClosed(object sender, FormClosedEventArgs e)
+       {
+           isClosed = true;
        }
 
         
@@ -73,7 +79,6 @@ namespace dotNetLab.Widgets
            DBEngineManager.DataBindingPropertyEditorDialogObject = this;
            DBEngineManager.ShowDialog();
            DBEngineManager.Close();
-           
            DBEngineManager.Dispose();
            Show();
          
@@ -129,9 +134,11 @@ namespace dotNetLab.Widgets
            this.txb_TableName.FloatValue = float.NaN;
            this.txb_TableName.Font = new System.Drawing.Font("微软雅黑", 13F);
            this.txb_TableName.ForeColor = System.Drawing.Color.DimGray;
+           this.txb_TableName.GreyPattern = false;
            this.txb_TableName.IntValue = -2147483648;
            this.txb_TableName.LineThickness = 2F;
            this.txb_TableName.Location = new System.Drawing.Point(277, 120);
+           this.txb_TableName.MainBindableProperty = "App_Extension_Data_Table";
            this.txb_TableName.Name = "txb_TableName";
            this.txb_TableName.Radius = -1;
            this.txb_TableName.Size = new System.Drawing.Size(240, 31);
@@ -156,9 +163,11 @@ namespace dotNetLab.Widgets
            this.txb_DBField.FloatValue = float.NaN;
            this.txb_DBField.Font = new System.Drawing.Font("微软雅黑", 13F);
            this.txb_DBField.ForeColor = System.Drawing.Color.DimGray;
+           this.txb_DBField.GreyPattern = false;
            this.txb_DBField.IntValue = -2147483648;
            this.txb_DBField.LineThickness = 2F;
            this.txb_DBField.Location = new System.Drawing.Point(277, 175);
+           this.txb_DBField.MainBindableProperty = "Val";
            this.txb_DBField.Name = "txb_DBField";
            this.txb_DBField.Radius = -1;
            this.txb_DBField.Size = new System.Drawing.Size(240, 31);
@@ -183,9 +192,11 @@ namespace dotNetLab.Widgets
            this.txb_Filter.FloatValue = float.NaN;
            this.txb_Filter.Font = new System.Drawing.Font("微软雅黑", 13F);
            this.txb_Filter.ForeColor = System.Drawing.Color.DimGray;
+           this.txb_Filter.GreyPattern = false;
            this.txb_Filter.IntValue = -2147483648;
            this.txb_Filter.LineThickness = 2F;
            this.txb_Filter.Location = new System.Drawing.Point(277, 226);
+           this.txb_Filter.MainBindableProperty = "Name=\'{0}\'";
            this.txb_Filter.Name = "txb_Filter";
            this.txb_Filter.Radius = -1;
            this.txb_Filter.Size = new System.Drawing.Size(240, 31);
@@ -204,15 +215,25 @@ namespace dotNetLab.Widgets
            this.textBlock1.BorderColor = System.Drawing.Color.Empty;
            this.textBlock1.BorderThickness = -1;
            this.textBlock1.DataBindingInfo = null;
+           this.textBlock1.EnableFlag = false;
+           this.textBlock1.EnableTextRenderHint = false;
+           this.textBlock1.FlagAlign = dotNetLab.Widgets.Alignments.Left;
+           this.textBlock1.FlagColor = System.Drawing.Color.DodgerBlue;
+           this.textBlock1.FlagThickness = 5;
            this.textBlock1.Font = new System.Drawing.Font("微软雅黑", 12F);
+           this.textBlock1.GapBetweenTextFlag = 10;
            this.textBlock1.LEDStyle = false;
            this.textBlock1.Location = new System.Drawing.Point(155, 126);
+           this.textBlock1.MainBindableProperty = "表名";
            this.textBlock1.Name = "textBlock1";
            this.textBlock1.Radius = -1;
            this.textBlock1.Size = new System.Drawing.Size(42, 25);
            this.textBlock1.TabIndex = 2;
            this.textBlock1.Text = "表名";
            this.textBlock1.UIElementBinders = null;
+           this.textBlock1.UnderLine = false;
+           this.textBlock1.UnderLineColor = System.Drawing.Color.DarkGray;
+           this.textBlock1.UnderLineThickness = 2F;
            this.textBlock1.Vertical = false;
            this.textBlock1.WhereReturn = ((byte)(0));
            // 
@@ -222,15 +243,25 @@ namespace dotNetLab.Widgets
            this.textBlock2.BorderColor = System.Drawing.Color.Empty;
            this.textBlock2.BorderThickness = -1;
            this.textBlock2.DataBindingInfo = null;
+           this.textBlock2.EnableFlag = false;
+           this.textBlock2.EnableTextRenderHint = false;
+           this.textBlock2.FlagAlign = dotNetLab.Widgets.Alignments.Left;
+           this.textBlock2.FlagColor = System.Drawing.Color.DodgerBlue;
+           this.textBlock2.FlagThickness = 5;
            this.textBlock2.Font = new System.Drawing.Font("微软雅黑", 12F);
+           this.textBlock2.GapBetweenTextFlag = 10;
            this.textBlock2.LEDStyle = false;
            this.textBlock2.Location = new System.Drawing.Point(147, 175);
+           this.textBlock2.MainBindableProperty = "字段名";
            this.textBlock2.Name = "textBlock2";
            this.textBlock2.Radius = -1;
            this.textBlock2.Size = new System.Drawing.Size(60, 25);
            this.textBlock2.TabIndex = 2;
            this.textBlock2.Text = "字段名";
            this.textBlock2.UIElementBinders = null;
+           this.textBlock2.UnderLine = false;
+           this.textBlock2.UnderLineColor = System.Drawing.Color.DarkGray;
+           this.textBlock2.UnderLineThickness = 2F;
            this.textBlock2.Vertical = false;
            this.textBlock2.WhereReturn = ((byte)(0));
            // 
@@ -240,15 +271,25 @@ namespace dotNetLab.Widgets
            this.textBlock3.BorderColor = System.Drawing.Color.Empty;
            this.textBlock3.BorderThickness = -1;
            this.textBlock3.DataBindingInfo = null;
+           this.textBlock3.EnableFlag = false;
+           this.textBlock3.EnableTextRenderHint = false;
+           this.textBlock3.FlagAlign = dotNetLab.Widgets.Alignments.Left;
+           this.textBlock3.FlagColor = System.Drawing.Color.DodgerBlue;
+           this.textBlock3.FlagThickness = 5;
            this.textBlock3.Font = new System.Drawing.Font("微软雅黑", 12F);
+           this.textBlock3.GapBetweenTextFlag = 10;
            this.textBlock3.LEDStyle = false;
            this.textBlock3.Location = new System.Drawing.Point(147, 226);
+           this.textBlock3.MainBindableProperty = "接入条件";
            this.textBlock3.Name = "textBlock3";
            this.textBlock3.Radius = -1;
            this.textBlock3.Size = new System.Drawing.Size(78, 25);
            this.textBlock3.TabIndex = 2;
            this.textBlock3.Text = "接入条件";
            this.textBlock3.UIElementBinders = null;
+           this.textBlock3.UnderLine = false;
+           this.textBlock3.UnderLineColor = System.Drawing.Color.DarkGray;
+           this.textBlock3.UnderLineThickness = 2F;
            this.textBlock3.Vertical = false;
            this.textBlock3.WhereReturn = ((byte)(0));
            // 
@@ -261,6 +302,7 @@ namespace dotNetLab.Widgets
            this.tgl_UpdateToDB.Checked = true;
            this.tgl_UpdateToDB.DataBindingInfo = null;
            this.tgl_UpdateToDB.Location = new System.Drawing.Point(277, 285);
+           this.tgl_UpdateToDB.MainBindableProperty = "";
            this.tgl_UpdateToDB.Name = "tgl_UpdateToDB";
            this.tgl_UpdateToDB.Size = new System.Drawing.Size(45, 22);
            this.tgl_UpdateToDB.TabIndex = 3;
@@ -272,15 +314,25 @@ namespace dotNetLab.Widgets
            this.textBlock5.BorderColor = System.Drawing.Color.Empty;
            this.textBlock5.BorderThickness = -1;
            this.textBlock5.DataBindingInfo = null;
+           this.textBlock5.EnableFlag = false;
+           this.textBlock5.EnableTextRenderHint = false;
+           this.textBlock5.FlagAlign = dotNetLab.Widgets.Alignments.Left;
+           this.textBlock5.FlagColor = System.Drawing.Color.DodgerBlue;
+           this.textBlock5.FlagThickness = 5;
            this.textBlock5.Font = new System.Drawing.Font("微软雅黑", 12F);
+           this.textBlock5.GapBetweenTextFlag = 10;
            this.textBlock5.LEDStyle = false;
            this.textBlock5.Location = new System.Drawing.Point(130, 285);
+           this.textBlock5.MainBindableProperty = "更新到数据库";
            this.textBlock5.Name = "textBlock5";
            this.textBlock5.Radius = -1;
            this.textBlock5.Size = new System.Drawing.Size(114, 25);
            this.textBlock5.TabIndex = 2;
            this.textBlock5.Text = "更新到数据库";
            this.textBlock5.UIElementBinders = null;
+           this.textBlock5.UnderLine = false;
+           this.textBlock5.UnderLineColor = System.Drawing.Color.DarkGray;
+           this.textBlock5.UnderLineThickness = 2F;
            this.textBlock5.Vertical = false;
            this.textBlock5.WhereReturn = ((byte)(0));
            // 
@@ -291,14 +343,21 @@ namespace dotNetLab.Widgets
            this.btn_BindData.BorderThickness = -1;
            this.btn_BindData.CornerAligment = dotNetLab.Widgets.Alignments.All;
            this.btn_BindData.DataBindingInfo = null;
+           this.btn_BindData.EnableFlag = false;
            this.btn_BindData.EnableMobileRound = false;
+           this.btn_BindData.EnableTextRenderHint = false;
+           this.btn_BindData.FlagAlign = dotNetLab.Widgets.Alignments.Left;
+           this.btn_BindData.FlagColor = System.Drawing.Color.DodgerBlue;
+           this.btn_BindData.FlagThickness = 5;
            this.btn_BindData.Font = new System.Drawing.Font("微软雅黑", 12F);
            this.btn_BindData.ForeColor = System.Drawing.Color.White;
+           this.btn_BindData.GapBetweenTextFlag = 10;
            this.btn_BindData.GapBetweenTextImage = 8;
            this.btn_BindData.IConAlignment = System.Windows.Forms.LeftRightAlignment.Left;
            this.btn_BindData.ImageSize = new System.Drawing.Size(0, 0);
            this.btn_BindData.LEDStyle = false;
            this.btn_BindData.Location = new System.Drawing.Point(473, 398);
+           this.btn_BindData.MainBindableProperty = "接入";
            this.btn_BindData.Name = "btn_BindData";
            this.btn_BindData.NeedAnimation = true;
            this.btn_BindData.NormalColor = System.Drawing.Color.DodgerBlue;
@@ -309,6 +368,9 @@ namespace dotNetLab.Widgets
            this.btn_BindData.TabIndex = 4;
            this.btn_BindData.Text = "接入";
            this.btn_BindData.UIElementBinders = null;
+           this.btn_BindData.UnderLine = false;
+           this.btn_BindData.UnderLineColor = System.Drawing.Color.DarkGray;
+           this.btn_BindData.UnderLineThickness = 2F;
            this.btn_BindData.Vertical = false;
            this.btn_BindData.WhereReturn = ((byte)(0));
            // 
@@ -324,9 +386,11 @@ namespace dotNetLab.Widgets
            this.txb_DBEngineIndex.FloatValue = 0F;
            this.txb_DBEngineIndex.Font = new System.Drawing.Font("微软雅黑", 13F);
            this.txb_DBEngineIndex.ForeColor = System.Drawing.Color.DimGray;
+           this.txb_DBEngineIndex.GreyPattern = false;
            this.txb_DBEngineIndex.IntValue = 0;
            this.txb_DBEngineIndex.LineThickness = 2F;
            this.txb_DBEngineIndex.Location = new System.Drawing.Point(277, 332);
+           this.txb_DBEngineIndex.MainBindableProperty = "0";
            this.txb_DBEngineIndex.Name = "txb_DBEngineIndex";
            this.txb_DBEngineIndex.Radius = -1;
            this.txb_DBEngineIndex.Size = new System.Drawing.Size(240, 31);
@@ -345,15 +409,25 @@ namespace dotNetLab.Widgets
            this.textBlock6.BorderColor = System.Drawing.Color.Empty;
            this.textBlock6.BorderThickness = -1;
            this.textBlock6.DataBindingInfo = null;
+           this.textBlock6.EnableFlag = false;
+           this.textBlock6.EnableTextRenderHint = false;
+           this.textBlock6.FlagAlign = dotNetLab.Widgets.Alignments.Left;
+           this.textBlock6.FlagColor = System.Drawing.Color.DodgerBlue;
+           this.textBlock6.FlagThickness = 5;
            this.textBlock6.Font = new System.Drawing.Font("微软雅黑", 12F);
+           this.textBlock6.GapBetweenTextFlag = 10;
            this.textBlock6.LEDStyle = false;
            this.textBlock6.Location = new System.Drawing.Point(130, 338);
+           this.textBlock6.MainBindableProperty = "数据库引擎索引";
            this.textBlock6.Name = "textBlock6";
            this.textBlock6.Radius = -1;
            this.textBlock6.Size = new System.Drawing.Size(132, 25);
            this.textBlock6.TabIndex = 2;
            this.textBlock6.Text = "数据库引擎索引";
            this.textBlock6.UIElementBinders = null;
+           this.textBlock6.UnderLine = false;
+           this.textBlock6.UnderLineColor = System.Drawing.Color.DarkGray;
+           this.textBlock6.UnderLineThickness = 2F;
            this.textBlock6.Vertical = false;
            this.textBlock6.WhereReturn = ((byte)(0));
            // 
@@ -362,6 +436,7 @@ namespace dotNetLab.Widgets
            this.colorDecorator1.BackColor = System.Drawing.Color.White;
            this.colorDecorator1.DataBindingInfo = null;
            this.colorDecorator1.Location = new System.Drawing.Point(5, 453);
+           this.colorDecorator1.MainBindableProperty = "";
            this.colorDecorator1.Name = "colorDecorator1";
            this.colorDecorator1.Size = new System.Drawing.Size(150, 53);
            this.colorDecorator1.TabIndex = 6;
@@ -373,15 +448,25 @@ namespace dotNetLab.Widgets
            this.textBlock4.BorderColor = System.Drawing.Color.Empty;
            this.textBlock4.BorderThickness = -1;
            this.textBlock4.DataBindingInfo = null;
+           this.textBlock4.EnableFlag = false;
+           this.textBlock4.EnableTextRenderHint = false;
+           this.textBlock4.FlagAlign = dotNetLab.Widgets.Alignments.Left;
+           this.textBlock4.FlagColor = System.Drawing.Color.DodgerBlue;
+           this.textBlock4.FlagThickness = 5;
            this.textBlock4.Font = new System.Drawing.Font("微软雅黑", 12F);
+           this.textBlock4.GapBetweenTextFlag = 10;
            this.textBlock4.LEDStyle = false;
            this.textBlock4.Location = new System.Drawing.Point(353, 285);
+           this.textBlock4.MainBindableProperty = "实时更新到数据库";
            this.textBlock4.Name = "textBlock4";
            this.textBlock4.Radius = -1;
            this.textBlock4.Size = new System.Drawing.Size(150, 25);
            this.textBlock4.TabIndex = 2;
            this.textBlock4.Text = "实时更新到数据库";
            this.textBlock4.UIElementBinders = null;
+           this.textBlock4.UnderLine = false;
+           this.textBlock4.UnderLineColor = System.Drawing.Color.DarkGray;
+           this.textBlock4.UnderLineThickness = 2F;
            this.textBlock4.Vertical = false;
            this.textBlock4.WhereReturn = ((byte)(0));
            // 
@@ -394,6 +479,7 @@ namespace dotNetLab.Widgets
            this.tgl_RealTimeWithDB.Checked = true;
            this.tgl_RealTimeWithDB.DataBindingInfo = null;
            this.tgl_RealTimeWithDB.Location = new System.Drawing.Point(533, 285);
+           this.tgl_RealTimeWithDB.MainBindableProperty = "";
            this.tgl_RealTimeWithDB.Name = "tgl_RealTimeWithDB";
            this.tgl_RealTimeWithDB.Size = new System.Drawing.Size(45, 22);
            this.tgl_RealTimeWithDB.TabIndex = 3;
@@ -406,14 +492,21 @@ namespace dotNetLab.Widgets
            this.btn_LookupTable.BorderThickness = -1;
            this.btn_LookupTable.CornerAligment = dotNetLab.Widgets.Alignments.All;
            this.btn_LookupTable.DataBindingInfo = null;
+           this.btn_LookupTable.EnableFlag = false;
            this.btn_LookupTable.EnableMobileRound = false;
+           this.btn_LookupTable.EnableTextRenderHint = false;
+           this.btn_LookupTable.FlagAlign = dotNetLab.Widgets.Alignments.Left;
+           this.btn_LookupTable.FlagColor = System.Drawing.Color.DodgerBlue;
+           this.btn_LookupTable.FlagThickness = 5;
            this.btn_LookupTable.Font = new System.Drawing.Font("微软雅黑", 12F);
            this.btn_LookupTable.ForeColor = System.Drawing.Color.White;
+           this.btn_LookupTable.GapBetweenTextFlag = 10;
            this.btn_LookupTable.GapBetweenTextImage = 8;
            this.btn_LookupTable.IConAlignment = System.Windows.Forms.LeftRightAlignment.Left;
            this.btn_LookupTable.ImageSize = new System.Drawing.Size(0, 0);
            this.btn_LookupTable.LEDStyle = false;
            this.btn_LookupTable.Location = new System.Drawing.Point(334, 398);
+           this.btn_LookupTable.MainBindableProperty = "查询";
            this.btn_LookupTable.Name = "btn_LookupTable";
            this.btn_LookupTable.NeedAnimation = true;
            this.btn_LookupTable.NormalColor = System.Drawing.Color.DodgerBlue;
@@ -424,6 +517,9 @@ namespace dotNetLab.Widgets
            this.btn_LookupTable.TabIndex = 4;
            this.btn_LookupTable.Text = "查询";
            this.btn_LookupTable.UIElementBinders = null;
+           this.btn_LookupTable.UnderLine = false;
+           this.btn_LookupTable.UnderLineColor = System.Drawing.Color.DarkGray;
+           this.btn_LookupTable.UnderLineThickness = 2F;
            this.btn_LookupTable.Vertical = false;
            this.btn_LookupTable.WhereReturn = ((byte)(0));
            // 

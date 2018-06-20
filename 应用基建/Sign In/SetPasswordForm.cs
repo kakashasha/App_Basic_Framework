@@ -10,7 +10,7 @@ namespace dotNetLab
 {
     namespace Common
     {
-        public partial class Frm_SetPassword : RibbonPage
+        public partial class SetPasswordForm : RibbonPage
         {
             protected override void prepareCtrls()
             {

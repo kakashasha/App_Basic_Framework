@@ -13,17 +13,24 @@ namespace dotNetLab.Data.Uniting
         public const string SQLCETABLEDEF =
        "Name national character varying(128) primary key ,Val  national character varying(512)";
         public string DefaultTable { get { return TABLENAME; } }
-        public String[] GetNameColumnValues(String strTableName)
+        public List<String> GetNameColumnValues(String strTableName)
         {
             try
             {
                 DataTable dt = this.ProvideTable(String.Format("select Name from {0}; ", strTableName), DBOperator.OPERATOR_QUERY_ALL_TABLENAMES);
-                string[] ColumnsValue = new string[dt.Rows.Count];
-                for (int i = 0; i < ColumnsValue.Length; i++)
+                if (dt == null)
+                    return null ;
+                if (dt != null)
                 {
-                    ColumnsValue[i] = dt.Rows[i][0].ToString();
+                    if (dt.Rows.Count == 0)
+                        return null;
                 }
-                return ColumnsValue;
+                List<String> lst = new List<String>();
+                for (int i = 0; i < dt.Rows.Count; i++)
+                {
+                   lst.Add( dt.Rows[i][0].ToString());
+                }
+                return lst;
             }
             catch (Exception e)
             {

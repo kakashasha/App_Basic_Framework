@@ -4,6 +4,7 @@ using System.Text;
 using System.Drawing.Design;
 using System.Windows.Forms.Design;
 using System.Windows.Forms;
+using System.Threading;
 
 namespace dotNetLab.Widgets
 {
@@ -23,7 +24,7 @@ namespace dotNetLab.Widgets
                     PrepareShowEditor( out frm,value);
                     frm.ShowDialog();
                     frm.Dispose();
-                    frm = null;
+                    
                     
                 }
             }
