@@ -54,6 +54,7 @@ namespace dotNetLab
                     R.CompactDB.TargetTable = "User_Key";
                     String strPassword =
                         R.CompactDB.FetchValue(this.edt_UserName.Text.Trim());
+                        
                     R.CompactDB.TargetTable = R.CompactDB.DefaultTable;
                     if (!R.CompactDB.Status)
                         Tipper.Tip_Info_Error("不存在此用户名！");

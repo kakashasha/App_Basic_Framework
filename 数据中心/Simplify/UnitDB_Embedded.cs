@@ -300,7 +300,7 @@ namespace dotNetLab.Data
                     return str.Split(new char[] { SPLITMARK });
                 else
                     return null;*/
-                return FetchArray(TargetTable, strLabelName);
+                return FetchArray(DefaultTable, strLabelName);
             }
             public String[] FetchArray(String strTableName, string strLabelName)
             {
