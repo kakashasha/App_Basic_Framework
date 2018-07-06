@@ -42,7 +42,7 @@ namespace dotNetLab.Data
         void CreateLogTable()
         {
             LogDB.NewTable(LOGTABLE,
-                "Fire_Time text primary key,Message text not null,Location text not null,Action text not null,MessageType text not null");
+                "Fire_Time text,Message text not null,Location text not null,Action text not null,MessageType text not null");
         }
         protected String Now
         {

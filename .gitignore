@@ -4,3 +4,7 @@
 # Ada Library Information
 *.ali
 /.vs
+/界面/dotNetLab/obj/Debug/*.cache
+/数据中心/obj/Debug/*.cache
+/应用基建/obj/Debug/*.cache
+/应用基建/obj/Debug/*.CopyComplete

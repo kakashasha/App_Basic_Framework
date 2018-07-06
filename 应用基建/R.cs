@@ -12,6 +12,13 @@ namespace dotNetLab
             public static UnitDB CompactDB = null;
             public static String NORMAL_DATE_FORMAT = "yyyy-MM-dd hh:mm:ss";
             public static UIConsole Pipe = null;
+            public static UnitDB LogDB
+            {
+                get
+                {
+                    return Pipe.LogDB;
+                }
+            }
             public static dotNetLab.Widgets.UIBinding.UIElementDataBinding DataBindingManager = null;
         }
     }
