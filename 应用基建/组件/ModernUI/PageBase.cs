@@ -56,6 +56,8 @@ namespace dotNetLab.Common.ModernUI
                 R.DataBindingManager.DbCommandList.Add(R.CompactDB.ThisDbCommand);
                 UIElementBinders = R.DataBindingManager;
             }
+            else
+                UIElementBinders = R.DataBindingManager;
         }
     }
 }

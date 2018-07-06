@@ -227,9 +227,6 @@
     <Compile Include="Widgets\Toggle.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Widgets\Abort\RibButton.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
     <Compile Include="Widgets\UIBinding\BlockUIBinder.cs" />
     <Compile Include="Widgets\UIBinding\DataBinding\TrueType_C\Double_Ptr.cs" />
     <Compile Include="Widgets\UIBinding\DataBinding\TrueType_C\Pointer.cs" />
@@ -394,7 +391,9 @@
     <Content Include="Widgets\Design\如何使自定义控件可点击.txt" />
     <Content Include="Widgets\Design\设计时自定义控件动态添加控件及添加之后处于可编辑状态.txt" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Widgets\Abort\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

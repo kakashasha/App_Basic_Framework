@@ -53,6 +53,13 @@ namespace dotNetLab.Widgets.Container
             set { nElementVerticalGap = value; }
         }
 
+
+        public void TopItem(Control c)
+        {
+            AddItem(c);
+            ctrl_ForHold.Controls.SetChildIndex(c, 0);
+        }
+
         public void AddItem(Control c)
         {
             if (bFirstBindUI)

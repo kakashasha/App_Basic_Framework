@@ -34,7 +34,7 @@ namespace dotNetLab.Data.Uniting
         {
             this.EngineName = EngineName;
              String strConn = null;
-            
+            this.TargetTable = TABLENAME;
             switch (EngineName)
             {
 
@@ -59,7 +59,7 @@ namespace dotNetLab.Data.Uniting
             
                 if (strConn != null && conn != null)
                 {
-                    this.TargetTable = TABLENAME;
+                    
                     base.Connect(IP, Port, dbName, UserName, Pwd, strConn, ref this.conn, ref this.cmd);
                     ExecuteNonQuery(String.Format("use {0};", dbName),DBOperator.OPERATOR_CONNECT_DB);
                     CheckDefaultTableExist();
@@ -78,6 +78,7 @@ namespace dotNetLab.Data.Uniting
             try
             {
                 this.EngineName = Enginename;
+                this.TargetTable = TABLENAME;
                 this.DBName = DBFilePath;
                 if (conn != null)
                 {
@@ -100,7 +101,7 @@ namespace dotNetLab.Data.Uniting
                 cmd.Connection = conn;
                 this.bConnected = true;
                 this.Status = true;
-                this.TargetTable = TABLENAME;
+               
                 CheckDefaultTableExist();
             }
             catch (Exception e)

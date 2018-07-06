@@ -18,7 +18,8 @@ namespace dotNetLab.Common
                lg.ErrorText = strText;
            else
                lg.InfoText = strText;
-           mlistbox.AddItem(lg);
+           
+            mlistbox.AddItem(lg);
 
        }
        public static void DisplayLogMessage( this Form frm,MobileListBox mlistbox,String strText,bool bisError)

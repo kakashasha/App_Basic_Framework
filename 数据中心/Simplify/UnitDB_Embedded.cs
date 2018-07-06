@@ -326,7 +326,7 @@ namespace dotNetLab.Data
                             return null ;
                         }
                     else
-                        return null;
+                        return new String[] { str };
                 }
             }
             public void FetchFloatArray(string strLabelName, out float[] fArr)

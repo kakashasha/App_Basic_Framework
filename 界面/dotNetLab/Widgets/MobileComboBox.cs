@@ -78,7 +78,7 @@ namespace dotNetLab.Widgets
             }
         }
         [Category("数据")]
-        public string[]
+        public String []
         Items
         {
             get { return strItems; }

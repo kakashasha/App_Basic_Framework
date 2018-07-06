@@ -19,11 +19,11 @@ namespace dotNetLab.Data.Uniting
             {
                 DataTable dt = this.ProvideTable(String.Format("select Name from {0}; ", strTableName), DBOperator.OPERATOR_QUERY_ALL_TABLENAMES);
                 if (dt == null)
-                    return null ;
+                    return new List<string>() ;
                 if (dt != null)
                 {
                     if (dt.Rows.Count == 0)
-                        return null;
+                        return  new  List<String>();
                 }
                 List<String> lst = new List<String>();
                 for (int i = 0; i < dt.Rows.Count; i++)

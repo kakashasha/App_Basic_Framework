@@ -88,7 +88,6 @@
     <Compile Include="Simplify\UIDBEngine.cs" />
     <Compile Include="Simplify\UnitDB_Connect.cs" />
     <Compile Include="Simplify\UnitDB_Embedded.cs" />
-    <Compile Include="Simplify\UnitDB_Extended.cs" />
     <Compile Include="Simplify\UnitDB_KeyValue.cs" />
     <Compile Include="Tipper.cs" />
   </ItemGroup>

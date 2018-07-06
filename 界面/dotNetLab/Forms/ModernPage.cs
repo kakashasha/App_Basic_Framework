@@ -17,7 +17,9 @@ namespace dotNetLab.Forms
         private Panel pnl_Switchers;
         Switcher[] switchers;
         protected Point pnt_TitlePos;
-       
+        private int nCurrent_NotMaxWidth = 0;
+        private int nCurrent_NotMaxHeight = 0;
+        private Point pnt_notMaxWindowLocation; 
         [Category("外观")]
         public Point TitlePos
         {
@@ -115,16 +117,29 @@ namespace dotNetLab.Forms
                 case 0: this.WindowState = FormWindowState.Minimized; break;
                 case 2: Close(); break;
                 case 1:
+                    
                     if (!EnableDialog)
                     {
                         bool b = (bool)this.Tag;
                         b = !b;
                         this.Tag = b;
                         if (b)
-                            this.WindowState = FormWindowState.Maximized;
+                        {
+                            if (this.Height < Screen.PrimaryScreen.WorkingArea.Height)
+                            {
+                                this.pnt_notMaxWindowLocation = this.Location;
+                                this.nCurrent_NotMaxWidth = this.Width;
+                                this.nCurrent_NotMaxHeight = this.Height;
+                            }
+                            this.Location = new Point(0, 0);
+                            this.Height = Screen.PrimaryScreen.WorkingArea.Height;
+                            this.Width = System.Windows.Forms.Screen.PrimaryScreen.Bounds.Width;
+                        }
                         else
                         {
-                            this.WindowState = FormWindowState.Normal;
+                            this.Location = pnt_notMaxWindowLocation;
+                            this.Height = nCurrent_NotMaxHeight;
+                            this.Width = nCurrent_NotMaxWidth;
                         }
                     }
                     break;

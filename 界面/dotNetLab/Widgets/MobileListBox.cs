@@ -45,6 +45,11 @@ namespace dotNetLab.Widgets
         {
             UIAdapter.AddItem(control);
         } 
+
+        public void TopItem(Control c)
+        {
+            UIAdapter.TopItem(c);
+        }
         public void RemoveItem(Control c)
         {
             UIAdapter.RemoveItem(c);
