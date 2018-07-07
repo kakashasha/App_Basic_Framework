@@ -115,6 +115,7 @@ namespace dotNetLab.Data
                 File.AppendAllText("Log.txt",str,Encoding.Default);
                 
             }
+            Console.WriteLine(info);
             LogDB.NewRecord( LOGTABLE,String.Format("'{0}','{1}','{2}','{3}','Info'",Now,info,strLocation,strAction));
         }
         public void Info(String info)
