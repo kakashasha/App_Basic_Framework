@@ -27,14 +27,11 @@ namespace dotNetLab.Forms
             set
             {
                 pnt_TitlePos = value;
+
                 Refresh();
             }
         }
-        protected override void prepareData()
-        {
-            pnt_TitlePos = new Point(80, 10);
-            base.prepareData();
-        }
+        
         protected override void DrawUpDownDecoratePatern(Graphics g, int times)
         {
             for (int i = 0; i < times; i++)
@@ -55,6 +52,8 @@ namespace dotNetLab.Forms
             g.TextRenderingHint = System.Drawing.Text.TextRenderingHint.AntiAlias;
             DrawBorder(g);
             DrawVerticalBar(g, this.Width-6-2, 80, 6, 75);
+            if(pnt_TitlePos == null)
+                pnt_TitlePos = new Point(80, 10);
             DrawText(g, pnt_TitlePos.X, pnt_TitlePos.Y);
             DrawUpDownDecoratePatern(g,DrawUpDownPatternTimes);
             DrawUpDownDecoratePatern(g,DrawUpDownPatternTimes);
