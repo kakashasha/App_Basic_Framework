@@ -452,6 +452,7 @@ namespace dotNetLab.Data.Uniting
         }
         public void GetAllTableNames()
          {
+            AllTableNames.Clear();
              switch (EngineName)
              {
                  case DBEngineNames.SQLITE:

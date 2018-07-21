@@ -376,10 +376,19 @@ namespace dotNetLab.Widgets.UIBinding
 
                 lock (this)
                 {
-                    String str = cmd.ExecuteScalar().ToString();
-                    UIElement ele = (ctrl as UIElement);
-                    if (!ele.MainBindableProperty.Equals(str))
-                        ele.MainBindableProperty = cmd.ExecuteScalar().ToString();
+                    try
+                    {
+                        String str = cmd.ExecuteScalar().ToString();
+                        UIElement ele = (ctrl as UIElement);
+                        if (!ele.MainBindableProperty.Equals(str))
+                            ele.MainBindableProperty = cmd.ExecuteScalar().ToString();
+                    }
+                    catch (Exception e)
+                    {
+
+                        Tipper.Error = e.Message;
+                    }
+                   
                 }
 
 
