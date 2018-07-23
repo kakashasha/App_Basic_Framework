@@ -131,9 +131,11 @@ namespace dotNetLab
                 }
             }
             
-             protected virtual void ClientRecieveMethod(int nIndex)
+             protected virtual int ClientRecieveMethod(int nIndex)
             {
-                lst_Clients[nIndex].Receive(ClientsBuffer[nIndex]);
+               return   lst_Clients[nIndex].Receive(ClientsBuffer[nIndex]);
+
+              
             }
               void RecieveAndParse(int nIndex_ArrByt)
             {
@@ -145,12 +147,15 @@ namespace dotNetLab
                     {
                         if (!lst_Thd_Ctrls[nIndex_ArrByt])
                             return;
-                        ClientRecieveMethod(nIndex_ArrByt);
+                        int nRecievedLen =  ClientRecieveMethod(nIndex_ArrByt);
+                        if (nRecievedLen == 0)
+                            throw new Exception("客户端断开");
                         ParseAndHandle(ClientsBuffer[nIndex_ArrByt],nIndex_ArrByt);
                         Thread.Sleep(nLoopGapTime);
                     }
                     catch (Exception e)
                     {
+                       
                         Console.WriteLine(e.Message);
                         this.strErrorInfo = e.ToString();
                         nIndex_ArrByt = lstStrArr_ClientID.IndexOf(strClientID);

@@ -22,9 +22,9 @@ namespace dotNetLab.Network
         }
 
        //防止数据没有传递完
-        protected override void ClientRecieveMethod(int nIndex)
+        protected override int ClientRecieveMethod(int nIndex)
         {
-            lst_Clients[nIndex].Receive(ClientsBuffer[nIndex],0,5,System.Net.Sockets.SocketFlags.None);
+           int nRecievedLen  =  lst_Clients[nIndex].Receive(ClientsBuffer[nIndex],0,5,System.Net.Sockets.SocketFlags.None);
              int nLen = (int)TCPBase.FetchDataLenByts(ClientsBuffer[nIndex]);
             int nCount = TCPBase.MARKPOSITION;
              
@@ -38,6 +38,8 @@ namespace dotNetLab.Network
                 else
                     break;
             }
+            return nRecievedLen;
+
         }
     }
 }
