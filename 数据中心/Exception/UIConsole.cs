@@ -23,7 +23,7 @@ namespace dotNetLab.Data
         public event UIOutput_InfoCallback UIOutput_Info;
         public UnitDB LogDB;
         public readonly String NORMAL_DATE_FORMAT = "yyyy-MM-dd HH:mm:ss";
-        public readonly string LOGTABLE = "LogTable";
+        public  string LOGTABLE = "LogTable";
         public UIConsole()
         {
             LogDB = new UnitDB();
@@ -35,12 +35,14 @@ namespace dotNetLab.Data
         private void CheckLogTable()
         {
             LogDB.GetAllTableNames();
+            LOGTABLE =  String.Format("_{0}_{1}", DateTime.Now.Year, DateTime.Now.Month);
             int n =LogDB.AllTableNames.IndexOf(LOGTABLE);
             if(n==-1)
                 CreateLogTable();
         }
         void CreateLogTable()
         {
+            
             LogDB.NewTable(LOGTABLE,
                 "Fire_Time text,Message text not null,Location text not null,Action text not null,MessageType text not null");
         }
@@ -55,6 +57,7 @@ namespace dotNetLab.Data
         //For DB Error
         public void Error(ErrorInfo e)
         {
+            CheckLogTable();
             if (UIOutput_Err != null)
             { 
                  
@@ -74,6 +77,7 @@ namespace dotNetLab.Data
         //For Normal Error
         public void Error(Exception e)
         {
+            CheckLogTable();
             if (UIOutput_Err != null)
             {
                 UIOutput_Err(
@@ -90,6 +94,7 @@ namespace dotNetLab.Data
         }
         public void Error(String err)
         {
+            CheckLogTable();
             if (UIOutput_Err != null)
             {
                 UIOutput_Err(err);
@@ -104,6 +109,7 @@ namespace dotNetLab.Data
         }
         public void Info(String info, string strLocation, String strAction)
         {
+            CheckLogTable();
             if (UIOutput_Info != null)
             {
                 UIOutput_Info(info);

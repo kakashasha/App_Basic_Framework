@@ -80,7 +80,9 @@
     <Compile Include="Tool\Tools.cs" />
     <Compile Include="Tool\Traverse.cs" />
     <Compile Include="Tool\Zip.cs" />
-    <Compile Include="组件\Log_日志\LogPad.cs" />
+    <Compile Include="组件\Log_日志\LogPad.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="组件\ModernUI\ListPage.cs">
       <SubType>Form</SubType>
     </Compile>
