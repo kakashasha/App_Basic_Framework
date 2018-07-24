@@ -73,6 +73,11 @@ namespace dotNetLab
                 }
 
             }
+            //请确保为IP属性赋值了
+            public bool Boot()
+            {
+                return Boot(IP);
+            }
             protected abstract void ImplementClientCon_DisCon_Delegate();
             private void InitCollections()
             {
