@@ -63,7 +63,7 @@ namespace dotNetLab.Widgets
             get { return (List<String>)AllTableNamesProperty.GetValue(objDBEngine, null); }
 
         }
-        public readonly String DataCenterDllPath = "D:/Projects/Shikii_New_App_Framework/DBManager/bin/Debug/shikii.dotNetLab.DataCenter.dll" ;
+       // public readonly String DataCenterDllPath = "D:/Projects/Shikii_New_App_Framework/DBManager/bin/Debug/shikii.dotNetLab.DataCenter.dll" ;
         PropertyInfo StatusPropertyInfo;
         public String TargetTable
         {
@@ -97,12 +97,11 @@ namespace dotNetLab.Widgets
         public DBEngineInvoker()
         {
           //  DataCenterDllPath =@ "D:\Projects\Shikii_New_App_Framework\DBManager\bin\Debug\shikii.dotNetLab.DataCenter.dll";
-           if (!File.Exists(DataCenterDllPath))
-             { 
-                String strDir = Path.GetDirectoryName(Application.ExecutablePath);
-                DataCenterDllPath = strDir + "\\shikii.dotNetLab.DataCenter.dll";
+            
+             String strDir = Path.GetDirectoryName(Application.ExecutablePath);
+              String  DataCenterDllPath = strDir + "\\shikii.dotNetLab.DataCenter.dll";
 
-            }
+            
             Load(DataCenterDllPath, "dotNetLab.Data.Uniting.UIDBEngine");
         }
         void Load(String strAssemblyName, String ClassFullName_IncludeNamespace)
@@ -125,6 +124,7 @@ namespace dotNetLab.Widgets
 
 
         }
+        
         private void AttachMembers()
         {
             for (int i = 0; i < PropertyInfos.Length; i++)
