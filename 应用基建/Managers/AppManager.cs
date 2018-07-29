@@ -7,6 +7,7 @@ using System.Text;
 using System.Windows.Forms;
 using Common;
 using dotNetLab.Forms;
+using dotNetLab.Widgets;
 
 namespace dotNetLab
 {
@@ -58,6 +59,19 @@ namespace dotNetLab
                     frm.FormBorderStyle = FormBorderStyle.FixedDialog;
                 }
                 return frm;
+            }
+
+            public static void ShowCompactDBEditor()
+            {
+                DBEngineInvoker dbInvoker = new DBEngineInvoker();
+                dbInvoker.Connect(DBEngineNames.SQLITE, "shikii.db");
+                if (dbInvoker.Status)
+                {
+
+                    DBEngineEditorPage EditorPage = AppManager.ShowPage(typeof(DBEngineEditorPage)) as DBEngineEditorPage;
+                    EditorPage.dbInvoker = dbInvoker;
+
+                }
             }
             public void InitSubForm<T>(out T frm)
             {
