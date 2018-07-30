@@ -6,6 +6,7 @@ using System.IO;
 using System.Data.SqlClient;
 using System.Reflection;
 using System.Data;
+using System.Windows.Forms;
 
 namespace dotNetLab.Data.Uniting
 {
@@ -261,14 +262,63 @@ namespace dotNetLab.Data.Uniting
               this.DbPar.Value = System.Data.SqlDbType.Image;
 
           }
-          //SQLite
-          void CheckSQLiteRefFiles()
+
+        public   bool IsX86Architecture(string filePath)
+        {
+            ushort architecture = 0;
+            try
+            {
+                using (System.IO.FileStream fStream = new System.IO.FileStream(filePath, System.IO.FileMode.Open, System.IO.FileAccess.Read))
+                {
+                    using (System.IO.BinaryReader bReader = new System.IO.BinaryReader(fStream))
+                    {
+                        if (bReader.ReadUInt16() == 23117)
+                        {
+                            fStream.Seek(0x3A, System.IO.SeekOrigin.Current);
+                            fStream.Seek(bReader.ReadUInt32(), System.IO.SeekOrigin.Begin);
+                            if (bReader.ReadUInt32() == 17744)
+                            {
+                                fStream.Seek(20, System.IO.SeekOrigin.Current);
+                                architecture = bReader.ReadUInt16();
+                            }
+                        }
+                    }
+                }
+            }
+            catch { }
+            if (architecture == 0x10b)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        //SQLite
+        void CheckSQLiteRefFiles()
           {
-              
+              bool isX86 = IsX86Architecture(Application.ExecutablePath);
               if (!File.Exists("System.Data.SQLite.dll"))
               {
+                
+                if(isX86)
                   AddRef("System.Data.SQLite.dll", dotNetLab.Data.DBEngines.SQLite.SqliteDBResource.System_Data_SQLite);
-              }
+                else
+                  AddRef("System.Data.SQLite.dll", dotNetLab.Data.DBEngines.SQLite.SqliteDBResource.System_Data_SQLiteX64);
+
+            }
+              else
+            {
+                bool isDllX86 = IsX86Architecture("System.Data.SQLite.dll");
+                if(isDllX86 != isX86)
+                {
+                    if (isX86)
+                        AddRef("System.Data.SQLite.dll", dotNetLab.Data.DBEngines.SQLite.SqliteDBResource.System_Data_SQLite);
+                    else
+                        AddRef("System.Data.SQLite.dll", dotNetLab.Data.DBEngines.SQLite.SqliteDBResource.System_Data_SQLiteX64);
+                }
+            }
           }
           void PreparesQLiteDB()
           {

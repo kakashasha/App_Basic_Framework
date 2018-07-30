@@ -88,6 +88,8 @@ namespace dotNetLab
                 Form frm = sender as Form;
                 frm.Hide();
             }
+
+            
         }
 
     }
