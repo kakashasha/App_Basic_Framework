@@ -7,7 +7,7 @@
     <ProjectGuid>{1FBA2CBC-8701-471A-A78F-AEC1119A5962}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Common</RootNamespace>
+    <RootNamespace>dotNetLab.Common</RootNamespace>
     <AssemblyName>shikii.dotNetLab.Common</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -32,6 +32,22 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="NPOI, Version=2.3.0.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\NPOI.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI.OOXML, Version=2.3.0.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\NPOI.OOXML.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI.OpenXml4Net, Version=2.3.0.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\NPOI.OpenXml4Net.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI.OpenXmlFormats, Version=2.3.0.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\NPOI.OpenXmlFormats.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -75,6 +91,7 @@
     </Compile>
     <Compile Include="Managers\AppManager.cs" />
     <Compile Include="Tool\FontTool.cs" />
+    <Compile Include="Tool\PortableOffice.cs" />
     <Compile Include="Tool\RegTool.cs" />
     <Compile Include="Tool\ResDll.cs" />
     <Compile Include="Tool\Tools.cs" />
@@ -126,6 +143,10 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Resources\NetCofig.exe" />
+    <None Include="Resources\NPOI.dll" />
+    <None Include="Resources\NPOI.OpenXmlFormats.dll" />
+    <None Include="Resources\NPOI.OpenXml4Net.dll" />
+    <None Include="Resources\NPOI.OOXML.dll" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\数据中心\DBManager.csproj">

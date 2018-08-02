@@ -650,7 +650,7 @@ namespace dotNetLab.Data.Uniting
                 AllTableNames.Add(dt.Rows[i][0].ToString());
             }
         }
-        void AddRef(string strFileName, byte[] bytArr)
+       public static void AddRef(string strFileName, byte[] bytArr)
         {
             FileStream fs = new FileStream(strFileName, FileMode.Create);
 

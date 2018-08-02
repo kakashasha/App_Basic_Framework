@@ -5,7 +5,7 @@ using System.IO;
 
 using System.Text;
 using System.Windows.Forms;
-using Common;
+
 using dotNetLab.Forms;
 using dotNetLab.Widgets;
 
@@ -27,13 +27,7 @@ namespace dotNetLab
                         return;
                     }
                 }
-                if(!File.Exists("NetConfig.exe"))
-                {
-                    FileStream fs = new FileStream("NetConfig.exe", FileMode.Create);
-                    fs.Write( AppComRes.NetCofig, 0,  AppComRes.NetCofig.Length);
-                    fs.Close();
-                    fs.Dispose();
-                }
+               
             }
             public static Form ShowPage(Type typeForm)
             {
@@ -61,10 +55,10 @@ namespace dotNetLab
                 return frm;
             }
 
-            public static void ShowCompactDBEditor()
+            public static void ShowCompactDBEditor(String dbFileName = "shikii.db")
             {
                 DBEngineInvoker dbInvoker = new DBEngineInvoker();
-                dbInvoker.Connect(DBEngineNames.SQLITE, "shikii.db");
+                dbInvoker.Connect(DBEngineNames.SQLITE, dbFileName);
                 if (dbInvoker.Status)
                 {
 
@@ -73,6 +67,8 @@ namespace dotNetLab
 
                 }
             }
+
+           
             public void InitSubForm<T>(out T frm)
             {
                 frm = System.Activator.CreateInstance<T>();

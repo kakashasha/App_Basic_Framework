@@ -2,6 +2,9 @@
 using System.Windows.Forms.VisualStyles;
 using dotNetLab.Widgets;
 using System;
+using System.IO;
+using dotNetLab.Data;
+using dotNetLab.Data.Uniting;
 
 namespace dotNetLab.Common
 {
@@ -16,7 +19,7 @@ namespace dotNetLab.Common
             _manager.UniqueApp();
             
         }
-
+        
         public static void EndInvokeApp(Form PG,params object[] objs)
         {
             if (objs.Length >0)

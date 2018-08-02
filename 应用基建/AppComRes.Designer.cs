@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Common {
+namespace dotNetLab.Common {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace Common {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Common.AppComRes", typeof(AppComRes).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("dotNetLab.Common.AppComRes", typeof(AppComRes).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -66,16 +66,6 @@ namespace Common {
         public static byte[] ICSharpCode_SharpZipLib {
             get {
                 object obj = ResourceManager.GetObject("ICSharpCode_SharpZipLib", resourceCulture);
-                return ((byte[])(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   查找 System.Byte[] 类型的本地化资源。
-        /// </summary>
-        public static byte[] NetCofig {
-            get {
-                object obj = ResourceManager.GetObject("NetCofig", resourceCulture);
                 return ((byte[])(obj));
             }
         }
