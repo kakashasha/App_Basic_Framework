@@ -68,8 +68,11 @@ namespace dotNetLab.Widgets
         protected override void OnResize(EventArgs e)
         {
             base.OnResize(e);
-            if(UIAdapter!= null)
-            UIAdapter.Size = new System.Drawing.Size(this.Size.Width - 30, this.Size.Height - 30);
+            if (UIAdapter != null)
+            {
+                UIAdapter.Size = new System.Drawing.Size(this.Size.Width - 30, this.Size.Height - 30);
+                VBar.Size = new Size(VBar.Size.Width, UIAdapter.Height - 10);
+            }
         }
 
     }
