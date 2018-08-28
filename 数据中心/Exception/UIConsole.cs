@@ -128,6 +128,8 @@ namespace dotNetLab.Data
         {
             Info(info,"No","No");
         }
+
+       
         private void LogDbOnDbDiagnoseHandler(ErrorInfo errorInfo, DBOperator bytOperator)
         {
              File.AppendAllText("Log.txt",string.Format("\r\n{0}日志数据库出现异常：{1} ，操作为{2}",
