@@ -422,6 +422,7 @@ namespace dotNetLab
                 try
                 {
                     cmd.CommandText = string.Format("insert into {0} values({1})", strTableName, strValue);
+                   // Console.WriteLine(cmd.CommandText);
                     if (!bRemoteMode)
                     {
                         cmd.ExecuteNonQuery();

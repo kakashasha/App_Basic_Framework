@@ -18,11 +18,11 @@ namespace dotNetLab
             public event ClientConnectedCallback ClientConnected;
             public event ClientDisconnectedCallback ClientDisconnected;
            
-            public RouteMessageCallback Route;
+            public RouteMessageCallback  Route;
             //Each SubLoop Thread Content Buffer To Recieve Client Message
             protected List<Byte[]> lstBytArr_Content;
             protected List<bool> lst_Thd_Ctrls;
-          public  bool MainLoopCtrl = true;
+            public  bool MainLoopCtrl = true;
             public List<Byte[]> ClientsBuffer
             {
                 get { return lstBytArr_Content; }
@@ -44,10 +44,7 @@ namespace dotNetLab
             {
 
                 DefaultConfig();
-                ServerSocket =
-                     new Socket(
-                         AddressFamily.InterNetwork,
-                         SocketType.Stream, ProtocolType.IP);
+              
 
                 InitCollections();
                 ImplementClientCon_DisCon_Delegate();
@@ -56,8 +53,14 @@ namespace dotNetLab
             {
                 try
                 {
+                    this.bEndNetwork = false;
                     ServerIP = IPAddress.Parse(strIP);
                     IPEndPoint ServerEndPoint = new IPEndPoint(ServerIP, nPort);
+                   
+                    ServerSocket =
+                    new Socket(
+                       AddressFamily.InterNetwork,
+                       SocketType.Stream, ProtocolType.IP);
                     ServerSocket.Bind(ServerEndPoint);
                     ServerSocket.Listen(3);
                     thd_Main = new Thread(Loop);
@@ -93,7 +96,18 @@ namespace dotNetLab
                 while (true)
                 {
                      
+                    try
+                    {
                     lst_Clients.Add(ServerSocket.Accept());
+                      
+                    }
+                    catch (System.Exception ex)
+                    {
+                        Console.WriteLine("At TCPServer.Loop:" + ex.Message);
+                        continue;
+                       // break;
+                    }
+                    
                     GetClientInfo(lst_Clients[lst_Clients.Count - 1]);
                     if (ClientConnected != null)
                         this.ClientConnected(lst_Clients.Count - 1);
@@ -152,6 +166,8 @@ namespace dotNetLab
                     {
                         if (!lst_Thd_Ctrls[nIndex_ArrByt])
                             return;
+                        if (bEndNetwork)
+                            return;
                         int nRecievedLen =  ClientRecieveMethod(nIndex_ArrByt);
                         if (nRecievedLen == 0)
                             throw new Exception("客户端断开");
@@ -182,7 +198,15 @@ namespace dotNetLab
                                // throw;
                             }
                         }
-                        lst_Clients[nIndex_ArrByt].Shutdown(SocketShutdown.Both);
+                        try
+                        {
+                            lst_Clients[nIndex_ArrByt].Shutdown(SocketShutdown.Both);
+                        }
+                        catch (System.Exception exx)
+                        {
+                        	
+                        }
+                        
                         lst_Clients[nIndex_ArrByt].Close();
                         lst_Clients.RemoveAt(nIndex_ArrByt);
                         this.ClientsBuffer.RemoveAt(nIndex_ArrByt);
@@ -264,9 +288,22 @@ namespace dotNetLab
                 try
                 {
                     this.bEndNetwork = true;
-                    ServerSocket.Shutdown(SocketShutdown.Both);
+                   
+                   // Thread.Sleep(200);
+                    
+                   try
+                   {
+                      ServerSocket.Shutdown(SocketShutdown.Both);
+                   }
+                   catch (System.Exception ex)
+                   {
+                   	
+                      //  ServerSocket.Shutdown(SocketShutdown.Receive);
+                   }
                     ServerSocket.Close();
-                    thd_Main.Abort();
+
+
+
                     foreach (var item in lst_Clients)
                     {
                         item.Shutdown(SocketShutdown.Both);
@@ -276,7 +313,7 @@ namespace dotNetLab
                     {
                         item.Abort();
                     }
-
+                    thd_Main.Abort();
                     return true;
                 }
                 catch (System.Exception ex)

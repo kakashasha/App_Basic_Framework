@@ -72,6 +72,8 @@ namespace dotNetLab.Widgets
             {
                 UIAdapter.Size = new System.Drawing.Size(this.Size.Width - 30, this.Size.Height - 30);
                 VBar.Size = new Size(VBar.Size.Width, UIAdapter.Height - 10);
+               // HBar.Size = new Size(UIAdapter.Width - 5, HBar.Size.Height);
+                HBar.Location = new Point(HBar.Location.X, UIAdapter.Height +15);
             }
         }
 

@@ -13,7 +13,7 @@ namespace dotNetLab
     {
       public  class TCPClient:TCPBase
         {
-            public event RouteMessageCallback Route;
+            public   RouteMessageCallback Route;
             protected Socket Client;
             protected Byte[] bytArr_MainChannel;
             public Byte[] MainBuffer
@@ -27,11 +27,6 @@ namespace dotNetLab
             public TCPClient()
             {
                 DefaultConfig();
-                Client = new
-                    Socket
-                    (
-                    AddressFamily.InterNetwork,
-                    SocketType.Stream, ProtocolType.IP);
                
                 this.lst_FileTransferInfo = new List<FileTransferInfo>();
             }
@@ -43,6 +38,11 @@ namespace dotNetLab
                     ServerIP = IPAddress.Parse(strIP);
                     IPEndPoint ClientEndPoint =
                         new IPEndPoint(this.ServerIP, nPort);
+                    Client = new
+                   Socket
+                   (
+                   AddressFamily.InterNetwork,
+                   SocketType.Stream, ProtocolType.IP);
                     Client.Connect(ClientEndPoint);
                     thd_Main = new Thread(Loop);
                     thd_Main.Start();
@@ -75,10 +75,16 @@ namespace dotNetLab
                 try
                 {
                     MainBuffer = new byte[BufferSize];
+                    bEndNetwork = false;
                     lst_FileTransferInfo.Add(new FileTransferInfo(TextEncode, this.MainBuffer, this.Client));
                     ServerIP = IPAddress.Parse(strIP);
                     IPEndPoint ClientEndPoint =
                         new IPEndPoint(this.ServerIP, nPort);
+                    Client = new
+                 Socket
+                 (
+                 AddressFamily.InterNetwork,
+                 SocketType.Stream, ProtocolType.IP);
                     Client.Connect(ClientEndPoint);
                     thd_Main = new Thread(Loop);
                     thd_Main.Start();
@@ -97,6 +103,8 @@ namespace dotNetLab
             {
                 while (true)
                 {
+                    if (bEndNetwork)
+                        return;
                     RecieveAndParse();
                     Thread.Sleep(nLoopGapTime);
                 }
@@ -144,6 +152,7 @@ namespace dotNetLab
             {
                 try
                 {
+                    bEndNetwork = true;
                     thd_Main.Abort();
                     Client.Disconnect(false);
                     Client.Shutdown(SocketShutdown.Both);

@@ -69,7 +69,7 @@ namespace dotNetLab.Data.Embedded
        {
             clientSocket = new TCPClient();
             clientSocket.Connect(clientSocket.IP);
-            clientSocket.Route += ClientSocket_Route;
+            clientSocket.Route = ClientSocket_Route;
             this.RemoteHandle += RemoteDB_RemoteHandle;
        }
         void Send(string sql, DBOperator byt_Operator)

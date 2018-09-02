@@ -109,6 +109,31 @@ namespace dotNetLab.Forms
 
             Refresh();
         }
+
+      public  void MaxWindow()
+        {
+            bool b = (bool)this.Tag;
+            b = !b;
+            this.Tag = b;
+            if (b)
+            {
+                if (this.Height < Screen.PrimaryScreen.WorkingArea.Height)
+                {
+                    this.pnt_notMaxWindowLocation = this.Location;
+                    this.nCurrent_NotMaxWidth = this.Width;
+                    this.nCurrent_NotMaxHeight = this.Height;
+                }
+                this.Location = new Point(0, 0);
+                this.Height = Screen.PrimaryScreen.WorkingArea.Height;
+                this.Width = System.Windows.Forms.Screen.PrimaryScreen.Bounds.Width;
+            }
+            else
+            {
+                this.Location = pnt_notMaxWindowLocation;
+                this.Height = nCurrent_NotMaxHeight;
+                this.Width = nCurrent_NotMaxWidth;
+            }
+        }
         private void Switch_Clicked(object sender, EventArgs e)
         {
             Switcher sw = sender as Switcher;
@@ -120,27 +145,7 @@ namespace dotNetLab.Forms
                     
                     if (!EnableDialog)
                     {
-                        bool b = (bool)this.Tag;
-                        b = !b;
-                        this.Tag = b;
-                        if (b)
-                        {
-                            if (this.Height < Screen.PrimaryScreen.WorkingArea.Height)
-                            {
-                                this.pnt_notMaxWindowLocation = this.Location;
-                                this.nCurrent_NotMaxWidth = this.Width;
-                                this.nCurrent_NotMaxHeight = this.Height;
-                            }
-                            this.Location = new Point(0, 0);
-                            this.Height = Screen.PrimaryScreen.WorkingArea.Height;
-                            this.Width = System.Windows.Forms.Screen.PrimaryScreen.Bounds.Width;
-                        }
-                        else
-                        {
-                            this.Location = pnt_notMaxWindowLocation;
-                            this.Height = nCurrent_NotMaxHeight;
-                            this.Width = nCurrent_NotMaxWidth;
-                        }
+                        MaxWindow();
                     }
                     break;
             }
