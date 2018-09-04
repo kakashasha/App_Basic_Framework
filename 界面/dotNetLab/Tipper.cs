@@ -37,7 +37,7 @@ namespace dotNetLab
         {
             set
             {
-                Tip_Info_Ask(value);
+                Tip_Info_Error(value);
             }
 
         }
