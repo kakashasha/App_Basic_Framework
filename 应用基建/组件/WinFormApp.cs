@@ -39,10 +39,36 @@ namespace dotNetLab.Common
                    PG.Invoke(action_DisplayLogMessage, ltb, str, true);
                };
 
+
             }
             Application.Run(PG);
         }
 
-         
+        public static void EndInvokeApp(Form PG, Action AfterLogPadInited,params object[] objs)
+        {
+            if (objs.Length > 0)
+            {
+
+                MobileListBox ltb = objs[0] as MobileListBox;
+                R.Pipe.UIOutput_Info += (str) =>
+                {
+
+                    Action<MobileListBox, String, bool> action_DisplayLogMessage = PG.DisplayLogMessage;
+
+                    PG.Invoke(action_DisplayLogMessage, ltb, str, false);
+                };
+                R.Pipe.UIOutput_Err += (str) =>
+                {
+                    Action<MobileListBox, String, bool> action_DisplayLogMessage = PG.DisplayLogMessage;
+                    PG.Invoke(action_DisplayLogMessage, ltb, str, true);
+                };
+                AfterLogPadInited();
+
+            }
+            Application.Run(PG);
+        }
+        
+
+
     }
 }

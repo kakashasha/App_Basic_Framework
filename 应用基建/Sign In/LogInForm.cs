@@ -1,6 +1,4 @@
 ﻿
-
-//using Framework.Res;
 using System;
 using System.Diagnostics;
 using System.Windows.Forms;
@@ -13,6 +11,7 @@ namespace dotNetLab
         public partial class LogInForm : RibbonPage
         {
             public bool bCloseWindow = false;
+            
             protected override void prepareCtrls()
             {
                 base.prepareCtrls();
@@ -96,7 +95,7 @@ namespace dotNetLab
             {
                 if (!bCloseWindow)
                 {
-                    e.Cancel = true;
+                   // e.Cancel = true;
                     this.bCloseWindow = false;
                 }
             }
