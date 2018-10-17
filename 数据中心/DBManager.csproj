@@ -70,7 +70,9 @@
       <DependentUpon>SqliteDBResource.resx</DependentUpon>
     </Compile>
     <Compile Include="Embedded_Remote\TCPServerDB.cs" />
+    <Compile Include="Exception\DBPipe.cs" />
     <Compile Include="Exception\UIConsole.cs" />
+    <Compile Include="Exception\LogPipe.cs" />
     <Compile Include="Network\Home\TServer.cs" />
     <Compile Include="Network\SerialPort\SerialPort.cs" />
     <Compile Include="Network\TCP_IP\Signals.cs" />

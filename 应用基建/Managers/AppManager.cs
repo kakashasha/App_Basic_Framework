@@ -24,6 +24,7 @@ namespace dotNetLab
                     if (allPro[i].ProcessName == Process.GetCurrentProcess().ProcessName && allPro[i].Id != Process.GetCurrentProcess().Id)
                     {
                         MessageBox.Show("程序正在运行中", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        Process.GetCurrentProcess().Kill();
                         return;
                     }
                 }

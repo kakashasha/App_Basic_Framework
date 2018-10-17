@@ -40,6 +40,13 @@ namespace dotNetLab.Common.Normal
                 return  R.Pipe;
             }
         }
+        public LogPipe LogPipe
+        {
+            get
+            {
+                return R.LogConsolePipe;
+            }
+        }
         public String ClipboardText
         {
             get { return Clipboard.GetText();}
@@ -151,8 +158,10 @@ namespace dotNetLab.Common.Normal
             {
                 R.CompactDB = new UnitDB();
                 R.Pipe = new UIConsole();
+                R.LogConsolePipe = new LogPipe();
                 R.CompactDB.DBDiagnoseHandler += CompactDbOnDbDiagnoseHandler;
                 R.CompactDB.Connect(DBEngineNames.SQLITE,"shikii.db");
+                R.LogConsolePipe.ThisDB = R.CompactDB;
                 if (R.DataBindingManager == null)
                     R.DataBindingManager = new dotNetLab.Widgets.UIBinding.UIElementDataBinding();
                 R.DataBindingManager.DbCommandList.Add(R.CompactDB.ThisDbCommand);

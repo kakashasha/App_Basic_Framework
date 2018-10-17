@@ -5,12 +5,14 @@ using System;
 using System.IO;
 using dotNetLab.Data;
 using dotNetLab.Data.Uniting;
+using dotNetLab.Network;
 
 namespace dotNetLab.Common
 {
     public class WinFormApp
     {
        public static  AppManager _manager;
+       
         public static void  BegineInvokeApp()
         {
             Application.EnableVisualStyles();
@@ -65,10 +67,9 @@ namespace dotNetLab.Common
                 AfterLogPadInited();
 
             }
+           
             Application.Run(PG);
         }
-        
-
 
     }
 }

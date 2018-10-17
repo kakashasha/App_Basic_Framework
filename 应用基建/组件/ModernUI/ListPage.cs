@@ -49,10 +49,11 @@ namespace dotNetLab.Common.ModernUI
             if (R.CompactDB == null)
             {
                 R.CompactDB = new UnitDB();
-              
+                R.LogConsolePipe = new LogPipe();
                 R.Pipe = new UIConsole();
                 R.CompactDB.DBDiagnoseHandler += CompactDbOnDbDiagnoseHandler;
                 R.CompactDB.Connect(DBEngineNames.SQLITE,"shikii.db");
+                R.LogConsolePipe.ThisDB = R.CompactDB;
                 if (R.DataBindingManager == null)
                     R.DataBindingManager = new dotNetLab.Widgets.UIBinding.UIElementDataBinding();
                 R.DataBindingManager.DbCommandList.Add(R.CompactDB.ThisDbCommand);

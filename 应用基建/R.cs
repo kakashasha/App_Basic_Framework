@@ -20,6 +20,7 @@ namespace dotNetLab
                 }
             }
             public static dotNetLab.Widgets.UIBinding.UIElementDataBinding DataBindingManager = null;
+            public static LogPipe LogConsolePipe;
         }
     }
 }

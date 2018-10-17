@@ -61,6 +61,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>AppComRes.resx</DependentUpon>
     </Compile>
+    <Compile Include="Tool\CodeDomEx.cs" />
     <Compile Include="Tool\CodeEngine.cs" />
     <Compile Include="Tool\DynamicLib.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
