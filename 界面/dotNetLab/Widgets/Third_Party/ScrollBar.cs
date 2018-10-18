@@ -681,7 +681,17 @@ namespace dotNetLab.Widgets.Third_Party
             {
                 return 0;
             }
-            int num = (this.metroOrientation == MetroScrollOrientation.Vertical) ? (this.thumbPosition / base.Height / this.thumbHeight) : (this.thumbPosition / base.Width / this.thumbWidth);
+            int num = 1;
+            try
+            {
+              num = (this.metroOrientation == MetroScrollOrientation.Vertical) ? (this.thumbPosition / base.Height / this.thumbHeight) : (this.thumbPosition / base.Width / this.thumbWidth);
+
+            }
+            catch (Exception ex)
+            {
+
+      
+            }
             int num2;
             if (this.Orientation == MetroScrollOrientation.Vertical)
             {
