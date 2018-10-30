@@ -6,12 +6,17 @@ using System.IO;
 using dotNetLab.Data;
 using dotNetLab.Data.Uniting;
 using dotNetLab.Network;
+using dotNetLab.Tools;
+using dotNetLab.Debug;
+using dotNetLab.Common.Tool;
+using System.Diagnostics;
 
 namespace dotNetLab.Common
 {
     public class WinFormApp
     {
-       public static  AppManager _manager;
+        public static  AppManager _manager;
+        public static bool CheckTrialVersion = true;
        
         public static void  BegineInvokeApp()
         {
@@ -65,9 +70,48 @@ namespace dotNetLab.Common
                     PG.Invoke(action_DisplayLogMessage, ltb, str, true);
                 };
                 AfterLogPadInited();
+                if (!WinFormApp.CheckTrialVersion)
+                    goto cc;
+              String strValue  = RegTool.GetRegistry("KeyCode","");
+                if(strValue=="null")
+                {
+                    RegTool.SaveRegistry("KeyCode", "0");
+                }
+               if(strValue=="0")
+                {
+                    strValue = RegTool.GetRegistry("TrialStartDay", "");
+                   
+                    if (strValue == "0")
+                        RegTool.SaveRegistry("TrialStartDay", DateTime.Now.ToString("yyyy-MM-dd"));
+                    else
+                    {
+                       TimeSpan ts  = DateTime.Parse(DateTime.Now.ToString("yyyy-MM-dd")) - DateTime.Parse(strValue);
+                       if (ts.Days >= 30)
+                        {
+                            Tipper.Error = "软件试用已到期，请联系视觉软件厂商\r\n李孟铖,Tel:18025366950";
+                            return;
+                        }
+                    }
+                }
+               else
+                {
+                  
+                     String str =  strValue ;
+                    if(str == CommandInvoker.ExecuteCMD("wmic cpu get processorid"))
+                    {
+                        ;
+                    }
+                    else
+                    {
+                        
+                    }
+                }
+
+                cc:;
+                 
+
 
             }
-           
             Application.Run(PG);
         }
 

@@ -12,7 +12,7 @@ namespace dotNetLab
 {
     namespace Tools
     {
-        class FontTool
+       public  class FontTool
         {
             [DllImport("kernel32.dll", SetLastError = true)]
             static extern int WriteProfileString(string lpszSection, string lpszKeyName, string lpszString);

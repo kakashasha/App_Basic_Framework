@@ -99,13 +99,13 @@ namespace dotNetLab
                     }
                     else
                     {
-                        return "0";
+                        return "null";
                     }
                     rsg.Close();
                 }
                 catch (Exception ex)
                 {
-                    return "0";
+                    return "null";
                 }
             }
         }

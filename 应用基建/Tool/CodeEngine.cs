@@ -9,102 +9,146 @@ using System.Text;
 using System.Windows.Forms;
 namespace dotNetLab.Debug
 {
+
+    /*
+     需要注意！要手动 MethodNames.Add,确保ClassFullName已经赋值
+
+    */
     public class CodeEngine
     {
-        public readonly string SHIKII_DEBUG_DLL_NAME = "SHIKII_DEBUG_DLL_NAME.dll";
-        readonly string SHIKII_DEBUG_DLL_NAMESPACE = "shikii.debug";
-        readonly string SHIKII_DEBUG_DLL_CLASSNAME = "ShikiiDebugPlatform";
-        string encryptKey = "Oyea";    //定义密钥  
-        Type type;
-        Object objCodeEngine;
-        public String LastErrorInfo = null;
-        System.Reflection.PropertyInfo[] PropertyInfos;
+        
+        string encryptKey = "Oyea";    //定义密钥                        
+        protected Object Host;
 
-        MethodInfo[] MethodInfos;
-        bool CheckSHIKII_DEBUG_DLL()
+        public String LastErrorInfo = null;
+        protected Assembly CompilledAssembly = null;
+        public String Code = null;
+         Dictionary<String, MethodInfo> MethodSet;
+        public List<String> MethodNames;
+        public String ClassFullName = null;
+        public CodeEngine()
         {
-            bool bisDebugFileExist = File.Exists(SHIKII_DEBUG_DLL_NAME);
-            return bisDebugFileExist;
+            MethodSet = new Dictionary<String, MethodInfo>();
+            MethodNames = new List<string>();
         }
-        void Load(String strAssemblyName, String ClassFullName_IncludeNamespace)
+        protected virtual void Load(string classFullName)
         {
+            if(classFullName == null)
+            {
+                Tipper.Error = "At CodeEngine.Load : classFullName 不能为空！";
+                return;
+            }
             try
             {
-                //  objDBEngine = System.Activator.CreateInstanceFrom(strAssemblyName, ClassFullName_IncludeNamespace);
-                objCodeEngine = Assembly.LoadFile(strAssemblyName).CreateInstance(ClassFullName_IncludeNamespace);
-                type = objCodeEngine.GetType();
-                MethodInfos = type.GetMethods();
+                ClassFullName = classFullName;
+
+                Host = this.CompilledAssembly.CreateInstance(ClassFullName);
+                MethodSet.Clear();
+
+                if (Host == null)
+                {
+                    Console.WriteLine( "At  CodeEngine.Load : 未能加载内存中的dll!");
+                    return;
+                }
+                for (int i = 0; i < MethodNames.Count; i++)
+                {
+
+                    MethodSet.Add(MethodNames[i], Host.GetType().GetMethod(MethodNames[i]));
+                }
+
 
             }
             catch (System.Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show("At  CodeEngine.Load : "+ ex.Message + " \r\n");
             }
         }
-        public bool BeginInvoke()
+
+        public virtual Object Invoke( String ThisMethodName,Object[] objArgs)
         {
-            if (CheckSHIKII_DEBUG_DLL())
+            try
             {
-                if (type == null)
-                    Load(SHIKII_DEBUG_DLL_NAME, Path.Combine(SHIKII_DEBUG_DLL_NAMESPACE, SHIKII_DEBUG_DLL_CLASSNAME));
-                return false;
+                PrepareRuntime();
+                MethodInfo mif = MethodSet[ThisMethodName];
+                return mif.Invoke(Host, objArgs);
+
             }
-            else
+            catch (Exception ex)
             {
-                return true;
+                Tipper.Error = "At CodeEngine.Invoke:" + ex.Message + " " + ex.StackTrace;
+                return null;
             }
         }
-        public Object EndInvoke(String strMethodName, ref Object[] objArgs)
+
+        public void ForcePrepareRuntime(string strcode)
         {
-            MethodInfo Mif = null;
-            for (int i = 0; i < MethodInfos.Length; i++)
+
+            CompileDll(strcode);
+
+            Load(ClassFullName);
+
+        }
+        public void PrepareRuntime()
+        {
+            try
             {
-                if (MethodInfos[i].Name.Equals(strMethodName))
+                if (Host == null)
                 {
-                    Mif = MethodInfos[i];
+                    CompileDll(Code);
+                    Load(ClassFullName);
                 }
             }
-            if (Mif != null)
-                return Mif.Invoke(objCodeEngine, objArgs);
-            else
-                return null;
+            catch (System.Exception ex)
+            {
+                Tipper.Error = "At ScriptEngine.PrepareRunTime() : " + ex.Message;
+            }
+
+
         }
-      
-        //        方法定义完后，将方法具体内容插入模板中，并生成编译，如果编译通过，则生成dll文件。编译不通过，获取错误信息。
-
-        //如：
-
-        //        CompilerResults result = DebugRun(整个cs代码, dll保存路径);
-
-        //        通过判断 result.Errors.Count 是否为0，得出是否编译通过。
-
-
-
         /// <summary>
         /// 动态编译并执行代码
         /// </summary>
         /// <param name="code">代码</param>
         /// <returns>返回输出内容</returns>
-        public bool CompileDll(string code, string strOuputDllPath)
+        public bool CompileDll(string code)
         {
+            // CheckClassName(ref code);
+            if (String.IsNullOrEmpty(code))
+            {
+                Tipper.Error = "At ScriptCodeEngine.CompileDll() : " + "code 参数为空";
+
+            }
             ICodeCompiler complier = new CSharpCodeProvider().CreateCompiler();
             //设置编译参数
             CompilerParameters paras = new CompilerParameters();
             //引入第三方dll
             paras.ReferencedAssemblies.Add("System.dll");
+            paras.ReferencedAssemblies.Add("System.Data.dll");
+            paras.ReferencedAssemblies.Add("System.Drawing.dll");
             paras.ReferencedAssemblies.Add("System.Windows.Forms.dll");
+            paras.ReferencedAssemblies.Add("System.Xml.dll");
+            paras.ReferencedAssemblies.Add("System.Core.dll");
+            paras.ReferencedAssemblies.Add("Microsoft.CSharp.dll");
+            paras.ReferencedAssemblies.Add("shikii.dotNetLab.HalconLib.dll");
+            paras.ReferencedAssemblies.Add("halcondotnet.dll");
+
             //引入自定义dll
             //  paras.ReferencedAssemblies.Add(@"D:\自定义方法\自定义方法\bin\LogHelper.dll");
             //是否内存中生成输出 
-            paras.GenerateInMemory = false;
+            paras.GenerateInMemory = true;
             //是否生成可执行文件
             paras.GenerateExecutable = false;
-            paras.OutputAssembly = strOuputDllPath;
+            LoadExternalDlls(paras);
 
             //编译代码
             CompilerResults result = complier.CompileAssemblyFromSource(paras, code);
+
             if (result.Errors.Count == 0)
             {
+                if (result.CompiledAssembly != null)
+                    this.CompilledAssembly = result.CompiledAssembly;
+
+
                 return true;
             }
             else
@@ -118,6 +162,27 @@ namespace dotNetLab.Debug
                 this.LastErrorInfo = stringBuilder.ToString();
 
                 return false;
+            }
+        }
+        void LoadExternalDlls(CompilerParameters paras)
+        {
+            string[] defFiles = Directory.GetFiles(Path.GetDirectoryName(Application.ExecutablePath), "*.csref");
+            if (defFiles.Length > 0)
+            {
+                for (int i = 0; i < defFiles.Length; i++)
+                {
+                    String[] strArr = File.ReadAllLines(defFiles[i]);
+                    int nDllPaths = strArr.Length;
+                    for (int z = 0; z < nDllPaths; z++)
+                    {
+
+                        if (File.Exists(strArr[z]))
+                        {
+                            paras.ReferencedAssemblies.Add(strArr[z]);
+                        }
+                    }
+
+                }
             }
         }
 
@@ -175,3 +240,11 @@ namespace dotNetLab.Debug
         #endregion
     }
 }
+
+
+
+       
+
+
+
+       

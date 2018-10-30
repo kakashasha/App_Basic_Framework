@@ -12,13 +12,11 @@ namespace dotNetLab.Common.Tool
        public CodeCompileUnit targetUnit;
        public CodeTypeDeclaration targetClass;
        public string outputFileName = "D:/SampleCode.cs";
-
         public CodeDomEx()
         {
              
           targetUnit = new CodeCompileUnit();
         }
-
         public CodeTypeDeclaration AddClass(string strClassName )
         {
             targetClass = new CodeTypeDeclaration("CodeDOMCreatedClass");
@@ -78,7 +76,7 @@ namespace dotNetLab.Common.Tool
             targetClass.Members.Add(widthProperty);
         }
 
-        public void AddMethod(MemberAttributes Modifier,String MethodName,Type ReturnType)
+        public CodeMemberMethod AddMethod(MemberAttributes Modifier,String MethodName,Type ReturnType)
         {
             // Declaring a ToString method
             CodeMemberMethod toStringMethod = new CodeMemberMethod();
@@ -86,7 +84,7 @@ namespace dotNetLab.Common.Tool
             toStringMethod.Name = MethodName;
             toStringMethod.ReturnType =
                 new CodeTypeReference( ReturnType );
-
+            
             //CodeFieldReferenceExpression widthReference =
             //    new CodeFieldReferenceExpression(
             //    new CodeThisReferenceExpression(), "Width");
@@ -113,10 +111,13 @@ namespace dotNetLab.Common.Tool
             //    new CodePrimitiveExpression(formattedOutput),
             //    widthReference, heightReference, areaReference);
             //toStringMethod.Statements.Add(returnStatement);
-            //targetClass.Members.Add(toStringMethod);
-              
+            targetClass.Members.Add(toStringMethod);
+            return targetClass.Members[targetClass.Members.Count - 1] as CodeMemberMethod;
+
+
         }
-        public void AddConstructor()
+        
+        public CodeConstructor AddConstructor()
         {
             // Declare the constructor
             CodeConstructor constructor = new CodeConstructor();
@@ -124,23 +125,24 @@ namespace dotNetLab.Common.Tool
                 MemberAttributes.Public | MemberAttributes.Final;
 
             // Add parameters.
-            constructor.Parameters.Add(new CodeParameterDeclarationExpression(
-                typeof(System.Double), "width"));
-            constructor.Parameters.Add(new CodeParameterDeclarationExpression(
-                typeof(System.Double), "height"));
+            //constructor.Parameters.Add(new CodeParameterDeclarationExpression(
+            //    typeof(System.Double), "width"));
+            //constructor.Parameters.Add(new CodeParameterDeclarationExpression(
+            //    typeof(System.Double), "height"));
 
             // Add field initialization logic
-            CodeFieldReferenceExpression widthReference =
-                new CodeFieldReferenceExpression(
-                new CodeThisReferenceExpression(), "widthValue");
-            constructor.Statements.Add(new CodeAssignStatement(widthReference,
-                new CodeArgumentReferenceExpression("width")));
-            CodeFieldReferenceExpression heightReference =
-                new CodeFieldReferenceExpression(
-                new CodeThisReferenceExpression(), "heightValue");
-            constructor.Statements.Add(new CodeAssignStatement(heightReference,
-                new CodeArgumentReferenceExpression("height")));
+            //CodeFieldReferenceExpression widthReference =
+            //    new CodeFieldReferenceExpression(
+            //    new CodeThisReferenceExpression(), "widthValue");
+            //constructor.Statements.Add(new CodeAssignStatement(widthReference,
+            //    new CodeArgumentReferenceExpression("width")));
+            //CodeFieldReferenceExpression heightReference =
+            //    new CodeFieldReferenceExpression(
+            //    new CodeThisReferenceExpression(), "heightValue");
+            //constructor.Statements.Add(new CodeAssignStatement(heightReference,
+            //    new CodeArgumentReferenceExpression("height")));
             targetClass.Members.Add(constructor);
+            return targetClass.Members[targetClass.Members.Count - 1] as CodeConstructor;
         }
 
     }

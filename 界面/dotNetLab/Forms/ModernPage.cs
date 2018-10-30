@@ -63,6 +63,12 @@ namespace dotNetLab.Forms
                 this.DrawUpDownDecoratePatern(g, DrawUpDownPatternTimes);
 
             }
+            OnDraw(  e);
+
+        }
+
+        protected  virtual void OnDraw(PaintEventArgs e)
+        {
 
         }
         protected override void prepareAppearance()
