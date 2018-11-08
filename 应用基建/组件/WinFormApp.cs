@@ -7,9 +7,10 @@ using dotNetLab.Data;
 using dotNetLab.Data.Uniting;
 using dotNetLab.Network;
 using dotNetLab.Tools;
-using dotNetLab.Debug;
+ 
 using dotNetLab.Common.Tool;
 using System.Diagnostics;
+using System.Text;
 
 namespace dotNetLab.Common
 {
@@ -73,9 +74,17 @@ namespace dotNetLab.Common
                 if (!WinFormApp.CheckTrialVersion)
                     goto cc;
               String strValue  = RegTool.GetRegistry("KeyCode","");
-                if(strValue=="null")
+                String KeyValue = File.ReadAllText("key.lic", Encoding.Default);
+                if(strValue=="null" &&  String.IsNullOrEmpty(KeyValue) )
                 {
                     RegTool.SaveRegistry("KeyCode", "0");
+                }
+                else
+                {
+                    if (KeyValue == CommandInvoker.ExecuteCMD("wmic cpu get processorid"))
+                    {
+                        goto cc;
+                    }
                 }
                if(strValue=="0")
                 {

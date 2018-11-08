@@ -9,7 +9,7 @@ using System.Windows.Forms;
  
 using System.IO;
 
-namespace dotNetLab.Vision.Halcon 
+namespace dotNetLab.Common
 {
    public abstract class Invoker:IDisposable
     {
