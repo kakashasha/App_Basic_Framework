@@ -17,7 +17,7 @@ namespace dotNetLab.Common
     public class WinFormApp
     {
         public static  AppManager _manager;
-        public static bool CheckTrialVersion = true;
+        public static bool CheckTrialVersion = false;
        
         public static void  BegineInvokeApp()
         {
