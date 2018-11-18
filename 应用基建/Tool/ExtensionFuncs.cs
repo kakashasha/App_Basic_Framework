@@ -15,8 +15,8 @@ namespace dotNetLab.Common
             {
                 cmbx.SelectedIndex = nIndex;
             }
-            string[] strarr = new string[5] ;
-            strarr.IndexOf("");
+            //string[] strarr = new string[5] ;
+            //strarr.IndexOf("");
               
         }
         public static int IndexOf<T>(this Array array, T obj)
@@ -24,7 +24,11 @@ namespace dotNetLab.Common
           return Array.IndexOf<T>((T[])array,  obj);
         }
 
+
+      
     }
+
+   
 }
 
 

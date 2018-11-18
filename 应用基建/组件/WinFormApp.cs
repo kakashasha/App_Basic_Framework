@@ -117,11 +117,10 @@ namespace dotNetLab.Common
                 }
 
                 cc:;
-                 
-
-
             }
-            Application.Run(PG);
+            Form frm = PG.GetType().GetMethod("ShowQuickBuildForm").Invoke(PG, null) as Form ; 
+            
+            Application.Run(frm);
         }
 
     }

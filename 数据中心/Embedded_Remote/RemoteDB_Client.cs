@@ -87,6 +87,7 @@ namespace dotNetLab.Data.Embedded
             }
              
         }
+        //处理远程数据库操作请求
         private object RemoteDB_RemoteHandle(string strSQL, DBOperator byt_Operator)
         {
             object obj = null;
@@ -119,6 +120,7 @@ namespace dotNetLab.Data.Embedded
         }
         void PrepareHandleRecievedData(byte dboperator)
         {
+            //调整BufferSize
             if(dboperator== Signals.BUFFER_SIZE)
             {
 
@@ -126,6 +128,7 @@ namespace dotNetLab.Data.Embedded
                
                 return;
             }
+            //表示要操作远程数据库
             this.bRemoteHandled = true;
             this.buffer = clientSocket.MainBuffer;
             if ((DBOperator)dboperator == DBOperator.OPERATOR_FAILED)

@@ -56,6 +56,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Advanced\CommandLineBase.cs" />
+    <Compile Include="Advanced\DebugCommand.cs" />
     <Compile Include="AppComRes.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -91,6 +93,7 @@
     <Compile Include="Managers\AppManager.cs" />
     <Compile Include="Advanced\CommandInvoker.cs" />
     <Compile Include="Tool\ExtensionFuncs.cs" />
+    <Compile Include="Tool\FileSystemManager.cs" />
     <Compile Include="Tool\FontTool.cs" />
     <Compile Include="Advanced\Invoker.cs" />
     <Compile Include="Tool\PortableOffice.cs" />
