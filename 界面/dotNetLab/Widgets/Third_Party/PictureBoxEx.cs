@@ -23,8 +23,13 @@ namespace dotNetLab.Widgets.Third_Party
             this.menuStrip = new ContextMenuStrip();
             menuStrip.Items.Add("缩放").Click += PictureBoxEx_MenuStripItem_Click;  
             menuStrip.Items.Add("绘制矩形").Click += PictureBoxEx_MenuStripItem_Click;  
-            menuStrip.Items.Add("设置矩形颜色").Click += PictureBoxEx_MenuStripItem_Click;  
-             
+            menuStrip.Items.Add("设置矩形颜色").Click += PictureBoxEx_MenuStripItem_Click;
+            menuStrip.Items.Add("图像适应窗口").Click += (sender,e)=>
+            {
+                Hrate = 1;      //竖向缩放比
+                Wrate = 1;     //横向缩放比
+                FitToScreen();
+            };
             this.ContextMenuStrip = menuStrip;
         }
 
@@ -51,8 +56,8 @@ namespace dotNetLab.Widgets.Third_Party
         public event MouseWheelDraw MouseWheelDrawEvent;
         public delegate void AfterDraw(bool isMove, bool isRight);
         public event AfterDraw AfterDrawEvent;
-        public delegate void Recognize(Bitmap image);
-        public static event Recognize RecognizeEvent;
+        //public delegate void Recognize(Bitmap image);
+        //public static event Recognize RecognizeEvent;
 
         private FineTuningRect _fineTuningRect;
         private Image _image; //原图
@@ -137,21 +142,30 @@ namespace dotNetLab.Widgets.Third_Party
         {
             get
             {
-                int x = (int)Math.Round((_luPonit.X - _startPoint.X) / Wrate);
-                int y = (int)Math.Round((_luPonit.Y - _startPoint.Y) / Hrate);
-                int width = (int)Math.Round((_rbPonit.X - _luPonit.X) / Wrate);
-                int height = (int)Math.Round((_rbPonit.Y - _luPonit.Y) / Wrate);
-                Rectangle rect = new Rectangle(x, y, width, height);
-                Rectangle imageRect = new Rectangle(0, 0, _image.Width , _image.Height);
-                _imageRect = Rectangle.Intersect(rect, imageRect);
-                if (_imageRect != rect)
+                try
                 {
-                    _luPonit.X = _imageRect.X * Wrate + _startPoint.X;
-                    _luPonit.Y = _imageRect.Y * Hrate + _startPoint.Y;
-                    _rbPonit.X = _imageRect.Width * Wrate + _luPonit.X;
-                    _rbPonit.Y = _imageRect.Height * Hrate + _luPonit.Y;
+                    int x = (int)Math.Round((_luPonit.X - _startPoint.X) / Wrate);
+                    int y = (int)Math.Round((_luPonit.Y - _startPoint.Y) / Hrate);
+                    int width = (int)Math.Round((_rbPonit.X - _luPonit.X) / Wrate);
+                    int height = (int)Math.Round((_rbPonit.Y - _luPonit.Y) / Wrate);
+                    Rectangle rect = new Rectangle(x, y, width, height);
+                    Rectangle imageRect = new Rectangle(0, 0, _image.Width, _image.Height);
+                    _imageRect = Rectangle.Intersect(rect, imageRect);
+                    if (_imageRect != rect)
+                    {
+                        _luPonit.X = _imageRect.X * Wrate + _startPoint.X;
+                        _luPonit.Y = _imageRect.Y * Hrate + _startPoint.Y;
+                        _rbPonit.X = _imageRect.Width * Wrate + _luPonit.X;
+                        _rbPonit.Y = _imageRect.Height * Hrate + _luPonit.Y;
+                    }
+                    return _imageRect;
+
                 }
-                return _imageRect;
+                catch (Exception ex)
+                {
+                    return new Rectangle();
+                   
+                }
             }
             set
             {
@@ -366,8 +380,20 @@ namespace dotNetLab.Widgets.Third_Party
 
         protected override void OnMouseUp(MouseEventArgs e)
         {
+              
             if (_treatmentType == TreatmentType.FineTuring || _treatmentType == TreatmentType.DrawRect)
-                AfterDrawEvent.Invoke(_isMouseMove, e.Button == MouseButtons.Right);
+                try
+                {
+                    AfterDrawEvent.Invoke(_isMouseMove, e.Button == MouseButtons.Right);
+                }
+                catch (Exception ex)
+                {
+
+                   
+                }
+             
+
+              
             if (_treatmentType == TreatmentType.DrawPolygon)
             {
                 if (_selectedCircleIndex != -1)
@@ -388,7 +414,16 @@ namespace dotNetLab.Widgets.Third_Party
                     else
                         _polygons.Insert(_onLineIndex1 + 1, new PointF(e.X, e.Y));
                 }
-                AfterDrawEvent.Invoke(_isMouseMove, e.Button == MouseButtons.Right);
+                try
+                {
+                    AfterDrawEvent.Invoke(_isMouseMove, e.Button == MouseButtons.Right);
+                }
+                catch (Exception ex)
+                {
+
+                   
+                }
+              
                 Invalidate();
             }
             _mIsClick = false;
