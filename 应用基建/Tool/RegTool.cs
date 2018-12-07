@@ -93,15 +93,15 @@ namespace dotNetLab
                     //                     rsg.CreateSubKey(Values);
                     //                 }
                     //                 rsg = Registry.CurrentUser.OpenSubKey("SOFTWARE\\Microsoft", true);
+
+                    string  _value = "null";
                     if (rsg.GetValue(Name) != null) //读取失败返回null
                     {
-                        return rsg.GetValue(Name).ToString();
+                         _value = rsg.GetValue(Name).ToString();
                     }
-                    else
-                    {
-                        return "null";
-                    }
+                    
                     rsg.Close();
+                    return _value;
                 }
                 catch (Exception ex)
                 {

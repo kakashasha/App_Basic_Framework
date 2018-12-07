@@ -73,48 +73,36 @@ namespace dotNetLab.Common
                 AfterLogPadInited();
                 if (!WinFormApp.CheckTrialVersion)
                     goto cc;
-              String strValue  = RegTool.GetRegistry("KeyCode","");
-                String KeyValue = File.ReadAllText("key.lic", Encoding.Default);
-                if(strValue=="null" &&  String.IsNullOrEmpty(KeyValue) )
+               String strTrial =  R.CompactDB.FetchValue("SheynQi");
+                if (strTrial == null)
+                    R.CompactDB.Write("SheynQi", "30");
+                int nTrialDay = R.CompactDB.FetchIntValue("SheynQi");
+              String strValue  =  
+                 File.ReadAllText("key.lic", Encoding.Default);
+                if(!String.IsNullOrEmpty( strValue) )
                 {
-                    RegTool.SaveRegistry("KeyCode", "0");
-                }
-                else
-                {
-                    if (KeyValue == CommandInvoker.ExecuteCMD("wmic cpu get processorid"))
+                 
+                    if (strValue == CommandInvoker.ExecuteCMD("wmic cpu get processorid"))
                     {
                         goto cc;
                     }
                 }
-               if(strValue=="0")
-                {
+                
                     strValue = RegTool.GetRegistry("TrialStartDay", "");
                    
-                    if (strValue == "0")
+                    if (strValue == "null")
                         RegTool.SaveRegistry("TrialStartDay", DateTime.Now.ToString("yyyy-MM-dd"));
                     else
                     {
                        TimeSpan ts  = DateTime.Parse(DateTime.Now.ToString("yyyy-MM-dd")) - DateTime.Parse(strValue);
-                       if (ts.Days >= 30)
+                       if (ts.Days >= nTrialDay)
                         {
                             Tipper.Error = "软件试用已到期，请联系视觉软件厂商\r\n李孟铖,Tel:18025366950";
                             return;
                         }
                     }
-                }
-               else
-                {
-                  
-                     String str =  strValue ;
-                    if(str == CommandInvoker.ExecuteCMD("wmic cpu get processorid"))
-                    {
-                        ;
-                    }
-                    else
-                    {
-                        
-                    }
-                }
+                
+               
 
                 cc:;
             }

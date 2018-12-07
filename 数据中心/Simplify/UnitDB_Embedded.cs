@@ -43,8 +43,11 @@ namespace dotNetLab.Data
                     Global_DBDataNotify(null, NotifyMessages.NoControlWrite,strTableName,strName,strValue);
                 }
             }
-            public string FetchValue(string strLabelName, string strTableName)
+         
+            public string FetchValue(String strLabelName, String strTableName,   String strDefaultValue = "0",bool NewWhenNoFound = true)
             {
+
+            cc:;
                 if (!bConnected)
                 {
                     HandleError(null, null, DBOperator.OPERATOR_CONNECT_DB);
@@ -55,31 +58,30 @@ namespace dotNetLab.Data
 
                     Global_DBDataNotify(null, NotifyMessages.NoControlRead, strTableName, strLabelName);
                 }
-                return this.UniqueResult(
+                String temp =  this.UniqueResult(
                     string.Format("select Val from {0} where Name='{1}'; "
                     , strTableName, strLabelName));
-               
+                if (temp == null && NewWhenNoFound)
+                {
+                    Write(strTableName, strLabelName, strDefaultValue);
+                    goto cc;
+                }
+                else
+                {
+                    return temp;
+                }
             }
+
+            public String FetchValue(String strLabelName,  bool NewWhenNoFound = true, String strDefaultValue = "0")
+            {
+                return FetchValue(strLabelName, TargetTable, strDefaultValue, NewWhenNoFound);
+            }
+          
             public void Write(string strName, string strValue)
             {
                 Write(TargetTable, strName, strValue);
             }
-            public string FetchValue(string strLabelName)
-            {
-                if (!bConnected)
-                {
-                    HandleError(null, null, DBOperator.OPERATOR_CONNECT_DB);
-                    return null;
-                }
-                if (Global_DBDataNotify != null)
-                {
-
-                    Global_DBDataNotify(null, NotifyMessages.NoControlRead, TargetTable, strLabelName);
-                }
-                return this.UniqueResult(
-                    string.Format("select Val from {0} where Name='{1}'; "
-                    , TargetTable, strLabelName));
-            }
+          
             public int FetchIntValue(string strLabelName)
             {
                 string temp = FetchValue(strLabelName);
