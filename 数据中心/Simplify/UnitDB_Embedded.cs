@@ -293,7 +293,6 @@ namespace dotNetLab.Data
                 sb.Remove(0, sb.Length);
                 sb = null;
             }
-            
             public String[] FetchArray(string strLabelName)
             {
 

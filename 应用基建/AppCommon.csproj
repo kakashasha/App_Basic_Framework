@@ -58,6 +58,7 @@
   <ItemGroup>
     <Compile Include="Advanced\CommandLineBase.cs" />
     <Compile Include="Advanced\DebugCommand.cs" />
+    <Compile Include="Advanced\模拟键鼠操作的函数集（用于编写dll）.cs" />
     <Compile Include="AppComRes.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -92,6 +93,7 @@
     </Compile>
     <Compile Include="Managers\AppManager.cs" />
     <Compile Include="Advanced\CommandInvoker.cs" />
+    <Compile Include="Tool\DirectSound播放声音.cs" />
     <Compile Include="Tool\ExtensionFuncs.cs" />
     <Compile Include="Tool\FileSystemManager.cs" />
     <Compile Include="Tool\FontTool.cs" />
@@ -100,6 +102,7 @@
     <Compile Include="Tool\RegTool.cs" />
     <Compile Include="Tool\ResDll.cs" />
     <Compile Include="Advanced\StoreEngine.cs" />
+    <Compile Include="Tool\SeekEngine.cs" />
     <Compile Include="Tool\SHA1_MD5.cs" />
     <Compile Include="Tool\Tools.cs" />
     <Compile Include="Tool\Traverse.cs" />
