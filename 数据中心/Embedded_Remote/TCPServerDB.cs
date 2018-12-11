@@ -73,9 +73,9 @@ namespace dotNetLab.Data.Embedded
             SignalTower.ClientConnected += FactoryServer_Socket_ClientConnected;
             SignalTower.ClientDisconnected += FactoryServer_Socket_ClientDisconnected;
             SignalTower.Route = RouteMessage;
-          //  SignalTower.TCPServerProperties.Boot();
             
-            SignalTower.Boot(this.strIP);
+            SignalTower.IP = strIP;
+            SignalTower.Boot();
         }
 
         private void RemoteServer_DBDiagnoseHandler(ErrorInfo e, DBOperator byt_Operator)

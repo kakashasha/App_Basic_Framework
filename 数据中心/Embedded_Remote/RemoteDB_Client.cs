@@ -68,8 +68,10 @@ namespace dotNetLab.Data.Embedded
        private void Initializer()
        {
             clientSocket = new TCPClient();
-            clientSocket.Connect(clientSocket.IP);
+            clientSocket.IP = this.strIP;
+            clientSocket.Connect();
             clientSocket.Route = ClientSocket_Route;
+            
             this.RemoteHandle += RemoteDB_RemoteHandle;
        }
         void Send(string sql, DBOperator byt_Operator)

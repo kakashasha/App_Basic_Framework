@@ -24,11 +24,12 @@ namespace dotNetLab.Network
        //防止数据没有传递完
         protected override int ClientRecieveMethod(int nIndex)
         {
-           int nRecievedLen  =  lst_Clients[nIndex].Receive(ClientsBuffer[nIndex],0,5,System.Net.Sockets.SocketFlags.None);
+             //读取数据的长度
+             int nRecievedLen  =  lst_Clients[nIndex].Receive(ClientsBuffer[nIndex],0,5,System.Net.Sockets.SocketFlags.None);
              int nLen = (int)TCPBase.FetchDataLenByts(ClientsBuffer[nIndex]);
             int nCount = TCPBase.MARKPOSITION;
-             
              int nTotalLen = (int)nLen + TCPBase.MARKPOSITION;
+            //然后循环读取，确保没有少读
             while (true)
             {
                 if (nCount < nTotalLen)

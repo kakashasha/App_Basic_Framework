@@ -49,14 +49,14 @@ namespace dotNetLab
                 InitCollections();
                 ImplementClientCon_DisCon_Delegate();
             }
-            public bool Boot(String strIP)
+              bool Boot(String strIP)
             {
                 try
                 {
                     this.bEndNetwork = false;
                     ServerIP = IPAddress.Parse(strIP);
                     IPEndPoint ServerEndPoint = new IPEndPoint(ServerIP, nPort);
-                   
+
                     ServerSocket =
                     new Socket(
                        AddressFamily.InterNetwork,
@@ -65,14 +65,14 @@ namespace dotNetLab
                     ServerSocket.Listen(3);
                     thd_Main = new Thread(Loop);
                     thd_Main.Start();
-                    return true ;
+                    return true;
                 }
                 catch (System.Exception ex)
                 {
-                      
-                	MessageBox.Show(String.Format("未能成功构建TCP服务器，IP或者端口错误: {0}。",ex.Message) 
-                	                ,"提示", MessageBoxButtons.OK,MessageBoxIcon.Error);
-                    return false ;
+
+                    MessageBox.Show(String.Format("未能成功构建TCP服务器，IP或者端口错误: {0}。", ex.Message)
+                                    , "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return false;
                 }
 
             }

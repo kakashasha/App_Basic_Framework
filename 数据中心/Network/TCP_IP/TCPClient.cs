@@ -70,14 +70,14 @@ namespace dotNetLab
 
             }
             //Client ID Is Client IP
-            public bool Connect(String strIP)
+            public bool Connect( )
             {
                 try
                 {
                     MainBuffer = new byte[BufferSize];
                     bEndNetwork = false;
                     lst_FileTransferInfo.Add(new FileTransferInfo(TextEncode, this.MainBuffer, this.Client));
-                    ServerIP = IPAddress.Parse(strIP);
+                    ServerIP = IPAddress.Parse(IP);
                     IPEndPoint ClientEndPoint =
                         new IPEndPoint(this.ServerIP, nPort);
                     Client = new

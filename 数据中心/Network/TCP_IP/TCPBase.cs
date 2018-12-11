@@ -19,7 +19,7 @@ namespace dotNetLab
             public Socket sct; 
             public FileStream fs;
             public Encoding en;
-            public const byte  MARKPOSITION = 5;
+            public   byte  MARKPOSITION = 5;
             public FileTransferInfo() { }
             public FileTransferInfo(Encoding en, byte[] byt_MainChannel, Socket sct)
             {
@@ -200,7 +200,7 @@ namespace dotNetLab
             protected int nLoopGapTime ;
             private String strIP;
             public List<FileTransferInfo> lst_FileTransferInfo;
-            public const byte MARKPOSITION = 5;
+            public static  byte MARKPOSITION = 5;
             public static void StoreDataLenByts(uint nLen,
             byte[] buffer)
             {
