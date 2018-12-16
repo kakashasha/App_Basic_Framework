@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>dotNetLab.Data</RootNamespace>
     <AssemblyName>shikii.dotNetLab.DataCenter</AssemblyName>
-    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
   </PropertyGroup>
@@ -35,6 +35,7 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
@@ -46,6 +47,11 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>FireBirdDBRes.resx</DependentUpon>
+    </Compile>
+    <Compile Include="DBEngines\LiteDB\LiteDBResource.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>LiteDBResource.resx</DependentUpon>
     </Compile>
     <Compile Include="DBEngines\MySQL\MySQLDBRes.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -87,6 +93,9 @@
       <DependentUpon>ErrorWnd.cs</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Root\UnitingDB.cs" />
+    <Compile Include="Simplify\NoSQLDB.cs" />
+    <Compile Include="Simplify\NoSQL\LiteDB.cs" />
     <Compile Include="Simplify\UIDBEngine.cs" />
     <Compile Include="Simplify\UnitDB_Connect.cs" />
     <Compile Include="Simplify\UnitDB_Embedded.cs" />
@@ -98,6 +107,10 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>FireBirdDBRes.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DBEngines\LiteDB\LiteDBResource.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>LiteDBResource.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="DBEngines\MySQL\MySQLDBRes.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -172,6 +185,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="log.txt" />
+    <None Include="DBEngines\LiteDB\Resources\LiteDB.dll" />
     <None Include="Resources\System.Data.SQLiteX64.dll" />
     <None Include="DBEngines\MySQL\Resources\MySql.Data.dll" />
   </ItemGroup>

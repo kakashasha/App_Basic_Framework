@@ -89,7 +89,7 @@ namespace dotNetLab
             OPERATOR_QUERY_UNIQUE,
             OPERATOR_QUERY_ALL_TABLENAMES_ARRAY,
         }
-        public abstract class DBRoot 
+        public abstract class DBRoot : DB
         {
 #if DATA_DEBUG
             ErrorWnd errorWnd;
@@ -120,22 +120,18 @@ namespace dotNetLab
             protected DbConnectionStringBuilder ncs;
             protected DbCommand cmd;
             protected DbDataReader reader;
-            protected String strIP;
-            protected String DBName;
+           
+            
             
             protected String strPassword;
             protected string UserName;
-            protected int nPort;
+           
             private List<String> lst_TableNames;
              List<String> lst_ColumnNames;
             //true 为文本，fale 为非文本
              List<bool> lst_ColumnTypes;
 
-            public String Database
-             {
-                 get { return DBName; }
-                set{DBName = value ;}
-             }
+           
             public List<bool> ColumnTypes
              {
                  get { return lst_ColumnTypes; }
