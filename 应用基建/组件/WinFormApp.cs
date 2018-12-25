@@ -71,13 +71,22 @@ namespace dotNetLab.Common
                     PG.Invoke(action_DisplayLogMessage, ltb, str, true);
                 };
                 AfterLogPadInited();
+
+                String strEnableProtect = R.CompactDB.FetchValue("shikii");
+                if (strEnableProtect == "0")
+                    R.CompactDB.Write("shikii", "True");
+                WinFormApp.CheckTrialVersion = R.CompactDB.FetchBoolValue("shikii");
+
+
                 if (!WinFormApp.CheckTrialVersion)
                     goto cc;
                String strTrial =  R.CompactDB.FetchValue("SheynQi");
                 if (strTrial == null)
                     R.CompactDB.Write("SheynQi", "30");
                 int nTrialDay = R.CompactDB.FetchIntValue("SheynQi");
-              String strValue  =  
+
+                
+                String strValue  =  
                  File.ReadAllText("key.lic", Encoding.Default);
                 if(!String.IsNullOrEmpty( strValue) )
                 {
@@ -87,7 +96,6 @@ namespace dotNetLab.Common
                         goto cc;
                     }
                 }
-                
                     strValue = RegTool.GetRegistry("TrialStartDay", "");
                    
                     if (strValue == "null")

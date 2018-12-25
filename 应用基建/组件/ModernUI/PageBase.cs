@@ -33,7 +33,17 @@ namespace dotNetLab.Common.ModernUI
         public String ClipboardText
         {
             get { return Clipboard.GetText();}
-            set { Clipboard.SetText(value); }
+            set {
+
+                  
+                   if( !string.IsNullOrEmpty(value))
+                    Clipboard.SetText(value);
+               
+                
+                
+
+
+            }
         }
         protected override void Prepare()
         {
