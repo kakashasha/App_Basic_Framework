@@ -15,7 +15,7 @@ namespace dotNetLab.Data
         }
         protected override void CheckLogTable()
         {
-
+             
 
             DeleteOldLogTable("AutoCleanOutputLogTime", "Outputs");
 

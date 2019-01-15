@@ -199,11 +199,11 @@ namespace dotNetLab
             {
                 try
                 {
-                    if(dt!= null)
+                    if (dt != null)
                     {
-                    dt.Clear();
-                    dt.Dispose();
-                        
+                        dt.Clear();
+                        dt.Dispose();
+
                     }
                     dt = new DataTable();
                         cmd.CommandText = sql;
