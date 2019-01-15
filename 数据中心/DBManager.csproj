@@ -80,7 +80,9 @@
     <Compile Include="Exception\UIConsole.cs" />
     <Compile Include="Exception\LogPipe.cs" />
     <Compile Include="Network\Home\TServer.cs" />
-    <Compile Include="Network\SerialPort\SerialPort.cs" />
+    <Compile Include="Network\SerialPort\AddressPLC.cs" />
+    <Compile Include="Network\SerialPort\NormalPLC.cs" />
+    <Compile Include="Network\SerialPort\PLCBase.cs" />
     <Compile Include="Network\TCP_IP\Signals.cs" />
     <Compile Include="Network\TCP_IP\TCPBase.cs" />
     <Compile Include="Network\TCP_IP\TCPClient.cs" />

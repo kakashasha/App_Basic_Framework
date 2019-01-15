@@ -78,6 +78,10 @@ namespace dotNetLab.Common
             {
                 txb.Visible = false;
             }
+            if(e.KeyData == (Keys.Control | Keys.A))
+            {
+                txb.SelectAll();
+            }
         }
         protected override void prepareEvents()
         {
@@ -98,9 +102,19 @@ namespace dotNetLab.Common
         {
             if (txb.Visible == false)
             {
+                Form frm = this.ParentForm;
+                Control ctrl_Pad = null;
+                 foreach (Control c in frm.Controls )
+                {
+                    if(c.Name == "mobileListBox1")
+                    {
+                        ctrl_Pad = c;
+                        break;
+                    }
+                }
 
                 txb.Visible = true;
-                txb.Size = txb.Size;
+                txb.Size = new Size(190 , txb.Height+5) ;
                 txb.Text = this.Text;
                 txb.BringToFront();
             }
@@ -143,7 +157,7 @@ namespace dotNetLab.Common
 
                 Graphics g = this.CreateGraphics();
                 SizeF sz = g.MeasureString(strCaption, Font);
-                this.Width = (int)sz.Width;
+                this.Width = (int)sz.Width+10;
                 Refresh();
             }
         }

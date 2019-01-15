@@ -16,5 +16,32 @@ namespace dotNetLab.Data
         {
             MessageBox.Show(strMsg, "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
+ 
+        public static void Tip_Info_Ask(string strMsg)
+        {
+            MessageBox.Show(strMsg, "询问", MessageBoxButtons.OK, MessageBoxIcon.Question);
+        }
+        public static String Info
+        {
+            set
+            {
+                Tip_Info_Done(value);
+            }
+        }
+        public static String Ask
+        {
+            set
+            {
+                Tip_Info_Ask(value);
+            }
+        }
+        public static String Error
+        {
+            set
+            {
+                Tip_Info_Error(value);
+            }
+
+        }
     }
 }
