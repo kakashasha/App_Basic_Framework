@@ -53,7 +53,19 @@ namespace dotNetLab.Data.Network
         public System.IO.Ports.StopBits StopBits { get; set; }        
         public int BufferSize { get; set; }
         public Encoding ThisEncoding { get { return en; } set { en = value; } }
-      
+       public byte [] DecodeHexString(String str)
+        {
+            String[] temp = str.Split(new char[] { ' ' });
+            int nIndex = 0;
+            byte[] bytArr = new byte[temp.Length];
+            foreach (var item in temp)
+            {
+                bytArr[nIndex++] =
+                    byte.Parse(item,
+                    System.Globalization.NumberStyles.HexNumber);
+            }
+            return bytArr;
+        }
         protected void DiscardIOBuffer()
         {
 

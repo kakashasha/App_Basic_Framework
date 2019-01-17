@@ -9,50 +9,66 @@ namespace dotNetLab.Data.Network
 {
    public  class AddressPLC : PLCBase
     {
+
+        
+       public void Send2Plc(String Head,String Adrr,String End)
+        {
+
+        }
         public override bool Close()
         {
-            throw new NotImplementedException();
-        }
-
-        public override bool Open()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Writeword(string add, long Num)
-        {
-
-
             try
             {
 
-                char[] chArr = new char[8];
-                for (int i = 0; i < 8; i++)
+                if (_rs232 != null)
                 {
-                    chArr[i] = '0';
+                    _rs232.DiscardInBuffer();
+                    _rs232.DiscardOutBuffer();
+                    _rs232.Close();
+                    _rs232.Dispose();
+                    _rs232 = null;
                 }
-                int n = 7;
-                StringBuilder str = new StringBuilder();
-                str.Append(Num.ToString("X4"));
-                if (str.Length < 8)
-                {
-                    for (int i = str.Length - 1; i > 0; i--)
-                    {
-                        chArr[n--] = str[i];
-                    }
-                }
-                String s = chArr.ToString();
-                string B = s.Substring(s.Length - 7, 4);
-                string C = s.Substring(s.Length - 3, 4);
-                this._rs232.Write(add + C + B);
-                Thread.Sleep(50);
+                Console.WriteLine("已经关闭串口：模式为通用。");
+                return true;
             }
-            catch (Exception ex)
+            catch (Exception e)
             {
-                MessageBox.Show(ex.Message, "提示", MessageBoxButtons.OK,
-                    MessageBoxIcon.Error);
+
+                _rs232 = null;
+                Tipper.Error = ("关闭通用作用口时失败：" + e.Message);
+                return false;
+            }
+        }
+        public override bool Open()
+        {
+            Close();
+            try
+            {
+                _rs232 = new System.IO.Ports.SerialPort(PortName, BaudRate, Parity, DataBits, StopBits);
+                _rs232.Encoding = ThisEncoding;
+                //this.BufferSize = 128;
+                buffer = new byte[this.BufferSize];
+                //_rs232.DtrEnable = true;
+                //_rs232.RtsEnable = true;
+                //_rs232.ReceivedBytesThreshold = 64;
+                _rs232.Open();
+                _rs232.DiscardOutBuffer();
+                _rs232.DiscardInBuffer();
+                //_rs232.Handshake = System.IO.Ports.Handshake.None;
+               
+
+                Console.WriteLine("已经开启串口：模式为通用。");
+                return true;
+            }
+            catch (Exception e)
+            {
+
+                Tipper.Error = "通用作用串口打开失败：" + e.Message;
+                return false;
             }
 
         }
+
+
     }
 }

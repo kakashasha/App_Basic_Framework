@@ -38,13 +38,6 @@ namespace dotNetLab.Data.Network
                 return false;
             }
         }
-        void ClearBuffer()
-        {
-            for (int i = 0; i < buffer.Length; i++)
-            {
-                buffer[i] = (byte)'\0';
-            }
-        }
         public override bool Open()
         {
             Close();
@@ -63,19 +56,29 @@ namespace dotNetLab.Data.Network
                 //_rs232.Handshake = System.IO.Ports.Handshake.None;
                 _rs232.DataReceived += (sender, e) =>
                 {
-                    ClearBuffer();
-
-                    int by = 0;
-                    int z = 0;
-                    do
+                    try
                     {
-                        by = _rs232.ReadByte();
-                        buffer[z++] = (byte)by;
-                    } while (-1 != by);
 
-                    if (Route != null)
-                        Route(buffer);
+                        ClearBuffer();
 
+                        int by = 0;
+                        int z = 0;
+                        do
+                        {
+                            by = _rs232.ReadByte();
+                            buffer[z++] = (byte)by;
+                        } while (-1 != by);
+
+                        if (Route != null)
+                            Route(buffer);
+
+                    }
+                    catch (Exception ex)
+                    {
+
+
+                    }
+                  
 
                 };
 
@@ -89,6 +92,13 @@ namespace dotNetLab.Data.Network
                 return false;
             }
 
+        }
+        void ClearBuffer()
+        {
+            for (int i = 0; i < buffer.Length; i++)
+            {
+                buffer[i] = (byte)'\0';
+            }
         }
         public void Send(byte[] buf)
         {
