@@ -299,26 +299,33 @@ namespace dotNetLab.Data.Uniting
         void CheckSQLiteRefFiles()
           {
               bool isX86 = IsX86Architecture(Application.ExecutablePath);
+            Action<bool> AddSQLiteRefFiles = (_isX86) =>
+             {
+                 AddRef("System.Data.SQLite.dll", dotNetLab.Data.DBEngines.SQLite.SqliteDBResource.System_Data_SQLite);
+                 if (_isX86)
+                 {
+                     AddRef("SQLite.Interop.dll", DBEngines.SQLite.SqliteDBResource.SQLite_Interop_x86);
+                     AddRef("sqlite3.dll", DBEngines.SQLite.SqliteDBResource.sqlite3_x86);
+                 }
+                 else
+                 {
+ 
+                     AddRef("SQLite.Interop.dll", DBEngines.SQLite.SqliteDBResource.SQLite_Interop_x64);
+                     AddRef("sqlite3.dll", DBEngines.SQLite.SqliteDBResource.sqlite3_x64);
+                 }
+             };
               if (!File.Exists("System.Data.SQLite.dll"))
               {
-                
-                if(isX86)
-                  AddRef("System.Data.SQLite.dll", dotNetLab.Data.DBEngines.SQLite.SqliteDBResource.System_Data_SQLite);
-                else
-                  AddRef("System.Data.SQLite.dll", dotNetLab.Data.DBEngines.SQLite.SqliteDBResource.System_Data_SQLiteX64);
-
-            }
+                AddSQLiteRefFiles(isX86);
+              }
               else
-            {
-                bool isDllX86 = IsX86Architecture("System.Data.SQLite.dll");
+              {
+                bool isDllX86 = IsX86Architecture("SQLite.Interop.dll");
                 if(isDllX86 != isX86)
                 {
-                    if (isX86)
-                        AddRef("System.Data.SQLite.dll", dotNetLab.Data.DBEngines.SQLite.SqliteDBResource.System_Data_SQLite);
-                    else
-                        AddRef("System.Data.SQLite.dll", dotNetLab.Data.DBEngines.SQLite.SqliteDBResource.System_Data_SQLiteX64);
+                    AddSQLiteRefFiles(isX86);
                 }
-            }
+             }
           }
           void PreparesQLiteDB()
           {

@@ -73,9 +73,9 @@ namespace dotNetLab.Data.DBEngines.SQLite {
         /// <summary>
         ///   查找 System.Byte[] 类型的本地化资源。
         /// </summary>
-        public static byte[] System_Data_SQLite {
+        public static byte[] SQLite_Interop_x64 {
             get {
-                object obj = ResourceManager.GetObject("System_Data_SQLite", resourceCulture);
+                object obj = ResourceManager.GetObject("SQLite_Interop_x64", resourceCulture);
                 return ((byte[])(obj));
             }
         }
@@ -83,9 +83,39 @@ namespace dotNetLab.Data.DBEngines.SQLite {
         /// <summary>
         ///   查找 System.Byte[] 类型的本地化资源。
         /// </summary>
-        public static byte[] System_Data_SQLiteX64 {
+        public static byte[] SQLite_Interop_x86 {
             get {
-                object obj = ResourceManager.GetObject("System_Data_SQLiteX64", resourceCulture);
+                object obj = ResourceManager.GetObject("SQLite_Interop_x86", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Byte[] 类型的本地化资源。
+        /// </summary>
+        public static byte[] sqlite3_x64 {
+            get {
+                object obj = ResourceManager.GetObject("sqlite3_x64", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Byte[] 类型的本地化资源。
+        /// </summary>
+        public static byte[] sqlite3_x86 {
+            get {
+                object obj = ResourceManager.GetObject("sqlite3_x86", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Byte[] 类型的本地化资源。
+        /// </summary>
+        public static byte[] System_Data_SQLite {
+            get {
+                object obj = ResourceManager.GetObject("System_Data_SQLite", resourceCulture);
                 return ((byte[])(obj));
             }
         }

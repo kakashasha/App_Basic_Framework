@@ -54,19 +54,19 @@ namespace dotNetLab.Common.Normal
         protected virtual void Prepare()
         {
             InitDB();
-            PrepareCtrls();
-            PrepareData();
+            prepareCtrls();
+            prepareData();
             UnitCtrls();
-            PrepareEvents();
+            prepareEvents();
          
         }
 
 
         protected virtual void UnitCtrls(){}
 
-        protected virtual void PrepareCtrls(){}
-        protected virtual void PrepareEvents(){}
-        protected virtual void PrepareData(){}
+        protected virtual void prepareCtrls(){}
+        protected virtual void prepareEvents(){}
+        protected virtual void prepareData(){}
         protected  virtual  void CompactDbOnDbDiagnoseHandler(ErrorInfo errorInfo, DBOperator bytOperator)
         {
             R.Pipe.Error(errorInfo.ExceptionInfo);
