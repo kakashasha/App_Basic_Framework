@@ -1,10 +1,66 @@
-﻿//using System;
-//using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
-//using System.Text;
-//using ICSharpCode.SharpZipLib.Zip;
-//using System.IO;
-//using ICSharpCode.SharpZipLib.Checksums;
+using System.Text;
+using System.IO;
+using SharpCompress.Archives.Zip;
+using SharpCompress.Common;
+using SharpCompress.Archives;
+using SharpCompress.IO;
+using System.Linq;
+using SharpCompress.Readers;
+using SharpCompress.Writers;
+
+namespace dotNetLab.Common.Zipping
+{
+
+    public class Zip
+    {
+        public static void ZipFolder(String FolderPath,String ZipFilePath,Encoding en)
+        {
+             
+            using (ZipArchive archive = new ZipArchive())
+            {
+               
+                archive.AddAllFromDirectory(FolderPath);
+                WriterOptions wo = new WriterOptions(CompressionType.Deflate);
+                wo.ArchiveEncoding.Default =en;
+                archive.SaveTo(ZipFilePath, wo ) ;  
+            }
+        }
+        public static void UnZipFolder(String ZipFilePath,String FolderPath, Encoding en)
+        {
+            ReaderOptions opts = new SharpCompress.Readers.ReaderOptions();
+            opts.ArchiveEncoding = new SharpCompress.Common.ArchiveEncoding();
+            opts.ArchiveEncoding.CustomDecoder = (data, x, y) =>
+            {
+                return en.GetString(data);
+            };
+            using (Stream stream = File.OpenRead(ZipFilePath))
+            using (var reader = ReaderFactory.Open(stream,opts))
+            {
+                while (reader.MoveToNextEntry())
+                {
+                    if (!reader.Entry.IsDirectory)
+                    {
+                        Console.WriteLine(reader.Entry.Key);
+
+                        reader.WriteEntryToDirectory(FolderPath, new ExtractionOptions()
+                        {
+                            ExtractFullPath = true,
+                            Overwrite = true,
+                            
+                        });
+
+                    }
+                }
+            }
+        }
+    }
+}
+
+//可能需要应用于 Xamarin
+//using ICSharpCode.SharpZipLib.Checksum;
 
 //namespace dotNetLab
 //{
@@ -239,7 +295,7 @@
 //                s.Close();
 //            }
 //        }
-//        public static void UnZip(string zipedFile, string strDirectory )
+//        public static void UnZip(string zipedFile, string strDirectory)
 //        {
 
 //            if (strDirectory == "")
@@ -249,7 +305,7 @@
 
 //            using (ZipInputStream s = new ZipInputStream(File.OpenRead(zipedFile)))
 //            {
-                
+
 //                ZipEntry theEntry;
 
 //                while ((theEntry = s.GetNextEntry()) != null)
@@ -294,3 +350,6 @@
 
 //    }
 //}
+
+
+

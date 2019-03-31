@@ -89,7 +89,7 @@ namespace dotNetLab
                 lstThdArr_SubContent = new List<Thread>();
                 lstStrArr_ClientID = new List<string>();
                 lst_Thd_Ctrls = new List<bool>();
-                this.lst_FileTransferInfo = new List<FileTransferInfo>();
+                
             }
             protected override void Loop()
             {
@@ -123,7 +123,7 @@ namespace dotNetLab
             protected void SubLoop()
             {
                 ClientsBuffer.Add(new byte[BufferSize]);
-                AddFileTransferInfo(lstStrArr_ClientID[lst_Clients.Count - 1]);
+                
                 RecieveAndParse(ClientsBuffer.Count - 1);
             }
             protected virtual void ParseAndHandle(byte[] bytArr,int nIndex)
@@ -133,14 +133,7 @@ namespace dotNetLab
                 switch (byt_MSG_Mark)
                 {
                     case Signals.CLIENT_ID: OnClientID(); break;
-                    case Signals.FILE_BEGIN:   n = GetFileTransferTarget(nIndex);
-                        lst_FileTransferInfo[n].OnFileBegine();break;
-                    case Signals.FILE_TRANSFER:
-                          n = GetFileTransferTarget(nIndex);
-                        lst_FileTransferInfo[n].OnFileTransfer(); break;
-                    case Signals.FILE_END:
-                        n = GetFileTransferTarget(nIndex);
-                        lst_FileTransferInfo[n].OnFileEnd(); break;
+                    
                     default:
                         if (Route != null)
                             Route(nIndex,bytArr);
@@ -184,20 +177,7 @@ namespace dotNetLab
                             this.ClientDisconnected(lstStrArr_ClientID[nIndex_ArrByt]);
                         else
                             Console.WriteLine("ClientDisconnected 事件未实现");
-                        if (lst_FileTransferInfo.Count > 0)
-                        {
-                            try
-                            {
-                                int n = GetFileTransferTarget(nIndex_ArrByt);
-                                lst_FileTransferInfo.RemoveAt(n);
-
-                            }
-                            catch (Exception ex)
-                            {
-
-                               // throw;
-                            }
-                        }
+                       
                         try
                         {
                             lst_Clients[nIndex_ArrByt].Shutdown(SocketShutdown.Both);
@@ -278,7 +258,7 @@ namespace dotNetLab
                 lstStrArr_ClientID.Add(TextEncode.GetString
                     (buf, 5, (int)byteNum)
                     );
-                AddFileTransferInfo(lstStrArr_ClientID[lst_Clients.Count - 1]);
+                
 #if SOCKERTTEST
                 Console.WriteLine(lstStrArr_ClientID[lstStrArr_ClientID.Count - 1]);
 #endif
@@ -322,9 +302,10 @@ namespace dotNetLab
                     return false;
                 }
             }
-            public void Dispose()
+            public void Dispose(bool bForceClose = true)
             {
                 Close();
+                if(bForceClose)
                 ForceClose();
             }
             ~TCPServer()
@@ -360,25 +341,7 @@ namespace dotNetLab
                 this.lst_Thd_Ctrls[nClientIndex] = false;
             }
             
-            #region File_Operation
-
-            int GetFileTransferTarget(int n)
-            {
-                for (int i = 0; i < lst_FileTransferInfo.Count; i++)
-                {
-                    if (lst_FileTransferInfo[i].sct == lst_Clients[n])
-                        return i;
-                }
-                return -1;
-            }
-            void AddFileTransferInfo(string strClientID)
-            {
-                int n = this.lstStrArr_ClientID.IndexOf(strClientID);
-                this.lst_FileTransferInfo.Add(
-                    new FileTransferInfo(this.TextEncode,ClientsBuffer[n], lst_Clients[n]));
-            }
-
-            #endregion
+             
         }
     }
 }

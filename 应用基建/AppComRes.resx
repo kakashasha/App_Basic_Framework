@@ -121,4 +121,25 @@
   <data name="ICSharpCode_SharpZipLib" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Resources\ICSharpCode.SharpZipLib.dll;System.Byte[], mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="QWhale_Common" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\QWhale.Common.dll;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="QWhale_Editor" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\QWhale.Editor.dll;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="QWhale_Syntax" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\QWhale.Syntax.dll;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="QWhale_Syntax_Parsers" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\QWhale.Syntax.Parsers.dll;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="QWhale_Syntax_Schemes" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\QWhale.Syntax.Schemes.dll;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="ShikiiBackgroundWorker" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\ShikiiBackgroundWorker.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;gb2312</value>
+  </data>
+  <data name="shikii_dotNetLab_Stimulus" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\shikii.dotNetLab.Stimulus.dll;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
 </root>

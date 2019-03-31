@@ -1,4 +1,4 @@
-﻿ 
+﻿
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -6,44 +6,54 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 
-namespace dotNetLab.Common
+namespace dotNetLab.Vision.Halcon
 {
-  public  class StoreEngine 
-   {
-        
+    //将数据存储于文件中
+    public class StoreEngine
+    {
+        //用于描述数据类型的列表
+
         public List<StoreItemInfo> StoreItemInfoSet;
+        //存储的文件名
         private String fileName;
+        //用于操作存储文件的流对象
         public FileStream ThisFileStream;
         public BinaryReader ThisBr;
         public BinaryWriter ThisWr;
+        //记录当前存储项目的索引。
         int StoreItemIndex = 0;
+        //赋予文件名即已经打开了文件并初始化了 ThisFileStream; ThisBr; ThisWr;
+        public string FileName { get { return fileName; } set { fileName = value; LoadNewFile(value); } }
 
-        public string FileName { get   {return fileName;} set { fileName = value; LoadNewFile(value);} }
         public StoreEngine()
         {
             StoreItemInfoSet = new List<StoreItemInfo>();
         }
+        //添加一个数据描述项
         public void AddStoreItem(Type type)
         {
-             
             StoreItemInfoSet.Add(new StoreItemInfo(type));
         }
+        //存储一个数据
         public void StoreItem(BinaryWriter bw, Object obj)
         {
             try
-            {
-                StoreItemInfoSet[StoreItemIndex++].xvalue = obj;
+            {  //以使再次存储不报错，将索引置0
+                if (StoreItemIndex == StoreItemInfoSet.Count)
+                    StoreItemIndex = 0;
+                StoreItemInfoSet[StoreItemIndex].xvalue = obj;
                 StoreItemInfoSet[StoreItemIndex++].Store(bw);
             }
             catch (Exception ex)
             {
-              Tipper.Error = "At StoreEngine.StoreItem :" + ex.Message; 
+                Tipper.Error = "At StoreEngine.StoreItem :" + ex.Message;
             }
 
         }
+
         public void StoreItem(Object obj)
         {
-            StoreItem(ThisWr);
+            StoreItem(ThisWr, obj);
         }
         public Object FetchItem()
         {
@@ -53,8 +63,8 @@ namespace dotNetLab.Common
         {
             try
             {
-                 StoreItemInfoSet[StoreItemIndex++].Fetch(br);
-                 return StoreItemInfoSet[StoreItemIndex++].xvalue;
+                StoreItemInfoSet[StoreItemIndex].Fetch(br);
+                return StoreItemInfoSet[StoreItemIndex++].xvalue;
             }
             catch (Exception ex)
             {
@@ -95,6 +105,17 @@ namespace dotNetLab.Common
 
         }
 
+        public void SaveStreamBy(BinaryWriter bw)
+        {
+
+            ThisWr = bw;
+        }
+        public void ReadStreamBy(BinaryReader br)
+        {
+            ThisBr = br;
+    
+
+        }
     }
     public class StoreItemInfo
     {

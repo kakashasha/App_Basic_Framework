@@ -37,31 +37,31 @@ namespace dotNetLab.Common
 
         void CheckNeccesoryDllFiles()
         {
-            //if (!File.Exists(CODE_EDIT_DLL_NAME))
-            //{
-            //    AddRef(CODE_EDIT_DLL_NAME, UI.shikii_dotNetLab_Stimulus);
-            //}
-            //if (!File.Exists(QWhale_Common_dll))
-            //{
-            //    AddRef(QWhale_Common_dll, UI.QWhale_Common);
+            if (!File.Exists(CODE_EDIT_DLL_NAME))
+            {
+                AddRef(CODE_EDIT_DLL_NAME, AppComRes.shikii_dotNetLab_Stimulus);
+            }
+            if (!File.Exists(QWhale_Common_dll))
+            {
+                AddRef(QWhale_Common_dll, AppComRes.QWhale_Common);
 
-            //}
-            //if (!File.Exists(QWhale_Editor_dll))
-            //{
-            //    AddRef(QWhale_Editor_dll, UI.QWhale_Editor);
-            //}
-            //if (!File.Exists(QWhale_Syntax_dll))
-            //{
-            //    AddRef(QWhale_Syntax_dll, UI.QWhale_Syntax);
-            //}
-            //if (!File.Exists(QWhale_Syntax_Parsers_dll))
-            //{
-            //    AddRef(QWhale_Syntax_Parsers_dll, UI.QWhale_Syntax_Parsers);
-            //}
-            //if (!File.Exists(QWhale_Syntax_Schemes_dll))
-            //{
-            //    AddRef(QWhale_Syntax_Schemes_dll, UI.QWhale_Syntax_Schemes);
-            //}
+            }
+            if (!File.Exists(QWhale_Editor_dll))
+            {
+                AddRef(QWhale_Editor_dll, AppComRes.QWhale_Editor);
+            }
+            if (!File.Exists(QWhale_Syntax_dll))
+            {
+                AddRef(QWhale_Syntax_dll, AppComRes.QWhale_Syntax);
+            }
+            if (!File.Exists(QWhale_Syntax_Parsers_dll))
+            {
+                AddRef(QWhale_Syntax_Parsers_dll, AppComRes.QWhale_Syntax_Parsers);
+            }
+            if (!File.Exists(QWhale_Syntax_Schemes_dll))
+            {
+                AddRef(QWhale_Syntax_Schemes_dll, AppComRes.QWhale_Syntax_Schemes);
+            }
         }
         public Control CodeEditControl
         {
@@ -76,8 +76,6 @@ namespace dotNetLab.Common
             PrepareRuntimeMethod = type.GetMethod("ForcePrepareRuntime");
 
         }
-
-       
 
         public Object ForcePrepareRuntime(string code, String FullClassName)
         {

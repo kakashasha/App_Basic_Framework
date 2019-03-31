@@ -299,19 +299,23 @@ namespace dotNetLab.Data.Uniting
         void CheckSQLiteRefFiles()
           {
               bool isX86 = IsX86Architecture(Application.ExecutablePath);
+            if(!File.Exists(this.DBName))
+            {
+                AddRef(DBName, dotNetLab.Data.DBEngines.SQLite.SqliteDBRes.shikii);
+            }
             Action<bool> AddSQLiteRefFiles = (_isX86) =>
              {
-                 AddRef("System.Data.SQLite.dll", dotNetLab.Data.DBEngines.SQLite.SqliteDBResource.System_Data_SQLite);
+                AddRef("System.Data.SQLite.dll", dotNetLab.Data.DBEngines.SQLite.SqliteDBRes.System_Data_SQLite);
                  if (_isX86)
                  {
-                     AddRef("SQLite.Interop.dll", DBEngines.SQLite.SqliteDBResource.SQLite_Interop_x86);
-                     AddRef("sqlite3.dll", DBEngines.SQLite.SqliteDBResource.sqlite3_x86);
+                     AddRef("SQLite.Interop.dll", DBEngines.SQLite.SqliteDBRes.SQLite_Interop_x86);
+                     AddRef("sqlite3.dll", DBEngines.SQLite.SqliteDBRes.sqlite3_x86);
                  }
                  else
                  {
  
-                     AddRef("SQLite.Interop.dll", DBEngines.SQLite.SqliteDBResource.SQLite_Interop_x64);
-                     AddRef("sqlite3.dll", DBEngines.SQLite.SqliteDBResource.sqlite3_x64);
+                     AddRef("SQLite.Interop.dll", DBEngines.SQLite.SqliteDBRes.SQLite_Interop_x64);
+                     AddRef("sqlite3.dll", DBEngines.SQLite.SqliteDBRes.sqlite3_x64);
                  }
              };
               if (!File.Exists("System.Data.SQLite.dll"))

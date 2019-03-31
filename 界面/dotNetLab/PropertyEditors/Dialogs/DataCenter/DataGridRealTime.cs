@@ -212,8 +212,8 @@ namespace dotNetLab.Widgets
             //this.txb.Left = this.dgv.Left + this.dgv.RowHeadersWidth + cellLeft;
             //this.txb.Top = this.dgv.Top + this.dataGridView1.ColumnHeadersHeight+cellTop;
             this.txb.Left = this.dgv.RowHeadersWidth + cellLeft;
-           // this.txb.Top = this.dgv.Top + this.dgv.ColumnHeadersHeight+cellTop;
-                       this.txb.Top = this.dgv.ColumnHeadersHeight + cellTop - dgv.VerticalScrollingOffset;
+            // this.txb.Top = this.dgv.Top + this.dgv.ColumnHeadersHeight+cellTop;
+            this.txb.Top = this.dgv.ColumnHeadersHeight + cellTop;//- dgv.VerticalScrollingOffset;
         
         }
         void dgv_CellDoubleClick(object sender, DataGridViewCellEventArgs e)

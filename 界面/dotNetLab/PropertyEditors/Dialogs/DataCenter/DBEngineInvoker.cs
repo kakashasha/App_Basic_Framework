@@ -49,7 +49,7 @@ namespace dotNetLab.Widgets
     public class DBEngineInvoker
     {
         Type type;
-        Object objDBEngine;
+       public Object objDBEngine;
         System.Reflection.PropertyInfo[] PropertyInfos;
         PropertyInfo ThisCommandProperty, TargetTableProperty, AllTableNamesProperty,DatabaseProperty;
         MethodInfo[] MethodInfos;

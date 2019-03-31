@@ -25,7 +25,6 @@ namespace dotNetLab.Widgets
               blockContainer1.Controls[i].Click += new EventHandler(DBEngineManagePage_Click);
           }
        }
-      
        void DBEngineManagePage_Click(object sender, EventArgs e)
        {
            UIElement ctrl = sender as UIElement;
@@ -73,7 +72,6 @@ namespace dotNetLab.Widgets
            this.Show();
           // this.WindowState = System.Windows.Forms.FormWindowState.Normal;
        }
-        
        protected override void prepareAppearance()
        {
            base.prepareAppearance();

@@ -18,7 +18,38 @@ namespace dotNetLab.Network
     {
         protected override void ImplementClientCon_DisCon_Delegate()
         {
-           
+            this.ClientConnected += (nIndex) =>
+            {
+                try
+                {
+
+                    String s  = String.Format("已经连接到客户端：{0}",
+                                       this.GetClientIP(nIndex)) ;
+                    Console.WriteLine(s);
+                }
+                catch (Exception ex)
+                {
+
+                }
+
+
+            };
+            this.ClientDisconnected += (ClientIP) =>
+            {
+                try
+                {
+
+                   String s = String.Format("客户端：{0}已经断开",
+                                       ClientIP) ;
+                    Console.WriteLine(s);
+                }
+                catch (Exception ex)
+                {
+
+                }
+
+
+            };
         }
 
        //防止数据没有传递完

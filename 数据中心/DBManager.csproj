@@ -24,6 +24,7 @@
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <PlatformTarget>AnyCPU</PlatformTarget>
     <Prefer32Bit>false</Prefer32Bit>
+    <LangVersion>4</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -43,6 +44,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CommonRes.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CommonRes.resx</DependentUpon>
+    </Compile>
     <Compile Include="DBEngines\FireBirdDB\FireBirdDBRes.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -64,7 +70,11 @@
       <DependentUpon>PostgreSQLRes.resx</DependentUpon>
     </Compile>
     <Compile Include="DBEngines\SQLite\SqliteDBManager.cs" />
-    <Compile Include="DBEngines\SQLite\SqliteDBResource.Designer.cs" />
+    <Compile Include="DBEngines\SQLite\SqliteDBRes.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SqliteDBRes.resx</DependentUpon>
+    </Compile>
     <Compile Include="Embedded_Remote\RemoteDB_Client.cs" />
     <Compile Include="DBEngines\SQLCE\SqlCERes.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -75,14 +85,20 @@
     <Compile Include="Exception\DBPipe.cs" />
     <Compile Include="Exception\UIConsole.cs" />
     <Compile Include="Exception\LogPipe.cs" />
+    <Compile Include="Network\Home\TClient.cs" />
     <Compile Include="Network\Home\TServer.cs" />
     <Compile Include="Network\SerialPort\AddressPLC.cs" />
     <Compile Include="Network\SerialPort\NormalPLC.cs" />
     <Compile Include="Network\SerialPort\PLCBase.cs" />
+    <Compile Include="Network\重写的全新的TCPIP类\TClient.cs" />
+    <Compile Include="Network\重写的全新的TCPIP类\TCPBase.cs" />
     <Compile Include="Network\TCP_IP\Signals.cs" />
     <Compile Include="Network\TCP_IP\TCPBase.cs" />
     <Compile Include="Network\TCP_IP\TCPClient.cs" />
     <Compile Include="Network\TCP_IP\TCPServer.cs" />
+    <Compile Include="Network\TCP_IP\舍弃\FileTransferInfo.cs" />
+    <Compile Include="Network\重写的全新的TCPIP类\TCPServer.cs" />
+    <Compile Include="Plugin\UniteDBPlugin.cs" />
     <Compile Include="Root\DBRoot.cs" />
     <Compile Include="Layers\ErrorWnd.cs">
       <SubType>Form</SubType>
@@ -101,6 +117,10 @@
     <Compile Include="Tipper.cs" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="CommonRes.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>CommonRes.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="DBEngines\FireBirdDB\FireBirdDBRes.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>FireBirdDBRes.Designer.cs</LastGenOutput>
@@ -123,7 +143,10 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>SqlCERes.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="DBEngines\SQLite\SqliteDBResource.resx" />
+    <EmbeddedResource Include="DBEngines\SQLite\SqliteDBRes.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>SqliteDBRes.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Layers\ErrorWnd.resx">
       <DependentUpon>ErrorWnd.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -133,6 +156,7 @@
     <None Include="DBEngines\FireBirdDB\Resources\shikii" />
     <None Include="DBEngines\SQLCE\Resources\shikii" />
     <None Include="DBEngines\PostgreSQL\Resources\npgsql.2.2.7.nupkg" />
+    <None Include="DBEngines\SQLite\Resources\shikii" />
   </ItemGroup>
   <ItemGroup>
     <None Include="DBEngines\SQLCE\Resources\sqlceme40.dll" />
@@ -174,6 +198,12 @@
     <None Include="DBEngines\FireBirdDB\Resources\icuuc30.dll" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\Property_Format.txt" />
+    <None Include="Resources\TableClass.txt" />
+    <None Include="DBEngines\SQLite\Resources\SQLite.Interop_x64.dll" />
+    <None Include="DBEngines\SQLite\Resources\SQLite.Interop_x86.dll" />
+    <None Include="DBEngines\SQLite\Resources\sqlite3_x64.dll" />
+    <None Include="DBEngines\SQLite\Resources\sqlite3_x86.dll" />
     <None Include="DBEngines\SQLite\Resources\System.Data.SQLite.dll" />
     <Content Include="log.txt" />
     <None Include="DBEngines\LiteDB\Resources\LiteDB.dll" />

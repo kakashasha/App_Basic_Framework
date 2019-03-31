@@ -17,7 +17,11 @@ namespace dotNetLab
             public const byte FILE_END = 47;
             public const byte DOWNLOAD_FILE = 48;
             public const byte GET_ALL_FILENAMES = 49;
+           
             public const byte BUFFER_SIZE = 50;
+            //执行特定的方法
+            public const byte CALL_METHOD = 51;
+
         }
 
 

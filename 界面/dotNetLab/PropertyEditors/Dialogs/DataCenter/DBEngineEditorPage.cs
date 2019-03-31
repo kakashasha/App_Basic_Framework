@@ -46,8 +46,14 @@ namespace dotNetLab.Widgets
                 case "表查询": EnterTableQueryPart(); break;
                 case "SQL查询": EnterSQLQueryPart(); break;
                 case "数据交接": EnterDB2DBPart(); break;
+                case "Entity操作": EnterEntityPart();break;
             }
             this.Text = MenuItemText;
+        }
+
+        private void EnterEntityPart()
+        {
+            
         }
 
         private void EnterDB2DBPart()

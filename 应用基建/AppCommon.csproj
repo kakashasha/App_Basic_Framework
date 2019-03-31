@@ -22,6 +22,8 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <PlatformTarget>AnyCPU</PlatformTarget>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <LangVersion>7</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -50,14 +52,20 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Design" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Security" />
+    <Reference Include="System.Security.Cryptography.Algorithms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\Windows\Microsoft.NET\Framework\v4.0.30319\System.Security.Cryptography.Algorithms.dll</HintPath>
+    </Reference>
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Advanced\CommandLineBase.cs" />
     <Compile Include="Advanced\DebugCommand.cs" />
+    <Compile Include="Advanced\IExecuteBackgroundTask.cs" />
     <Compile Include="Advanced\模拟键鼠操作的函数集（用于编写dll）.cs" />
     <Compile Include="AppComRes.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -93,6 +101,334 @@
     </Compile>
     <Compile Include="Managers\AppManager.cs" />
     <Compile Include="Advanced\CommandInvoker.cs" />
+    <Compile Include="Tool\7Z\Archives\AbstractArchive.cs" />
+    <Compile Include="Tool\7Z\Archives\AbstractWritableArchive.cs" />
+    <Compile Include="Tool\7Z\Archives\ArchiveFactory.cs" />
+    <Compile Include="Tool\7Z\Archives\GZip\GZipArchive.cs" />
+    <Compile Include="Tool\7Z\Archives\GZip\GZipArchiveEntry.cs" />
+    <Compile Include="Tool\7Z\Archives\GZip\GZipWritableArchiveEntry.cs" />
+    <Compile Include="Tool\7Z\Archives\IArchive.cs" />
+    <Compile Include="Tool\7Z\Archives\IArchiveEntry.cs" />
+    <Compile Include="Tool\7Z\Archives\IArchiveEntryExtensions.cs" />
+    <Compile Include="Tool\7Z\Archives\IArchiveExtensions.cs" />
+    <Compile Include="Tool\7Z\Archives\IArchiveExtractionListener.cs" />
+    <Compile Include="Tool\7Z\Archives\IWritableArchive.cs" />
+    <Compile Include="Tool\7Z\Archives\IWritableArchiveEntry.cs" />
+    <Compile Include="Tool\7Z\Archives\IWritableArchiveExtensions.cs" />
+    <Compile Include="Tool\7Z\Archives\Rar\FileInfoRarArchiveVolume.cs" />
+    <Compile Include="Tool\7Z\Archives\Rar\FileInfoRarFilePart.cs" />
+    <Compile Include="Tool\7Z\Archives\Rar\RarArchive.cs" />
+    <Compile Include="Tool\7Z\Archives\Rar\RarArchive.Extensions.cs" />
+    <Compile Include="Tool\7Z\Archives\Rar\RarArchiveEntry.cs" />
+    <Compile Include="Tool\7Z\Archives\Rar\RarArchiveEntryFactory.cs" />
+    <Compile Include="Tool\7Z\Archives\Rar\RarArchiveVolumeFactory.cs" />
+    <Compile Include="Tool\7Z\Archives\Rar\SeekableFilePart.cs" />
+    <Compile Include="Tool\7Z\Archives\Rar\StreamRarArchiveVolume.cs" />
+    <Compile Include="Tool\7Z\Archives\SevenZip\SevenZipArchive.cs" />
+    <Compile Include="Tool\7Z\Archives\SevenZip\SevenZipArchiveEntry.cs" />
+    <Compile Include="Tool\7Z\Archives\Tar\TarArchive.cs" />
+    <Compile Include="Tool\7Z\Archives\Tar\TarArchiveEntry.cs" />
+    <Compile Include="Tool\7Z\Archives\Tar\TarWritableArchiveEntry.cs" />
+    <Compile Include="Tool\7Z\Archives\Zip\ZipArchive.cs" />
+    <Compile Include="Tool\7Z\Archives\Zip\ZipArchiveEntry.cs" />
+    <Compile Include="Tool\7Z\Archives\Zip\ZipWritableArchiveEntry.cs" />
+    <Compile Include="Tool\7Z\Buffers\ArrayPool.cs" />
+    <Compile Include="Tool\7Z\Buffers\DefaultArrayPool.cs" />
+    <Compile Include="Tool\7Z\Buffers\DefaultArrayPoolBucket.cs" />
+    <Compile Include="Tool\7Z\Buffers\Utilities.cs" />
+    <Compile Include="Tool\7Z\Common\ArchiveEncoding.cs" />
+    <Compile Include="Tool\7Z\Common\ArchiveException.cs" />
+    <Compile Include="Tool\7Z\Common\ArchiveExtractionEventArgs.cs" />
+    <Compile Include="Tool\7Z\Common\ArchiveType.cs" />
+    <Compile Include="Tool\7Z\Common\CompressedBytesReadEventArgs.cs" />
+    <Compile Include="Tool\7Z\Common\CompressionType.cs" />
+    <Compile Include="Tool\7Z\Common\CryptographicException.cs" />
+    <Compile Include="Tool\7Z\Common\Entry.cs" />
+    <Compile Include="Tool\7Z\Common\EntryStream.cs" />
+    <Compile Include="Tool\7Z\Common\ExtractionException.cs" />
+    <Compile Include="Tool\7Z\Common\ExtractionMethods.cs" />
+    <Compile Include="Tool\7Z\Common\ExtractionOptions.cs" />
+    <Compile Include="Tool\7Z\Common\FilePart.cs" />
+    <Compile Include="Tool\7Z\Common\FilePartExtractionBeginEventArgs.cs" />
+    <Compile Include="Tool\7Z\Common\FlagUtility.cs" />
+    <Compile Include="Tool\7Z\Common\GZip\GZipEntry.cs" />
+    <Compile Include="Tool\7Z\Common\GZip\GZipFilePart.cs" />
+    <Compile Include="Tool\7Z\Common\GZip\GZipVolume.cs" />
+    <Compile Include="Tool\7Z\Common\IEntry.cs" />
+    <Compile Include="Tool\7Z\Common\IEntry.Extensions.cs" />
+    <Compile Include="Tool\7Z\Common\IExtractionListener.cs" />
+    <Compile Include="Tool\7Z\Common\IncompleteArchiveException.cs" />
+    <Compile Include="Tool\7Z\Common\InvalidFormatException.cs" />
+    <Compile Include="Tool\7Z\Common\IVolume.cs" />
+    <Compile Include="Tool\7Z\Common\MultipartStreamRequiredException.cs" />
+    <Compile Include="Tool\7Z\Common\MultiVolumeExtractionException.cs" />
+    <Compile Include="Tool\7Z\Common\OptionsBase.cs" />
+    <Compile Include="Tool\7Z\Common\PasswordProtectedException.cs" />
+    <Compile Include="Tool\7Z\Common\Rar\Headers\ArchiveCryptHeader.cs" />
+    <Compile Include="Tool\7Z\Common\Rar\Headers\ArchiveHeader.cs" />
+    <Compile Include="Tool\7Z\Common\Rar\Headers\AVHeader.cs" />
+    <Compile Include="Tool\7Z\Common\Rar\Headers\CommentHeader.cs" />
+    <Compile Include="Tool\7Z\Common\Rar\Headers\EndArchiveHeader.cs" />
+    <Compile Include="Tool\7Z\Common\Rar\Headers\FileHeader.cs" />
+    <Compile Include="Tool\7Z\Common\Rar\Headers\FileNameDecoder.cs" />
+    <Compile Include="Tool\7Z\Common\Rar\Headers\Flags.cs" />
+    <Compile Include="Tool\7Z\Common\Rar\Headers\IRarHeader.cs" />
+    <Compile Include="Tool\7Z\Common\Rar\Headers\MarkHeader.cs" />
+    <Compile Include="Tool\7Z\Common\Rar\Headers\NewSubHeaderType.cs" />
+    <Compile Include="Tool\7Z\Common\Rar\Headers\ProtectHeader.cs" />
+    <Compile Include="Tool\7Z\Common\Rar\Headers\RarHeader.cs" />
+    <Compile Include="Tool\7Z\Common\Rar\Headers\RarHeaderFactory.cs" />
+    <Compile Include="Tool\7Z\Common\Rar\Headers\SignHeader.cs" />
+    <Compile Include="Tool\7Z\Common\Rar\RarCrcBinaryReader.cs" />
+    <Compile Include="Tool\7Z\Common\Rar\RarCryptoBinaryReader.cs" />
+    <Compile Include="Tool\7Z\Common\Rar\RarCryptoWrapper.cs" />
+    <Compile Include="Tool\7Z\Common\Rar\RarEntry.cs" />
+    <Compile Include="Tool\7Z\Common\Rar\RarFilePart.cs" />
+    <Compile Include="Tool\7Z\Common\Rar\RarRijndael.cs" />
+    <Compile Include="Tool\7Z\Common\Rar\RarVolume.cs" />
+    <Compile Include="Tool\7Z\Common\ReaderExtractionEventArgs.cs" />
+    <Compile Include="Tool\7Z\Common\SevenZip\ArchiveDatabase.cs" />
+    <Compile Include="Tool\7Z\Common\SevenZip\ArchiveReader.cs" />
+    <Compile Include="Tool\7Z\Common\SevenZip\CBindPair.cs" />
+    <Compile Include="Tool\7Z\Common\SevenZip\CCoderInfo.cs" />
+    <Compile Include="Tool\7Z\Common\SevenZip\CFileItem.cs" />
+    <Compile Include="Tool\7Z\Common\SevenZip\CFolder.cs" />
+    <Compile Include="Tool\7Z\Common\SevenZip\CMethodId.cs" />
+    <Compile Include="Tool\7Z\Common\SevenZip\CStreamSwitch.cs" />
+    <Compile Include="Tool\7Z\Common\SevenZip\DataReader.cs" />
+    <Compile Include="Tool\7Z\Common\SevenZip\SevenZipEntry.cs" />
+    <Compile Include="Tool\7Z\Common\SevenZip\SevenZipFilePart.cs" />
+    <Compile Include="Tool\7Z\Common\SevenZip\SevenZipVolume.cs" />
+    <Compile Include="Tool\7Z\Common\Tar\Headers\EntryType.cs" />
+    <Compile Include="Tool\7Z\Common\Tar\Headers\TarHeader.cs" />
+    <Compile Include="Tool\7Z\Common\Tar\TarEntry.cs" />
+    <Compile Include="Tool\7Z\Common\Tar\TarFilePart.cs" />
+    <Compile Include="Tool\7Z\Common\Tar\TarHeaderFactory.cs" />
+    <Compile Include="Tool\7Z\Common\Tar\TarReadOnlySubStream.cs" />
+    <Compile Include="Tool\7Z\Common\Tar\TarVolume.cs" />
+    <Compile Include="Tool\7Z\Common\Volume.cs" />
+    <Compile Include="Tool\7Z\Common\Zip\Headers\DirectoryEndHeader.cs" />
+    <Compile Include="Tool\7Z\Common\Zip\Headers\DirectoryEntryHeader.cs" />
+    <Compile Include="Tool\7Z\Common\Zip\Headers\HeaderFlags.cs" />
+    <Compile Include="Tool\7Z\Common\Zip\Headers\IgnoreHeader.cs" />
+    <Compile Include="Tool\7Z\Common\Zip\Headers\LocalEntryHeader.cs" />
+    <Compile Include="Tool\7Z\Common\Zip\Headers\LocalEntryHeaderExtraFactory.cs" />
+    <Compile Include="Tool\7Z\Common\Zip\Headers\SplitHeader.cs" />
+    <Compile Include="Tool\7Z\Common\Zip\Headers\Zip64DirectoryEndHeader.cs" />
+    <Compile Include="Tool\7Z\Common\Zip\Headers\Zip64DirectoryEndLocatorHeader.cs" />
+    <Compile Include="Tool\7Z\Common\Zip\Headers\ZipFileEntry.cs" />
+    <Compile Include="Tool\7Z\Common\Zip\Headers\ZipHeader.cs" />
+    <Compile Include="Tool\7Z\Common\Zip\Headers\ZipHeaderType.cs" />
+    <Compile Include="Tool\7Z\Common\Zip\PkwareTraditionalCryptoStream.cs" />
+    <Compile Include="Tool\7Z\Common\Zip\PkwareTraditionalEncryptionData.cs" />
+    <Compile Include="Tool\7Z\Common\Zip\SeekableZipFilePart.cs" />
+    <Compile Include="Tool\7Z\Common\Zip\SeekableZipHeaderFactory.cs" />
+    <Compile Include="Tool\7Z\Common\Zip\StreamingZipFilePart.cs" />
+    <Compile Include="Tool\7Z\Common\Zip\StreamingZipHeaderFactory.cs" />
+    <Compile Include="Tool\7Z\Common\Zip\WinzipAesCryptoStream.cs" />
+    <Compile Include="Tool\7Z\Common\Zip\WinzipAesEncryptionData.cs" />
+    <Compile Include="Tool\7Z\Common\Zip\WinzipAesKeySize.cs" />
+    <Compile Include="Tool\7Z\Common\Zip\ZipCompressionMethod.cs" />
+    <Compile Include="Tool\7Z\Common\Zip\ZipEntry.cs" />
+    <Compile Include="Tool\7Z\Common\Zip\ZipFilePart.cs" />
+    <Compile Include="Tool\7Z\Common\Zip\ZipHeaderFactory.cs" />
+    <Compile Include="Tool\7Z\Common\Zip\ZipVolume.cs" />
+    <Compile Include="Tool\7Z\Compressors\ADC\ADCBase.cs" />
+    <Compile Include="Tool\7Z\Compressors\ADC\ADCStream.cs" />
+    <Compile Include="Tool\7Z\Compressors\BZip2\BZip2Constants.cs" />
+    <Compile Include="Tool\7Z\Compressors\BZip2\BZip2Stream.cs" />
+    <Compile Include="Tool\7Z\Compressors\BZip2\CBZip2InputStream.cs" />
+    <Compile Include="Tool\7Z\Compressors\BZip2\CBZip2OutputStream.cs" />
+    <Compile Include="Tool\7Z\Compressors\BZip2\CRC.cs" />
+    <Compile Include="Tool\7Z\Compressors\CompressionMode.cs" />
+    <Compile Include="Tool\7Z\Compressors\Deflate64\BlockType.cs" />
+    <Compile Include="Tool\7Z\Compressors\Deflate64\Deflate64Stream.cs" />
+    <Compile Include="Tool\7Z\Compressors\Deflate64\DeflateInput.cs" />
+    <Compile Include="Tool\7Z\Compressors\Deflate64\FastEncoderStatus.cs" />
+    <Compile Include="Tool\7Z\Compressors\Deflate64\HuffmanTree.cs" />
+    <Compile Include="Tool\7Z\Compressors\Deflate64\InflaterManaged.cs" />
+    <Compile Include="Tool\7Z\Compressors\Deflate64\InflaterState.cs" />
+    <Compile Include="Tool\7Z\Compressors\Deflate64\InputBuffer.cs" />
+    <Compile Include="Tool\7Z\Compressors\Deflate64\Match.cs" />
+    <Compile Include="Tool\7Z\Compressors\Deflate64\MatchState.cs" />
+    <Compile Include="Tool\7Z\Compressors\Deflate64\OutputWindow.cs" />
+    <Compile Include="Tool\7Z\Compressors\Deflate\CRC32.cs" />
+    <Compile Include="Tool\7Z\Compressors\Deflate\DeflateManager.cs" />
+    <Compile Include="Tool\7Z\Compressors\Deflate\DeflateStream.cs" />
+    <Compile Include="Tool\7Z\Compressors\Deflate\FlushType.cs" />
+    <Compile Include="Tool\7Z\Compressors\Deflate\GZipStream.cs" />
+    <Compile Include="Tool\7Z\Compressors\Deflate\Inflate.cs" />
+    <Compile Include="Tool\7Z\Compressors\Deflate\InfTree.cs" />
+    <Compile Include="Tool\7Z\Compressors\Deflate\Tree.cs" />
+    <Compile Include="Tool\7Z\Compressors\Deflate\Zlib.cs" />
+    <Compile Include="Tool\7Z\Compressors\Deflate\ZlibBaseStream.cs" />
+    <Compile Include="Tool\7Z\Compressors\Deflate\ZlibCodec.cs" />
+    <Compile Include="Tool\7Z\Compressors\Deflate\ZlibConstants.cs" />
+    <Compile Include="Tool\7Z\Compressors\Deflate\ZlibStream.cs" />
+    <Compile Include="Tool\7Z\Compressors\Filters\BCJ2Filter.cs" />
+    <Compile Include="Tool\7Z\Compressors\Filters\BCJFilter.cs" />
+    <Compile Include="Tool\7Z\Compressors\Filters\Filter.cs" />
+    <Compile Include="Tool\7Z\Compressors\LZMA\AesDecoderStream.cs" />
+    <Compile Include="Tool\7Z\Compressors\LZMA\Bcj2DecoderStream.cs" />
+    <Compile Include="Tool\7Z\Compressors\LZMA\BitVector.cs" />
+    <Compile Include="Tool\7Z\Compressors\LZMA\CRC.cs" />
+    <Compile Include="Tool\7Z\Compressors\LZMA\DecoderStream.cs" />
+    <Compile Include="Tool\7Z\Compressors\LZMA\ICoder.cs" />
+    <Compile Include="Tool\7Z\Compressors\LZMA\Log.cs" />
+    <Compile Include="Tool\7Z\Compressors\LZMA\LZipStream.cs" />
+    <Compile Include="Tool\7Z\Compressors\LZMA\LzmaBase.cs" />
+    <Compile Include="Tool\7Z\Compressors\LZMA\LzmaDecoder.cs" />
+    <Compile Include="Tool\7Z\Compressors\LZMA\LzmaEncoder.cs" />
+    <Compile Include="Tool\7Z\Compressors\LZMA\LzmaEncoderProperties.cs" />
+    <Compile Include="Tool\7Z\Compressors\LZMA\LzmaStream.cs" />
+    <Compile Include="Tool\7Z\Compressors\LZMA\LZ\LzBinTree.cs" />
+    <Compile Include="Tool\7Z\Compressors\LZMA\LZ\LzInWindow.cs" />
+    <Compile Include="Tool\7Z\Compressors\LZMA\LZ\LzOutWindow.cs" />
+    <Compile Include="Tool\7Z\Compressors\LZMA\RangeCoder\RangeCoder.cs" />
+    <Compile Include="Tool\7Z\Compressors\LZMA\RangeCoder\RangeCoderBit.cs" />
+    <Compile Include="Tool\7Z\Compressors\LZMA\RangeCoder\RangeCoderBitTree.cs" />
+    <Compile Include="Tool\7Z\Compressors\LZMA\Registry.cs" />
+    <Compile Include="Tool\7Z\Compressors\LZMA\Utilites\CrcBuilderStream.cs" />
+    <Compile Include="Tool\7Z\Compressors\LZMA\Utilites\CrcCheckStream.cs" />
+    <Compile Include="Tool\7Z\Compressors\LZMA\Utilites\IPasswordProvider.cs" />
+    <Compile Include="Tool\7Z\Compressors\LZMA\Utilites\Utils.cs" />
+    <Compile Include="Tool\7Z\Compressors\PPMd\H\FreqData.cs" />
+    <Compile Include="Tool\7Z\Compressors\PPMd\H\ModelPPM.cs" />
+    <Compile Include="Tool\7Z\Compressors\PPMd\H\Pointer.cs" />
+    <Compile Include="Tool\7Z\Compressors\PPMd\H\PPMContext.cs" />
+    <Compile Include="Tool\7Z\Compressors\PPMd\H\RangeCoder.cs" />
+    <Compile Include="Tool\7Z\Compressors\PPMd\H\RarMemBlock.cs" />
+    <Compile Include="Tool\7Z\Compressors\PPMd\H\RarNode.cs" />
+    <Compile Include="Tool\7Z\Compressors\PPMd\H\SEE2Context.cs" />
+    <Compile Include="Tool\7Z\Compressors\PPMd\H\State.cs" />
+    <Compile Include="Tool\7Z\Compressors\PPMd\H\StateRef.cs" />
+    <Compile Include="Tool\7Z\Compressors\PPMd\H\SubAllocator.cs" />
+    <Compile Include="Tool\7Z\Compressors\PPMd\I1\Allocator.cs" />
+    <Compile Include="Tool\7Z\Compressors\PPMd\I1\Coder.cs" />
+    <Compile Include="Tool\7Z\Compressors\PPMd\I1\MemoryNode.cs" />
+    <Compile Include="Tool\7Z\Compressors\PPMd\I1\Model.cs" />
+    <Compile Include="Tool\7Z\Compressors\PPMd\I1\ModelRestorationMethod.cs" />
+    <Compile Include="Tool\7Z\Compressors\PPMd\I1\Pointer.cs" />
+    <Compile Include="Tool\7Z\Compressors\PPMd\I1\PpmContext.cs" />
+    <Compile Include="Tool\7Z\Compressors\PPMd\I1\PpmState.cs" />
+    <Compile Include="Tool\7Z\Compressors\PPMd\I1\See2Context.cs" />
+    <Compile Include="Tool\7Z\Compressors\PPMd\PpmdProperties.cs" />
+    <Compile Include="Tool\7Z\Compressors\PPMd\PpmdStream.cs" />
+    <Compile Include="Tool\7Z\Compressors\PPMd\PpmdVersion.cs" />
+    <Compile Include="Tool\7Z\Compressors\Rar\IRarUnpack.cs" />
+    <Compile Include="Tool\7Z\Compressors\Rar\MultiVolumeReadOnlyStream.cs" />
+    <Compile Include="Tool\7Z\Compressors\Rar\RarCRC.cs" />
+    <Compile Include="Tool\7Z\Compressors\Rar\RarCrcStream.cs" />
+    <Compile Include="Tool\7Z\Compressors\Rar\RarStream.cs" />
+    <Compile Include="Tool\7Z\Compressors\Rar\UnpackV1\Decode\AudioVariables.cs" />
+    <Compile Include="Tool\7Z\Compressors\Rar\UnpackV1\Decode\BitDecode.cs" />
+    <Compile Include="Tool\7Z\Compressors\Rar\UnpackV1\Decode\CodeType.cs" />
+    <Compile Include="Tool\7Z\Compressors\Rar\UnpackV1\Decode\Decode.cs" />
+    <Compile Include="Tool\7Z\Compressors\Rar\UnpackV1\Decode\DistDecode.cs" />
+    <Compile Include="Tool\7Z\Compressors\Rar\UnpackV1\Decode\FilterType.cs" />
+    <Compile Include="Tool\7Z\Compressors\Rar\UnpackV1\Decode\LitDecode.cs" />
+    <Compile Include="Tool\7Z\Compressors\Rar\UnpackV1\Decode\LowDistDecode.cs" />
+    <Compile Include="Tool\7Z\Compressors\Rar\UnpackV1\Decode\MultDecode.cs" />
+    <Compile Include="Tool\7Z\Compressors\Rar\UnpackV1\Decode\PackDef.cs" />
+    <Compile Include="Tool\7Z\Compressors\Rar\UnpackV1\Decode\RepDecode.cs" />
+    <Compile Include="Tool\7Z\Compressors\Rar\UnpackV1\PPM\BlockTypes.cs" />
+    <Compile Include="Tool\7Z\Compressors\Rar\UnpackV1\Unpack.cs" />
+    <Compile Include="Tool\7Z\Compressors\Rar\UnpackV1\Unpack15.cs" />
+    <Compile Include="Tool\7Z\Compressors\Rar\UnpackV1\Unpack20.cs" />
+    <Compile Include="Tool\7Z\Compressors\Rar\UnpackV1\Unpack50.cs" />
+    <Compile Include="Tool\7Z\Compressors\Rar\UnpackV1\UnpackFilter.cs" />
+    <Compile Include="Tool\7Z\Compressors\Rar\UnpackV1\UnpackInline.cs" />
+    <Compile Include="Tool\7Z\Compressors\Rar\UnpackV1\UnpackUtility.cs" />
+    <Compile Include="Tool\7Z\Compressors\Rar\UnpackV2017\BitInput.getbits_cpp.cs" />
+    <Compile Include="Tool\7Z\Compressors\Rar\UnpackV2017\BitInput.getbits_hpp.cs" />
+    <Compile Include="Tool\7Z\Compressors\Rar\UnpackV2017\FragmentedWindow.unpack50frag_cpp.cs" />
+    <Compile Include="Tool\7Z\Compressors\Rar\UnpackV2017\PackDef.compress_hpp.cs" />
+    <Compile Include="Tool\7Z\Compressors\Rar\UnpackV2017\Unpack.cs" />
+    <Compile Include="Tool\7Z\Compressors\Rar\UnpackV2017\Unpack.rawint_hpp.cs" />
+    <Compile Include="Tool\7Z\Compressors\Rar\UnpackV2017\Unpack.unpack15_cpp.cs" />
+    <Compile Include="Tool\7Z\Compressors\Rar\UnpackV2017\Unpack.unpack20_cpp.cs" />
+    <Compile Include="Tool\7Z\Compressors\Rar\UnpackV2017\Unpack.unpack30_cpp.cs" />
+    <Compile Include="Tool\7Z\Compressors\Rar\UnpackV2017\Unpack.unpack50_cpp.cs" />
+    <Compile Include="Tool\7Z\Compressors\Rar\UnpackV2017\Unpack.unpackinline_cpp.cs" />
+    <Compile Include="Tool\7Z\Compressors\Rar\UnpackV2017\Unpack.unpack_cpp.cs" />
+    <Compile Include="Tool\7Z\Compressors\Rar\UnpackV2017\unpack_hpp.cs" />
+    <Compile Include="Tool\7Z\Compressors\Rar\VM\BitInput.cs" />
+    <Compile Include="Tool\7Z\Compressors\Rar\VM\RarVM.cs" />
+    <Compile Include="Tool\7Z\Compressors\Rar\VM\VMCmdFlags.cs" />
+    <Compile Include="Tool\7Z\Compressors\Rar\VM\VMCommands.cs" />
+    <Compile Include="Tool\7Z\Compressors\Rar\VM\VMFlags.cs" />
+    <Compile Include="Tool\7Z\Compressors\Rar\VM\VMOpType.cs" />
+    <Compile Include="Tool\7Z\Compressors\Rar\VM\VMPreparedCommand.cs" />
+    <Compile Include="Tool\7Z\Compressors\Rar\VM\VMPreparedOperand.cs" />
+    <Compile Include="Tool\7Z\Compressors\Rar\VM\VMPreparedProgram.cs" />
+    <Compile Include="Tool\7Z\Compressors\Rar\VM\VMStandardFilters.cs" />
+    <Compile Include="Tool\7Z\Compressors\Rar\VM\VMStandardFilterSignature.cs" />
+    <Compile Include="Tool\7Z\Compressors\Xz\BinaryUtils.cs" />
+    <Compile Include="Tool\7Z\Compressors\Xz\CheckType.cs" />
+    <Compile Include="Tool\7Z\Compressors\Xz\Crc32.cs" />
+    <Compile Include="Tool\7Z\Compressors\Xz\Crc64.cs" />
+    <Compile Include="Tool\7Z\Compressors\Xz\Filters\BlockFilter.cs" />
+    <Compile Include="Tool\7Z\Compressors\Xz\Filters\Lzma2Filter.cs" />
+    <Compile Include="Tool\7Z\Compressors\Xz\MultiByteIntegers.cs" />
+    <Compile Include="Tool\7Z\Compressors\Xz\ReadOnlyStream.cs" />
+    <Compile Include="Tool\7Z\Compressors\Xz\XZBlock.cs" />
+    <Compile Include="Tool\7Z\Compressors\Xz\XZFooter.cs" />
+    <Compile Include="Tool\7Z\Compressors\Xz\XZHeader.cs" />
+    <Compile Include="Tool\7Z\Compressors\Xz\XZIndex.cs" />
+    <Compile Include="Tool\7Z\Compressors\Xz\XZIndexMarkerReachedException.cs" />
+    <Compile Include="Tool\7Z\Compressors\Xz\XZIndexRecord.cs" />
+    <Compile Include="Tool\7Z\Compressors\Xz\XZReadOnlyStream.cs" />
+    <Compile Include="Tool\7Z\Compressors\Xz\XZStream.cs" />
+    <Compile Include="Tool\7Z\Converters\DataConverter.cs" />
+    <Compile Include="Tool\7Z\Crypto\Crc32Stream.cs" />
+    <Compile Include="Tool\7Z\Crypto\CryptoException.cs" />
+    <Compile Include="Tool\7Z\Crypto\DataLengthException.cs" />
+    <Compile Include="Tool\7Z\Crypto\IBlockCipher.cs" />
+    <Compile Include="Tool\7Z\Crypto\ICipherParameters.cs" />
+    <Compile Include="Tool\7Z\Crypto\KeyParameter.cs" />
+    <Compile Include="Tool\7Z\Crypto\RijndaelEngine.cs" />
+    <Compile Include="Tool\7Z\EnumExtensions.cs" />
+    <Compile Include="Tool\7Z\IO\BufferedSubStream.cs" />
+    <Compile Include="Tool\7Z\IO\CountingWritableSubStream.cs" />
+    <Compile Include="Tool\7Z\IO\ListeningStream.cs" />
+    <Compile Include="Tool\7Z\IO\MarkingBinaryReader.cs" />
+    <Compile Include="Tool\7Z\IO\NonDisposingStream.cs" />
+    <Compile Include="Tool\7Z\IO\ReadOnlySubStream.cs" />
+    <Compile Include="Tool\7Z\IO\RewindableStream.cs" />
+    <Compile Include="Tool\7Z\IO\StreamingMode.cs" />
+    <Compile Include="Tool\7Z\Lazy.cs" />
+    <Compile Include="Tool\7Z\LazyReadOnlyCollection.cs" />
+    <Compile Include="Tool\7Z\Readers\AbstractReader.cs" />
+    <Compile Include="Tool\7Z\Readers\GZip\GZipReader.cs" />
+    <Compile Include="Tool\7Z\Readers\IReader.cs" />
+    <Compile Include="Tool\7Z\Readers\IReaderExtensions.cs" />
+    <Compile Include="Tool\7Z\Readers\IReaderExtractionListener.cs" />
+    <Compile Include="Tool\7Z\Readers\Rar\MultiVolumeRarReader.cs" />
+    <Compile Include="Tool\7Z\Readers\Rar\NonSeekableStreamFilePart.cs" />
+    <Compile Include="Tool\7Z\Readers\Rar\RarReader.cs" />
+    <Compile Include="Tool\7Z\Readers\Rar\RarReaderEntry.cs" />
+    <Compile Include="Tool\7Z\Readers\Rar\RarReaderVolume.cs" />
+    <Compile Include="Tool\7Z\Readers\Rar\SingleVolumeRarReader.cs" />
+    <Compile Include="Tool\7Z\Readers\ReaderFactory.cs" />
+    <Compile Include="Tool\7Z\Readers\ReaderOptions.cs" />
+    <Compile Include="Tool\7Z\Readers\ReaderProgress.cs" />
+    <Compile Include="Tool\7Z\Readers\Tar\TarReader.cs" />
+    <Compile Include="Tool\7Z\Readers\Zip\ZipReader.cs" />
+    <Compile Include="Tool\7Z\ReadOnlyCollection.cs" />
+    <Compile Include="Tool\7Z\Utility.cs" />
+    <Compile Include="Tool\7Z\Writers\AbstractWriter.cs" />
+    <Compile Include="Tool\7Z\Writers\GZip\GZipWriter.cs" />
+    <Compile Include="Tool\7Z\Writers\GZip\GZipWriterOptions.cs" />
+    <Compile Include="Tool\7Z\Writers\IWriter.cs" />
+    <Compile Include="Tool\7Z\Writers\IWriterExtensions.cs" />
+    <Compile Include="Tool\7Z\Writers\Tar\TarWriter.cs" />
+    <Compile Include="Tool\7Z\Writers\Tar\TarWriterOptions.cs" />
+    <Compile Include="Tool\7Z\Writers\WriterFactory.cs" />
+    <Compile Include="Tool\7Z\Writers\WriterOptions.cs" />
+    <Compile Include="Tool\7Z\Writers\Zip\ZipCentralDirectoryEntry.cs" />
+    <Compile Include="Tool\7Z\Writers\Zip\ZipWriter.cs" />
+    <Compile Include="Tool\7Z\Writers\Zip\ZipWriterEntryOptions.cs" />
+    <Compile Include="Tool\7Z\Writers\Zip\ZipWriterOptions.cs" />
     <Compile Include="Tool\DirectSound播放声音.cs" />
     <Compile Include="Tool\ExtensionFuncs.cs" />
     <Compile Include="Tool\FileSystemManager.cs" />
@@ -118,6 +454,229 @@
     <Compile Include="组件\ModernUI\SessionPage.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="组件\Netron\Weight\Attributes\Attributes.cs" />
+    <Compile Include="组件\Netron\Weight\Attributes\GraphMLDataAttribute.cs" />
+    <Compile Include="组件\Netron\Weight\BasicShapes\BasicNode.cs" />
+    <Compile Include="组件\Netron\Weight\BasicShapes\SimpleNode.cs" />
+    <Compile Include="组件\Netron\Weight\BasicShapes\TextLabel.cs" />
+    <Compile Include="组件\Netron\Weight\Collections\BezierHandleCollection.cs" />
+    <Compile Include="组件\Netron\Weight\Collections\ConnectionCollection.cs" />
+    <Compile Include="组件\Netron\Weight\Collections\ConnectorCollection.cs" />
+    <Compile Include="组件\Netron\Weight\Collections\EntityCollection.cs" />
+    <Compile Include="组件\Netron\Weight\Collections\PointFCollection.cs" />
+    <Compile Include="组件\Netron\Weight\Collections\ShapeCollection.cs" />
+    <Compile Include="组件\Netron\Weight\Collections\StringCollection.cs" />
+    <Compile Include="组件\Netron\Weight\Collections\WidgetCollection.cs" />
+    <Compile Include="组件\Netron\Weight\Configuration\ConnectionSummary.cs" />
+    <Compile Include="组件\Netron\Weight\Configuration\ConnectionSummaryCollection.cs" />
+    <Compile Include="组件\Netron\Weight\Configuration\GraphLibConfigurationHandler.cs" />
+    <Compile Include="组件\Netron\Weight\Configuration\GraphObjectsLibrary.cs" />
+    <Compile Include="组件\Netron\Weight\Configuration\GraphObjectsLibraryCollection.cs" />
+    <Compile Include="组件\Netron\Weight\Configuration\ShapeSummary.cs" />
+    <Compile Include="组件\Netron\Weight\Configuration\ShapeSummaryCollection.cs" />
+    <Compile Include="组件\Netron\Weight\Configuration\Summary.cs" />
+    <Compile Include="组件\Netron\Weight\Connection.cs" />
+    <Compile Include="组件\Netron\Weight\ConnectionPainter.cs" />
+    <Compile Include="组件\Netron\Weight\Connections\Bezier\BezierEntity.cs" />
+    <Compile Include="组件\Netron\Weight\Connections\Bezier\BezierHandle.cs" />
+    <Compile Include="组件\Netron\Weight\Connections\Bezier\BezierPainter.cs" />
+    <Compile Include="组件\Netron\Weight\Connections\Bezier\BezierTracker.cs" />
+    <Compile Include="组件\Netron\Weight\Connections\Bezier\TangentHandle.cs" />
+    <Compile Include="组件\Netron\Weight\Connections\Default\DefaultPainter.cs" />
+    <Compile Include="组件\Netron\Weight\Connections\Rectangular\RectangularPainter.cs" />
+    <Compile Include="组件\Netron\Weight\ConnectionTracker.cs" />
+    <Compile Include="组件\Netron\Weight\Connector.cs" />
+    <Compile Include="组件\Netron\Weight\Delegates\ConnectionEventArgs.cs" />
+    <Compile Include="组件\Netron\Weight\Delegates\Delegates.cs" />
+    <Compile Include="组件\Netron\Weight\Delegates\InfoEventArgs.cs" />
+    <Compile Include="组件\Netron\Weight\Delegates\PropertySpecEventHandler.cs" />
+    <Compile Include="组件\Netron\Weight\Entity.cs" />
+    <Compile Include="组件\Netron\Weight\Enums\AutomataDataTypes.cs" />
+    <Compile Include="组件\Netron\Weight\Enums\Enums.cs" />
+    <Compile Include="组件\Netron\Weight\FlowAppEditorV2.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="组件\Netron\Weight\FlowEditor.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="组件\Netron\Weight\GraphAbstract.cs" />
+    <Compile Include="组件\Netron\Weight\GraphInformation.cs" />
+    <Compile Include="组件\Netron\Weight\GraphLayout\GraphLayout.cs" />
+    <Compile Include="组件\Netron\Weight\GraphLayout\LayoutFactory.cs" />
+    <Compile Include="组件\Netron\Weight\GraphLayout\RandomizerLayout.cs" />
+    <Compile Include="组件\Netron\Weight\GraphLayout\SpringEmbedder.cs" />
+    <Compile Include="组件\Netron\Weight\GraphLayout\TreeLayout.cs" />
+    <Compile Include="组件\Netron\Weight\GraphLayout\VisitCollection.cs" />
+    <Compile Include="组件\Netron\Weight\Info\AboutForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="组件\Netron\Weight\Interfaces\IAutomataCell.cs" />
+    <Compile Include="组件\Netron\Weight\Interfaces\IConnection.cs" />
+    <Compile Include="组件\Netron\Weight\Interfaces\IEntity.cs" />
+    <Compile Include="组件\Netron\Weight\Interfaces\IEntityBundle.cs" />
+    <Compile Include="组件\Netron\Weight\Interfaces\IGraphLayout.cs" />
+    <Compile Include="组件\Netron\Weight\Interfaces\IGraphSite.cs" />
+    <Compile Include="组件\Netron\Weight\Interfaces\ILayoutNode.cs" />
+    <Compile Include="组件\Netron\Weight\Interfaces\IPaintable.cs" />
+    <Compile Include="组件\Netron\Weight\Interfaces\IReporter.cs" />
+    <Compile Include="组件\Netron\Weight\Interfaces\IShape.cs" />
+    <Compile Include="组件\Netron\Weight\Interfaces\IWidget.cs" />
+    <Compile Include="组件\Netron\Weight\IO\Binary\BinaryAmbiance.cs" />
+    <Compile Include="组件\Netron\Weight\IO\Binary\BinaryCapsule.cs" />
+    <Compile Include="组件\Netron\Weight\IO\Binary\BinarySerializer.cs" />
+    <Compile Include="组件\Netron\Weight\IO\HTML\HTMLExporter.cs" />
+    <Compile Include="组件\Netron\Weight\IO\NML\Collections\DataCollection.cs" />
+    <Compile Include="组件\Netron\Weight\IO\NML\Collections\FromToCollection.cs" />
+    <Compile Include="组件\Netron\Weight\IO\NML\ConnectionType.cs" />
+    <Compile Include="组件\Netron\Weight\IO\NML\ConnectorType.cs" />
+    <Compile Include="组件\Netron\Weight\IO\NML\DataType.cs" />
+    <Compile Include="组件\Netron\Weight\IO\NML\DefaultType.cs" />
+    <Compile Include="组件\Netron\Weight\IO\NML\DictionarySerializer.cs" />
+    <Compile Include="组件\Netron\Weight\IO\NML\enums\GraphEdgeDefaultType.cs" />
+    <Compile Include="组件\Netron\Weight\IO\NML\enums\KeyForType.cs" />
+    <Compile Include="组件\Netron\Weight\IO\NML\FromTo.cs" />
+    <Compile Include="组件\Netron\Weight\IO\NML\GraphInformationType.cs" />
+    <Compile Include="组件\Netron\Weight\IO\NML\GraphType.cs" />
+    <Compile Include="组件\Netron\Weight\IO\NML\KeyType.cs" />
+    <Compile Include="组件\Netron\Weight\IO\NML\LocatorType.cs" />
+    <Compile Include="组件\Netron\Weight\IO\NML\NMLSerializer.cs" />
+    <Compile Include="组件\Netron\Weight\IO\NML\NMLType.cs" />
+    <Compile Include="组件\Netron\Weight\IO\NML\PortType.cs" />
+    <Compile Include="组件\Netron\Weight\IO\NML\PropertiesHashtable.cs" />
+    <Compile Include="组件\Netron\Weight\IO\NML\ShapeType.cs" />
+    <Compile Include="组件\Netron\Weight\IO\Reporting\AssemblyReporter.cs" />
+    <Compile Include="组件\Netron\Weight\IO\Reporting\BinaryReport.cs" />
+    <Compile Include="组件\Netron\Weight\IO\Reporting\BinaryReportCollection.cs" />
+    <Compile Include="组件\Netron\Weight\IO\Reporting\BinaryReporter.cs" />
+    <Compile Include="组件\Netron\Weight\IO\Reporting\ShapeReporter.cs" />
+    <Compile Include="组件\Netron\Weight\IO\SVG\SVGSerializer.cs" />
+    <Compile Include="组件\Netron\Weight\Selector.cs" />
+    <Compile Include="组件\Netron\Weight\Shape.cs" />
+    <Compile Include="组件\Netron\Weight\ShapeTracker.cs" />
+    <Compile Include="组件\Netron\Weight\Tracker.cs" />
+    <Compile Include="组件\Netron\Weight\UI\Bundles\EntityBundle.cs" />
+    <Compile Include="组件\Netron\Weight\UI\CategoryMenuItem.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="组件\Netron\Weight\UI\FileNameUIEditor.cs" />
+    <Compile Include="组件\Netron\Weight\UI\GraphControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="组件\Netron\Weight\UI\GraphControlDesigner.cs" />
+    <Compile Include="组件\Netron\Weight\UI\GraphMenuItem.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="组件\Netron\Weight\UI\GraphProperties\GraphProps.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="组件\Netron\Weight\UI\GraphShapesView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="组件\Netron\Weight\UI\GraphTreeNode.cs" />
+    <Compile Include="组件\Netron\Weight\UI\Layers\GraphLayer.cs" />
+    <Compile Include="组件\Netron\Weight\UI\Layers\GraphLayerCollection.cs" />
+    <Compile Include="组件\Netron\Weight\UI\Layers\GraphLayerManager.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="组件\Netron\Weight\UI\Layers\LayerEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="组件\Netron\Weight\UI\Layers\LayerListItem.cs" />
+    <Compile Include="组件\Netron\Weight\UI\Layers\LayerUITypeEditor.cs" />
+    <Compile Include="组件\Netron\Weight\UI\Layers\ListViewEx.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="组件\Netron\Weight\UI\PointFTypeConverter.cs" />
+    <Compile Include="组件\Netron\Weight\UI\ShapesTab.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="组件\Netron\Weight\UI\ShapesTabItem.cs" />
+    <Compile Include="组件\Netron\Weight\UI\SizeFTypeConverter.cs" />
+    <Compile Include="组件\Netron\Weight\UI\Stamper.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="组件\Netron\Weight\UI\TextEditor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="组件\Netron\Weight\UI\TextUIEditor.cs" />
+    <Compile Include="组件\Netron\Weight\UI\Widgets\AutomataController.cs" />
+    <Compile Include="组件\Netron\Weight\Utils\ADTConverter.cs" />
+    <Compile Include="组件\Netron\Weight\Utils\Analysis\Abstract implementations\AbstractContainer.cs" />
+    <Compile Include="组件\Netron\Weight\Utils\Analysis\Abstract implementations\AbstractGraph.cs" />
+    <Compile Include="组件\Netron\Weight\Utils\Analysis\Abstract implementations\AbstractHashTable.cs" />
+    <Compile Include="组件\Netron\Weight\Utils\Analysis\Abstract implementations\AbstractPrePostVisitor.cs" />
+    <Compile Include="组件\Netron\Weight\Utils\Analysis\Abstract implementations\AbstractSearchableContainer.cs" />
+    <Compile Include="组件\Netron\Weight\Utils\Analysis\Abstract implementations\AbstractSet.cs" />
+    <Compile Include="组件\Netron\Weight\Utils\Analysis\Abstract implementations\AbstractTree.cs" />
+    <Compile Include="组件\Netron\Weight\Utils\Analysis\Abstract implementations\AbstractVisitor.cs" />
+    <Compile Include="组件\Netron\Weight\Utils\Analysis\Algortihms\Algorithms.cs" />
+    <Compile Include="组件\Netron\Weight\Utils\Analysis\AVLTree.cs" />
+    <Compile Include="组件\Netron\Weight\Utils\Analysis\BinaryHeap.cs" />
+    <Compile Include="组件\Netron\Weight\Utils\Analysis\BinarySearchTree.cs" />
+    <Compile Include="组件\Netron\Weight\Utils\Analysis\BinaryTree.cs" />
+    <Compile Include="组件\Netron\Weight\Utils\Analysis\ChainedHashTable.cs" />
+    <Compile Include="组件\Netron\Weight\Utils\Analysis\Comparables\ComparableChar.cs" />
+    <Compile Include="组件\Netron\Weight\Utils\Analysis\Comparables\ComparableDouble.cs" />
+    <Compile Include="组件\Netron\Weight\Utils\Analysis\Comparables\ComparableInt32.cs" />
+    <Compile Include="组件\Netron\Weight\Utils\Analysis\Comparables\ComparableObject.cs" />
+    <Compile Include="组件\Netron\Weight\Utils\Analysis\Comparables\ComparableString.cs" />
+    <Compile Include="组件\Netron\Weight\Utils\Analysis\Comparables\ComparableValue.cs" />
+    <Compile Include="组件\Netron\Weight\Utils\Analysis\GraphLibAdapter\GraphAnalyzer.cs" />
+    <Compile Include="组件\Netron\Weight\Utils\Analysis\Graph\DigraphAsList.cs" />
+    <Compile Include="组件\Netron\Weight\Utils\Analysis\Graph\DigraphAsMatrix.cs" />
+    <Compile Include="组件\Netron\Weight\Utils\Analysis\Graph\GraphAsList.cs" />
+    <Compile Include="组件\Netron\Weight\Utils\Analysis\Graph\GraphAsMatrix.cs" />
+    <Compile Include="组件\Netron\Weight\Utils\Analysis\Helpers\Association.cs" />
+    <Compile Include="组件\Netron\Weight\Utils\Analysis\Helpers\Bounds.cs" />
+    <Compile Include="组件\Netron\Weight\Utils\Analysis\Helpers\Enumerable.cs" />
+    <Compile Include="组件\Netron\Weight\Utils\Analysis\Interfaces\IContainer.cs" />
+    <Compile Include="组件\Netron\Weight\Utils\Analysis\Interfaces\IDiGraph.cs" />
+    <Compile Include="组件\Netron\Weight\Utils\Analysis\Interfaces\IEdge.cs" />
+    <Compile Include="组件\Netron\Weight\Utils\Analysis\Interfaces\IGraph.cs" />
+    <Compile Include="组件\Netron\Weight\Utils\Analysis\Interfaces\IHashTable.cs" />
+    <Compile Include="组件\Netron\Weight\Utils\Analysis\Interfaces\IPartition.cs" />
+    <Compile Include="组件\Netron\Weight\Utils\Analysis\Interfaces\IPrePostVisitor.cs" />
+    <Compile Include="组件\Netron\Weight\Utils\Analysis\Interfaces\IPriorityQueue.cs" />
+    <Compile Include="组件\Netron\Weight\Utils\Analysis\Interfaces\IQueue.cs" />
+    <Compile Include="组件\Netron\Weight\Utils\Analysis\Interfaces\ISearchableContainer.cs" />
+    <Compile Include="组件\Netron\Weight\Utils\Analysis\Interfaces\ISearchTree.cs" />
+    <Compile Include="组件\Netron\Weight\Utils\Analysis\Interfaces\ISet.cs" />
+    <Compile Include="组件\Netron\Weight\Utils\Analysis\Interfaces\IStack.cs" />
+    <Compile Include="组件\Netron\Weight\Utils\Analysis\Interfaces\ITree.cs" />
+    <Compile Include="组件\Netron\Weight\Utils\Analysis\Interfaces\IVertex.cs" />
+    <Compile Include="组件\Netron\Weight\Utils\Analysis\Interfaces\IVisitor.cs" />
+    <Compile Include="组件\Netron\Weight\Utils\Analysis\LinkedList.cs" />
+    <Compile Include="组件\Netron\Weight\Utils\Analysis\PartitionAsForest.cs" />
+    <Compile Include="组件\Netron\Weight\Utils\Analysis\QueueAsLinkedList.cs" />
+    <Compile Include="组件\Netron\Weight\Utils\Analysis\StackAsLinkedList.cs" />
+    <Compile Include="组件\Netron\Weight\Utils\Analysis\Visitors\HashCodeVisitor.cs" />
+    <Compile Include="组件\Netron\Weight\Utils\Analysis\Visitors\InOrder.cs" />
+    <Compile Include="组件\Netron\Weight\Utils\Analysis\Visitors\PostOrder.cs" />
+    <Compile Include="组件\Netron\Weight\Utils\Analysis\Visitors\PreOrderVisitor.cs" />
+    <Compile Include="组件\Netron\Weight\Utils\Analysis\Visitors\PrintingVisitor.cs" />
+    <Compile Include="组件\Netron\Weight\Utils\Analysis\Visitors\ToStringVisitor.cs" />
+    <Compile Include="组件\Netron\Weight\Utils\ConnectionStyleEditor.cs" />
+    <Compile Include="组件\Netron\Weight\Utils\ConnectionTypeEditor.cs" />
+    <Compile Include="组件\Netron\Weight\Utils\FreeArrow.cs" />
+    <Compile Include="组件\Netron\Weight\Utils\FreeArrowCollection.cs" />
+    <Compile Include="组件\Netron\Weight\Utils\Maths\Angle.cs" />
+    <Compile Include="组件\Netron\Weight\Utils\Maths\ComplexNumbers.cs" />
+    <Compile Include="组件\Netron\Weight\Utils\Maths\MersenneTwister.cs" />
+    <Compile Include="组件\Netron\Weight\Utils\Maths\NetronVector.cs" />
+    <Compile Include="组件\Netron\Weight\Utils\Maths\Noise.cs" />
+    <Compile Include="组件\Netron\Weight\Utils\MouseCursors.cs" />
+    <Compile Include="组件\Netron\Weight\Utils\PropertyBag.cs" />
+    <Compile Include="组件\Netron\Weight\Utils\PropertySpec.cs" />
+    <Compile Include="组件\Netron\Weight\Utils\PropertySpecEventArgs.cs" />
+    <Compile Include="组件\Netron\Weight\Utils\PropertyTable.cs" />
+    <Compile Include="组件\Netron\Weight\Utils\ReflectedEnumStyleEditor.cs" />
+    <Compile Include="组件\Netron\Weight\Utils\ShapeControls\NComboBox.cs" />
+    <Compile Include="组件\Netron\Weight\Utils\ShapeControls\NetronGraphControl.cs" />
+    <Compile Include="组件\Netron\Weight\Utils\ShapeControls\NetronGraphControlCollection.cs" />
+    <Compile Include="组件\Netron\Weight\Utils\ShapeControls\NListItem.cs" />
+    <Compile Include="组件\Netron\Weight\Utils\ShapeControls\NListtemCollection.cs" />
+    <Compile Include="组件\Netron\Weight\Utils\ShapeControls\NTextBox.cs" />
+    <Compile Include="组件\Netron\Weight\Utils\Sorting.cs" />
     <Compile Include="组件\Normal\PageBase.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -148,12 +707,75 @@
       <DependentUpon>SetPasswordForm.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="组件\Netron\Weight\FlowAppEditorV2.resx">
+      <DependentUpon>FlowAppEditorV2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="组件\Netron\Weight\FlowEditor.resx">
+      <DependentUpon>FlowEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="组件\Netron\Weight\Info\AboutForm.resx">
+      <DependentUpon>AboutForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="组件\Netron\Weight\UI\GraphControl.resx">
+      <DependentUpon>GraphControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="组件\Netron\Weight\UI\GraphProperties\GraphProps.resx">
+      <DependentUpon>GraphProps.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="组件\Netron\Weight\UI\GraphShapesView.resx">
+      <DependentUpon>GraphShapesView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="组件\Netron\Weight\UI\Layers\GraphLayerManager.resx">
+      <DependentUpon>GraphLayerManager.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="组件\Netron\Weight\UI\Layers\LayerEdit.resx">
+      <DependentUpon>LayerEdit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="组件\Netron\Weight\UI\Stamper.resx">
+      <DependentUpon>Stamper.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="组件\Netron\Weight\UI\TextEditor.resx">
+      <DependentUpon>TextEditor.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\ICSharpCode.SharpZipLib.dll" />
+    <EmbeddedResource Include="组件\Netron\Weight\Info\NetronLicense.rtf" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Resources\NetCofig.exe" />
+    <None Include="Resources\QWhale.Syntax.dll" />
+    <None Include="Resources\QWhale.Syntax.Parsers.dll" />
+    <None Include="Resources\QWhale.Syntax.Schemes.dll" />
+    <None Include="Resources\shikii.dotNetLab.Stimulus.dll" />
+    <None Include="Resources\QWhale.Common.dll" />
+    <None Include="Resources\QWhale.Editor.dll" />
+    <Content Include="Tool\7Z\Compressors\Rar\UnpackV2017\notes.txt" />
+    <EmbeddedResource Include="组件\Netron\Weight\UI\Stamper.bmp" />
+    <EmbeddedResource Include="组件\Netron\Weight\UI\GraphShapesView.bmp" />
+    <EmbeddedResource Include="组件\Netron\Weight\UI\GraphProps.bmp" />
+    <EmbeddedResource Include="组件\Netron\Weight\UI\GraphLayerManager.bmp" />
+    <EmbeddedResource Include="组件\Netron\Weight\UI\GraphControl.bmp" />
+    <EmbeddedResource Include="组件\Netron\Weight\Resources\URL.gif" />
+    <EmbeddedResource Include="组件\Netron\Weight\Resources\UnknownShape.gif" />
+    <EmbeddedResource Include="组件\Netron\Weight\Resources\Stripes.gif" />
+    <EmbeddedResource Include="组件\Netron\Weight\Resources\stop.gif" />
+    <EmbeddedResource Include="组件\Netron\Weight\Resources\start.gif" />
+    <EmbeddedResource Include="组件\Netron\Weight\Resources\SimpleNode.gif" />
+    <EmbeddedResource Include="组件\Netron\Weight\Resources\Select.cur" />
+    <EmbeddedResource Include="组件\Netron\Weight\Resources\refresh.gif" />
+    <EmbeddedResource Include="组件\Netron\Weight\Resources\Move.cur" />
+    <EmbeddedResource Include="组件\Netron\Weight\Resources\Grip.cur" />
+    <EmbeddedResource Include="组件\Netron\Weight\Resources\DefaultHTML.htm" />
+    <EmbeddedResource Include="组件\Netron\Weight\Resources\Cross.cur" />
+    <EmbeddedResource Include="组件\Netron\Weight\Resources\Add.cur" />
+    <EmbeddedResource Include="组件\Netron\Weight\Info\NetronLicense.txt" />
+    <EmbeddedResource Include="组件\Netron\Weight\Info\ChangeLog.txt" />
+    <EmbeddedResource Include="组件\Netron\Weight\Info\AboutSplash.jpg" />
+    <EmbeddedResource Include="组件\Netron\Weight\BasicShapes\Resources\TextLabel.gif" />
+    <EmbeddedResource Include="组件\Netron\Weight\BasicShapes\Resources\SimpleNode.gif" />
+    <EmbeddedResource Include="组件\Netron\Weight\BasicShapes\Resources\BasicNode.gif" />
+    <None Include="Resources\ShikiiBackgroundWorker.txt" />
     <None Include="Resources\NPOI.dll" />
     <None Include="Resources\NPOI.OpenXmlFormats.dll" />
     <None Include="Resources\NPOI.OpenXml4Net.dll" />
@@ -169,5 +791,6 @@
       <Name>dotNetLab</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

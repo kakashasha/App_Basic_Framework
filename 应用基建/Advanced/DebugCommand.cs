@@ -39,9 +39,6 @@ namespace dotNetLab.Common
             }
         }
 
-         
-
-
 
     }
 }

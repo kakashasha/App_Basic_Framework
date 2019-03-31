@@ -21,14 +21,21 @@ namespace dotNetLab
                 get { return bytArr_MainChannel; }
                 set { bytArr_MainChannel = value; }
             }
-            uint nRecievedNum = 0;
+           protected uint nRecievedNum = 0;
             public bool bIsConnected = false;
            
             public TCPClient()
             {
                 DefaultConfig();
                
-                this.lst_FileTransferInfo = new List<FileTransferInfo>();
+                
+            }
+            public bool Connected
+            {
+                get
+                {
+                    return bIsConnected;
+                }
             }
             public bool Connect(String strIP, String strClientID)
             {
@@ -76,7 +83,7 @@ namespace dotNetLab
                 {
                     MainBuffer = new byte[BufferSize];
                     bEndNetwork = false;
-                    lst_FileTransferInfo.Add(new FileTransferInfo(TextEncode, this.MainBuffer, this.Client));
+                    
                     ServerIP = IPAddress.Parse(IP);
                     IPEndPoint ClientEndPoint =
                         new IPEndPoint(this.ServerIP, nPort);
@@ -88,11 +95,13 @@ namespace dotNetLab
                     Client.Connect(ClientEndPoint);
                     thd_Main = new Thread(Loop);
                     thd_Main.Start();
+                    this.bIsConnected = true;
                     return true;
                 }
                 catch (System.Exception ex)
                 {
                     this.strErrorInfo = ex.ToString();
+                    this.bIsConnected = false ;
                     return false;
                 }
 
@@ -121,28 +130,20 @@ namespace dotNetLab
                 {
                     RecieveFormServerMethod();
                     if (nRecievedNum == 0)
+                    {
+                        bIsConnected = false;
                         return;
+                    }
                     byte byt_MSG_Mark = MainBuffer[0];
                      
-                    switch (byt_MSG_Mark)
-                    {
-                        case Signals.FILE_BEGIN:
-                            lst_FileTransferInfo[0].OnFileBegine(); break;
-                        case Signals.FILE_TRANSFER:
-                            lst_FileTransferInfo[0].OnFileTransfer(); break;
-                        case Signals.FILE_END:
-                            lst_FileTransferInfo[0].OnFileEnd(); break;
-                        case Signals.DOWNLOAD_FILE:
-                            string strName = lst_FileTransferInfo[0].RecieveFileName();
-                            lst_FileTransferInfo[0].SendFile(strName);
-                            break;
-                    }
+                    
                     if (Route!=null)
                     Route(-1,MainBuffer);
                     Thread.Sleep(nLoopGapTime);
                 }
                 catch (Exception e)
                 {
+                    this.bIsConnected = false;
                     this.strErrorInfo = e.ToString();
                 }
 
@@ -157,12 +158,14 @@ namespace dotNetLab
                     Client.Disconnect(false);
                     Client.Shutdown(SocketShutdown.Both);
                     Client.Close();
+                    this.bIsConnected = false;
                     
                     return true;
                 }
                 catch (System.Exception ex)
                 {
                     this.strErrorInfo = ex.ToString();
+                    this.bIsConnected = false;
                     return false;
                 }
 

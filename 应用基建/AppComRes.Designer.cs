@@ -47,7 +47,7 @@ namespace dotNetLab.Common {
         }
         
         /// <summary>
-        ///   使用此强类型资源类，为所有资源查找
+        ///   重写当前线程的 CurrentUICulture 属性
         ///   重写当前线程的 CurrentUICulture 属性。
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
@@ -67,6 +67,97 @@ namespace dotNetLab.Common {
             get {
                 object obj = ResourceManager.GetObject("ICSharpCode_SharpZipLib", resourceCulture);
                 return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Byte[] 类型的本地化资源。
+        /// </summary>
+        public static byte[] QWhale_Common {
+            get {
+                object obj = ResourceManager.GetObject("QWhale_Common", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Byte[] 类型的本地化资源。
+        /// </summary>
+        public static byte[] QWhale_Editor {
+            get {
+                object obj = ResourceManager.GetObject("QWhale_Editor", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Byte[] 类型的本地化资源。
+        /// </summary>
+        public static byte[] QWhale_Syntax {
+            get {
+                object obj = ResourceManager.GetObject("QWhale_Syntax", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Byte[] 类型的本地化资源。
+        /// </summary>
+        public static byte[] QWhale_Syntax_Parsers {
+            get {
+                object obj = ResourceManager.GetObject("QWhale_Syntax_Parsers", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Byte[] 类型的本地化资源。
+        /// </summary>
+        public static byte[] QWhale_Syntax_Schemes {
+            get {
+                object obj = ResourceManager.GetObject("QWhale_Syntax_Schemes", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Byte[] 类型的本地化资源。
+        /// </summary>
+        public static byte[] shikii_dotNetLab_Stimulus {
+            get {
+                object obj = ResourceManager.GetObject("shikii_dotNetLab_Stimulus", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 
+        ///using System;
+        ///using System.Collections.Generic;
+        ///using System.Linq;
+        ///using System.Text;
+        ///using System.Reflection;
+        ///using System.IO;
+        ///using System.Windows.Forms;
+        ///using System.Threading;
+        ///namespace ConsoleApplication1
+        ///{
+        ///    class Program
+        ///    {
+        ///	
+        ///        [STAThread]
+        ///        static void Main(string[] args)
+        ///        {
+        ///            String ThisDirectoryPath = Path.GetDirectoryName(Application.ExecutablePath);
+        ///            if (args[0] == &quot;0&quot;)
+        ///                return;
+        ///            else
+        ///            {
+        ///     [字符串的其余部分被截断]&quot;; 的本地化字符串。
+        /// </summary>
+        public static string ShikiiBackgroundWorker {
+            get {
+                return ResourceManager.GetString("ShikiiBackgroundWorker", resourceCulture);
             }
         }
     }

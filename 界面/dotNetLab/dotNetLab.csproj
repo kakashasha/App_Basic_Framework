@@ -23,6 +23,7 @@
     <WarningLevel>4</WarningLevel>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
     <PlatformTarget>AnyCPU</PlatformTarget>
+    <LangVersion>4</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -50,6 +51,8 @@
     <Compile Include="Animation\WidthAnimation.cs" />
     <Compile Include="Appearance.cs" />
     <Compile Include="Abort\CScrollBar.cs" />
+    <Compile Include="InteractiveLinkPlugin.cs" />
+    <Compile Include="InteractivePlugin.cs" />
     <Compile Include="PropertyEditors\Dialogs\DataCenter\DataGridRealTime.cs" />
     <Compile Include="PropertyEditors\Dialogs\DataCenter\DBEngineConnectPage.cs">
       <SubType>Form</SubType>
@@ -58,6 +61,9 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="PropertyEditors\Dialogs\DataCenter\DBEngineEditorPage_Parts\DB2DB\ConveyDataToOtherDBPart.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PropertyEditors\Dialogs\DataCenter\DBEngineEditorPage_Parts\EntityPart.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="PropertyEditors\Dialogs\DataCenter\DBEngineEditorPage_Parts\ListBoxItem_ColumnName.cs">
@@ -245,6 +251,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="PropertyEditors\Dialogs\DataCenter\DBEngineEditorPage_Parts\DB2DB\ConveyDataToOtherDBPart.resx">
       <DependentUpon>ConveyDataToOtherDBPart.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PropertyEditors\Dialogs\DataCenter\DBEngineEditorPage_Parts\EntityPart.resx">
+      <DependentUpon>EntityPart.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PropertyEditors\Dialogs\DataCenter\DBEngineEditorPage_Parts\ListBoxItem_ColumnName.resx">
       <DependentUpon>ListBoxItem_ColumnName.cs</DependentUpon>

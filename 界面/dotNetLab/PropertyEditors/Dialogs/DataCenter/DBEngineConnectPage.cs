@@ -254,7 +254,7 @@ namespace dotNetLab.Widgets
             Img_Down = dotNetLab.UI.RibbonSchoolStuff;
         }
 
-        void btn_Connect_Click(object sender, EventArgs e)
+        protected  Object InternalConnectDB()
         {
             int n = lst_DBEngineNames.IndexOf(cmbx_DBEngineNames.SelectedItem);
             if (bEmbeddedDB)
@@ -265,8 +265,13 @@ namespace dotNetLab.Widgets
             {
                 dbInvoker.Connect((DBEngineNames)n, txb_Host.Text.Trim(), txb_Port.IntValue,
                 txb_UserName.Text.Trim(), txb_pwd.Text.Trim(), txb_HugeDBName.Text.Trim());
-
             }
+            return dbInvoker.objDBEngine;
+        }
+
+       protected virtual void btn_Connect_Click(object sender, EventArgs e)
+        {
+            InternalConnectDB();
             if (dbInvoker.Status)
             {
                 //To DO

@@ -76,7 +76,7 @@ namespace dotNetLab
             /// <param name="Name">注册表名称</param>
             /// <param name="Values">注册表值</param>
             /// <returns></returns>
-            public static string GetRegistry(string Name, string Values)
+            public static string GetRegistry(string Name )
             {
                 try
                 {
